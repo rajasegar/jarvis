@@ -15,7 +15,8 @@
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
-    "test": "ember test"
+    "test": "ember test",
+    "deploy": "git push && ember build --environment production && gh-pages -d dist"
   },
   "devDependencies": {
     "@ember/optional-features": "^1.0.0",
@@ -43,6 +44,7 @@
     "ember-source": "~3.14.1",
     "eslint-plugin-ember": "^7.1.0",
     "eslint-plugin-node": "^10.0.0",
+    "gh-pages": "^2.1.1",
     "ivy-codemirror": "^2.1.0",
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.9.0"
