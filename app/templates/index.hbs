@@ -1,0 +1,42 @@
+<div class="grid-col">
+  <div class="grid-row">
+    <div>
+      {{ivy-codemirror 
+        value=source 
+        options=(hash lineNumbers=true mode="javascript" theme=theme)
+        valueUpdated=(action (mut source))
+      }}
+      <div class="mode-options">
+        {{#radio-button
+          value="remove"
+          groupValue=nodeOp
+          changed=(action "opChanged")
+          }}
+          <span>Remove</span>
+        {{/radio-button}}
+        {{#radio-button
+          value="replace"
+          groupValue=nodeOp
+          changed=(action "opChanged")
+          }}
+          <span>Replace</span>
+        {{/radio-button}}
+        {{#radio-button
+          value="insert"
+          groupValue=nodeOp
+          changed=(action "opChanged")
+          }}
+          <span>Insert</span>
+        {{/radio-button}}
+      </div>
+    </div>
+    {{#if showDest}}
+      {{ivy-codemirror 
+        value=dest 
+        options=(hash mode=jsonMode theme=theme foldGutter=true readOnly=true)}}
+    {{/if}}
+  </div>
+  <div class="grid-row">
+    {{ivy-codemirror value=nodeApi options=(hash lineNumbers=true mode="javascript" theme=theme autoIndent=true )}}
+  </div>
+</div>

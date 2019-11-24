@@ -1,5 +1,23 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+<header>
+  <h1>JARVIS</h1>
+  <nav>
+    <ul>
+      <li>
+        {{#link-to "index"}}Javascript{{/link-to}}
+      </li>
+    </ul>
+  </nav>
+  <div id="options">
+    {{!-- <p>DarkMode: <Input @type="checkbox" @click={{action "toggleDarkMode"}}/></p> --}}
+  </div>
+</header>
+<main>
+  {{outlet}}
+</main>
+<footer>
+  <p>
+    Built with <a href="https://emberjs.com">Ember.js</a> |
+    <a href="https://github.com/rajasegar/ast-finder">Github</a> |
+    <a href="https://github.com/rajasegar/ast-finder/issues">Report issues</a> 
+  </p>
+</footer>
