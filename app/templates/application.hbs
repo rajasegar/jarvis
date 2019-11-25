@@ -8,11 +8,15 @@
       <li>
         <a href="https://rajasegar.github.io/ast-finder/">ast-finder</a>
       </li>
+      <li>
+        <a href="https://astexplorer.net/">ast-explorer</a>
+      </li>
+      <li>
+        <span>Enable Dark theme: <Input @type="checkbox" @click={{action "toggleDarkMode"}}/></span>
+      </li>
+
     </ul>
   </nav>
-  <div id="options">
-    <p>Enable Dark theme: <Input @type="checkbox" @click={{action "toggleDarkMode"}}/></p>
-  </div>
 </header>
 <main>
   {{outlet}}

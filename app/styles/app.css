@@ -23,8 +23,6 @@ nav ul {
 nav ul li {
   list-style: none;
   margin:0 10px;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
 }
 
 nav ul li a.active {
@@ -37,6 +35,9 @@ a {
   padding: .25em;
 }
 
+p { 
+margin: .25em;
+}
 footer p {
   text-align:center;
 }
@@ -52,12 +53,13 @@ footer p {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 5px;
+  padding: 0 10px;
 }
 
 .mode-options {
   padding: 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
 }
 

@@ -17,35 +17,46 @@ export default Controller.extend({
     let _show  = this.get('nodeOp') === 'replace' || this.get('nodeOp') === 'insert';
     return  _show;
   }),
-  nodeApi: computed('source', 'opQuery', function() {
+  insertOption: 'before',
+  showInsertOptions: computed('nodeOp', function() {
+  return this.get('nodeOp') === 'insert' ? true : false;
+  }),
+  nodeApi: computed('source', 'opQuery', 'insertOption', function() {
     let ast = parse(this.get('source'));
     let transformLogic = dispatchNodes(ast).join();
-    const transformTemplate = `
-export default function transformer(file, api) {
+    let _opQuery = this.get('opQuery');
+    const transformTemplate = `export default function transformer(file, api) {
   const j = api.jscodeshift;
   const root = j(file.source);
   const body = root.get().value.program.body;
   ${transformLogic}
-  ${this.get('opQuery')}
+  ${_opQuery}
   return root.toSource();
 }
 `;
     return transformTemplate;
   }),
 
-  opQuery: computed('nodeOp', 'dest', function() {
+  opQuery: computed('nodeOp', 'dest', 'insertOption', function() {
     let str = '';
+    let insert = this.get('insertOption') === 'before' ? 'unshift' : 'push';
     switch(this.get('nodeOp')) {
       case 'remove':
         str = `.remove();`        
         break;
 
       case 'replace':
-
         str = `.replaceWith(path => {
           return ${buildAST(parse(this.get('dest')))};
         })`;
         break;
+
+      case 'insert':
+        str =  `.forEach(path => {
+        body.${insert}(${buildAST(parse(this.get('dest')))});
+        })`;
+        break;
+
 
     }
     return str;
