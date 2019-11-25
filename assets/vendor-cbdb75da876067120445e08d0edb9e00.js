@@ -8408,156 +8408,157 @@ else if(s.MemberExpression.check(t)&&"object"===r)o.default.strictEqual(t.object
 else if(s.ConditionalExpression.check(t)&&"test"===r)o.default.strictEqual(t.test,n)
 else if(p(t)&&"left"===r)o.default.strictEqual(t.left,n)
 else{if(!s.UnaryExpression.check(t)||t.prefix||"argument"!==r)return!1
-o.default.strictEqual(t.argument,n)}}return!0},t.default=h},,,function(e,t){function r(e){var t=e.arguments,r=e.callee
-return"MemberExpression"===r.type?"j.callExpression(\n          ".concat(h(r),",\n          [").concat(a(t),"]\n        )"):"j.callExpression(\n          ".concat(i(r),",\n          [").concat(a(t),"]\n        )")}function n(e){var t="string"==typeof e.value?"'".concat(e.value,"'"):e.value
-return"j.literal(".concat(t,")")}function i(e){return"j.identifier('".concat(e.name,"')")}function o(e){var t=e.elements.map((function(e){switch(e.type){case"Literal":return n(e)
-case"UnaryExpression":return function(e){var t=e.argument,r=e.operator,i=e.prefix
-return"j.unaryExpression('".concat(r,"', ").concat(n(t),", ").concat(i,")")}(e)}})).join(",")
-return"j.arrayExpression([".concat(t,"])")}function a(e){return e.map((function(e){switch(e.type){case"Literal":return n(e)
+o.default.strictEqual(t.argument,n)}}return!0},t.default=h},,,function(e,t){var r
+function n(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}function i(e){var t=e.arguments,r=e.callee
+return"MemberExpression"===r.type?"j.callExpression(\n          ".concat(f(r),",\n          [").concat(u(t),"]\n        )"):"j.callExpression(\n          ".concat(a(r),",\n          [").concat(u(t),"]\n        )")}function o(e){var t="string"==typeof e.value?"'".concat(e.value,"'"):e.value
+return"j.literal(".concat(t,")")}function a(e){return"j.identifier('".concat(e.name,"')")}function s(e){var t=e.elements.map((function(e){switch(e.type){case"Literal":return o(e)
+case"UnaryExpression":return function(e){var t=e.argument,r=e.operator,n=e.prefix
+return"j.unaryExpression('".concat(r,"', ").concat(o(t),", ").concat(n,")")}(e)}})).join(",")
+return"j.arrayExpression([".concat(t,"])")}function u(e){return e.map((function(e){switch(e.type){case"Literal":return o(e)
 case"Identifier":return"j.identifier('".concat(e.name,"')")
 case"SpreadElement":return t=e.argument.name,"j.spreadElement(j.identifier('".concat(t,"'))")
-case"FunctionExpression":return _(e)
-case"CallExpression":return r(e)
-case"MemberExpression":return h(e)
-case"ArrayExpression":return o(e)
-case"ArrowFunctionExpression":return x(e)
-default:return console.log("buildArgs => ",e.type),""}var t})).join(",")}function s(e){switch(e.type){case"Literal":return n(e)
+case"FunctionExpression":return w(e)
+case"CallExpression":return i(e)
+case"MemberExpression":return f(e)
+case"ArrayExpression":return s(e)
+case"ArrowFunctionExpression":return C(e)
+default:return console.log("buildArgs => ",e.type),""}var t})).join(",")}function l(e){switch(e.type){case"Literal":return o(e)
 case"ObjectExpression":return function(e){var t=e.properties.map((function(e){var t=e.key,r=e.value
-return'j.property("init", j.identifier(\''.concat(t.name,"'), ").concat(s(r),")")}))
+return'j.property("init", j.identifier(\''.concat(t.name,"'), ").concat(l(r),")")}))
 return"j.objectExpression([".concat(t.join(","),"])")}(e)
-case"CallExpression":return r(e)
-case"ArrayExpression":return o(e)
-case"ArrowFunctionExpression":return x(e)
-case"Identifier":return i(e)
-case"MemberExpression":return h(e)
-case"BinaryExpression":return v(e)
-case"NewExpression":return p(e)
+case"CallExpression":return i(e)
+case"ArrayExpression":return s(e)
+case"ArrowFunctionExpression":return C(e)
+case"Identifier":return a(e)
+case"MemberExpression":return f(e)
+case"BinaryExpression":return b(e)
+case"NewExpression":return g(e)
 case"LogicalExpression":return function(e){var t=e.operator,r=e.left,n=e.right
-return"j.logicalExpression(\n  '".concat(t,"',\n  ").concat(s(r),",\n  ").concat(s(n),",\n  )")}(e)
+return"j.logicalExpression(\n  '".concat(t,"',\n  ").concat(l(r),",\n  ").concat(l(n),",\n  )")}(e)
 case"ConditionalExpression":return function(e){var t=e.test,r=e.consequent,n=e.alternate
-return"j.conditionalExpression(\n  ".concat(s(t),",\n  ").concat(s(r),",\n  ").concat(s(n),",\n  )")}(e)
-default:return console.log("buildValue => ",e.type),""}}function u(e){var t,r="",n=e.id,o=e.init,a=o?s(o):null
-switch(n.type){case"Identifier":r="j.variableDeclarator(\n      j.identifier('".concat(n.name,"'),\n        ").concat(a,"\n          )")
+return"j.conditionalExpression(\n  ".concat(l(t),",\n  ").concat(l(r),",\n  ").concat(l(n),",\n  )")}(e)
+default:return console.log("buildValue => ",e.type),""}}function c(e){var t,r="",n=e.id,i=e.init,o=i?l(i):null
+switch(n.type){case"Identifier":r="j.variableDeclarator(\n      j.identifier('".concat(n.name,"'),\n        ").concat(o,"\n          )")
 break
-case"ObjectPattern":r="j.variableDeclarator(\n      j.objectPattern([".concat(function(e){return e.map((function(e){return r=(t=e).key,n=t.value,'j.property("init", j.identifier(\''.concat(r.name,"'), ").concat(s(n),")")
-var t,r,n})).join(",")}(n.properties),"]),\n        ").concat(a,"\n          )")
+case"ObjectPattern":r="j.variableDeclarator(\n      j.objectPattern([".concat(function(e){return e.map((function(e){return r=(t=e).key,n=t.value,'j.property("init", j.identifier(\''.concat(r.name,"'), ").concat(l(n),")")
+var t,r,n})).join(",")}(n.properties),"]),\n        ").concat(o,"\n          )")
 break
-case"ArrayPattern":r="j.variableDeclarator(\n      j.arrayPattern([".concat((t=n.elements,t.map((function(e){return i(e)})).join(",")),"]),\n        ").concat(a,"\n          )")}return r}function l(e){var t=e.kind,r=e.declarations
-return"j.variableDeclaration(\n  '".concat(t,"',\n      [").concat(u(r[0]),"])")}function c(e){var t=e.source,r=e.specifiers[0],n=r.imported,i=r.local
-return"j.importDeclaration(\n           [j.importSpecifier(j.identifier('".concat(n.name,"'),j.identifier('").concat(i.name,"'))],\n    j.literal('").concat(t.value,"')\n                  );")}function h(e){var t=e.object,o=e.property,a=e.computed,s=""
+case"ArrayPattern":r="j.variableDeclarator(\n      j.arrayPattern([".concat((t=n.elements,t.map((function(e){return a(e)})).join(",")),"]),\n        ").concat(o,"\n          )")}return r}function h(e){var t=e.kind,r=e.declarations
+return"j.variableDeclaration(\n  '".concat(t,"',\n      [").concat(c(r[0]),"])")}function d(e){var t=e.source,r=e.specifiers[0],n=r.imported,i=r.local
+return"j.importDeclaration(\n           [j.importSpecifier(j.identifier('".concat(n.name,"'),j.identifier('").concat(i.name,"'))],\n    j.literal('").concat(t.value,"')\n                  );")}function f(e){var t=e.object,r=e.property,n=e.computed,s=""
 switch(t.type){case"ThisExpression":s="j.thisExpression()"
 break
-case"MemberExpression":s="".concat(h(t))
+case"MemberExpression":s="".concat(f(t))
 break
 case"Identifier":s="j.identifier('".concat(t.name,"')")
 break
-case"CallExpression":s=r(t)
+case"CallExpression":s=i(t)
 break
 default:console.log("memberExpression => ",t.type)}var u=""
-switch(o.type){case"Identifier":u=i(o)
+switch(r.type){case"Identifier":u=a(r)
 break
-case"Literal":u=n(o)
+case"Literal":u=o(r)
 break
-case"CallExpression":u=r(o)
+case"CallExpression":u=i(r)
 break
-default:console.log("memberExpression.property => ",o.type)}return"j.memberExpression(\n ".concat(s,",\n ").concat(u,",\n ").concat(a,"\n  )")}function d(e){var t=e.expression,n=t.extra,o=""
-switch(t.type){case"MemberExpression":o="j.expressionStatement(".concat(h(t),")")
+default:console.log("memberExpression.property => ",r.type)}return"j.memberExpression(\n ".concat(s,",\n ").concat(u,",\n ").concat(n,"\n  )")}function p(e){var t="",r=e.operator,n=e.left,i=e.right
+switch(n.type){case"Identifier":t="j.assignmentExpression(\n        '".concat(r,"',\n        ").concat(a(n),",\n        ").concat(l(i),"\n      )")
 break
-case"CallExpression":o=n&&n.parenthesized?"j.expressionStatement(\n       j.parenthesizedExpression(\n       ".concat(r(t),"\n       ))"):"j.expressionStatement(".concat(r(t),")")
+case"MemberExpression":t="j.assignmentExpression(\n        '".concat(r,"',\n        ").concat(f(n),",\n        ").concat(l(i),"\n      )")}return t}function m(e){var t=e.expression,r=t.extra,n=""
+switch(t.type){case"MemberExpression":n="j.expressionStatement(".concat(f(t),")")
 break
-case"AssignmentExpression":o="j.expressionStatement(".concat(function(e){var t="",r=e.operator,n=e.left,o=e.right
-switch(n.type){case"Identifier":t="j.assignmentExpression(\n        '".concat(r,"',\n        ").concat(i(n),",\n        ").concat(s(o),"\n      )")
+case"CallExpression":n=r&&r.parenthesized?"j.expressionStatement(\n       j.parenthesizedExpression(\n       ".concat(i(t),"\n       ))"):"j.expressionStatement(".concat(i(t),")")
 break
-case"MemberExpression":t="j.assignmentExpression(\n        '".concat(r,"',\n        ").concat(h(n),",\n        ").concat(s(o),"\n      )")}return t}(t),")")
+case"AssignmentExpression":n="j.expressionStatement(".concat(p(t),")")
 break
-case"Identifier":o="j.expressionStatement(".concat(i(t),")")
+case"Identifier":n="j.expressionStatement(".concat(a(t),")")
 break
-case"BinaryExpression":o=v(t)
+case"BinaryExpression":n=b(t)
 break
-default:console.log("expressionStatement => ",t.type)}return o}function f(e){var t=e.argument,o=""
-switch(t.type){case"CallExpression":o="j.returnStatement(".concat(r(t),")")
+default:console.log("expressionStatement => ",t.type)}return n}function v(e){var t=e.argument,r=""
+switch(t.type){case"CallExpression":r="j.returnStatement(".concat(i(t),")")
 break
-case"Identifier":o="j.returnStatement(".concat(i(t),")")
+case"Identifier":r="j.returnStatement(".concat(a(t),")")
 break
-case"MemberExpression":o="j.returnStatement(".concat(h(t),")")
+case"MemberExpression":r="j.returnStatement(".concat(f(t),")")
 break
-case"Literal":o="j.returnStatement(".concat(n(t),")")
+case"Literal":r="j.returnStatement(".concat(o(t),")")
 break
-default:console.log("returnStatement => ",t.type)}return o}function p(e){var t=e.callee,r=e.arguments
+default:console.log("returnStatement => ",t.type)}return r}function g(e){var t=e.callee,r=e.arguments
 return"j.newExpression(\n  ".concat(function(e){var t=""
-switch(e.type){case"Identifier":t=i(e)
+switch(e.type){case"Identifier":t=a(e)
 break
-default:console.log("buildCallee => ",e.type)}return t}(t),",\n  [").concat(a(r),"]\n  )")}function m(e){return e.map((function(e){switch(e.type){case"VariableDeclaration":return l(e)
-case"ImportDeclaration":return c(e)
-case"ExpressionStatement":return d(e)
-case"IfStatement":return g(e)
-case"FunctionDeclaration":return E(e)
-case"ReturnStatement":return f(e)
+default:console.log("buildCallee => ",e.type)}return t}(t),",\n  [").concat(u(r),"]\n  )")}function y(e){return e.map((function(e){switch(e.type){case"VariableDeclaration":return h(e)
+case"ImportDeclaration":return d(e)
+case"ExpressionStatement":return m(e)
+case"IfStatement":return E(e)
+case"FunctionDeclaration":return S(e)
+case"ReturnStatement":return v(e)
 case"BreakStatement":return"j.breakStatement()"
 case"ThrowStatement":return function(e){var t=e.argument,r=""
-switch(t.type){case"NewExpression":r=p(t)
+switch(t.type){case"NewExpression":r=g(t)
 break
-case"Identifier":r=i(t)
+case"Identifier":r=a(t)
 break
 default:console.log("thowStatement => ",t.type)}return"j.throwStatement(\n  ".concat(r,"\n  )")}(e)
 case"ContinueStatement":return"j.continueStatement()"
-default:return console.log("buildBlock => ",e.type),""}})).join(",")}function v(e){var t=e.operator,r=e.left,o=e.right,a="",s=""
-switch(r.type){case"Identifier":a=i(r)
+default:return console.log("buildBlock => ",e.type),""}})).join(",")}function b(e){var t=e.operator,r=e.left,n=e.right,i="",s=""
+switch(r.type){case"Identifier":i=a(r)
 break
-default:console.log("binaryExpression::left => ",r.type)}switch(o.type){case"Literal":s=n(o)
+default:console.log("binaryExpression::left => ",r.type)}switch(n.type){case"Literal":s=o(n)
 break
-case"BinaryExpression":s=v(o)
+case"BinaryExpression":s=b(n)
 break
-case"Identifier":s=i(o)
+case"Identifier":s=a(n)
 break
-default:console.log("binaryExpression::right => ",o.type)}return"j.binaryExpression(\n    '".concat(t,"', \n    ").concat(a,",\n    ").concat(s,"\n  )")}function g(e){var t,r=e.test,i=e.consequent,o=e.alternate
+default:console.log("binaryExpression::right => ",n.type)}return"j.binaryExpression(\n    '".concat(t,"', \n    ").concat(i,",\n    ").concat(s,"\n  )")}function E(e){var t,r=e.test,n=e.consequent,i=e.alternate
 if("BinaryExpression"===r.type){var a=r.operator,s=r.left,u=r.right
-t="j.binaryExpression('".concat(a,"', j.identifier('").concat(s.name,"'), ").concat(n(u),")")}else"Identifier"===r.type&&(t="j.identifier(".concat(r.name,")"))
-return o?"j.ifStatement(\n  ".concat(t,",\n  j.blockStatement([").concat(m(i.body),"]),\n  j.blockStatement([").concat(m(o.body),"])\n  )"):"j.ifStatement(\n  ".concat(t,",\n  j.blockStatement([").concat(m(i.body),"])\n  )")}function y(e){var t=e.id,r=e.superClass,n=e.body,o=r?i(r):null
-return"j.classDeclaration(\n    ".concat(i(t),",\n    j.classBody([").concat(function(e){return e.map((function(e){switch(e.type){case"MethodDefinition":return"j.methodDefinition(\n          '".concat(e.kind,"',\n          ").concat(i(e.key),",\n          ").concat(_(e.value),",\n          ").concat(e.static,"\n        )")}})).join(",")}(n.body),"]),\n    ").concat(o,"\n  )")}function b(e){var t="",r=e.declaration
-switch(r.type){case"FunctionDeclaration":t="j.exportDefaultDeclaration(".concat(E(r),")")
+t="j.binaryExpression('".concat(a,"', j.identifier('").concat(s.name,"'), ").concat(o(u),")")}else"Identifier"===r.type&&(t="j.identifier(".concat(r.name,")"))
+return i?"j.ifStatement(\n  ".concat(t,",\n  j.blockStatement([").concat(y(n.body),"]),\n  j.blockStatement([").concat(y(i.body),"])\n  )"):"j.ifStatement(\n  ".concat(t,",\n  j.blockStatement([").concat(y(n.body),"])\n  )")}function _(e){var t=e.id,r=e.superClass,n=e.body,i=r?a(r):null
+return"j.classDeclaration(\n    ".concat(a(t),",\n    j.classBody([").concat(function(e){return e.map((function(e){switch(e.type){case"MethodDefinition":return"j.methodDefinition(\n          '".concat(e.kind,"',\n          ").concat(a(e.key),",\n          ").concat(w(e.value),",\n          ").concat(e.static,"\n        )")}})).join(",")}(n.body),"]),\n    ").concat(i,"\n  )")}function x(e){var t="",r=e.declaration
+switch(r.type){case"FunctionDeclaration":t="j.exportDefaultDeclaration(".concat(S(r),")")
 break
-case"ClassDeclaration":t="j.exportDefaultDeclaration(".concat(y(r),")")
+case"ClassDeclaration":t="j.exportDefaultDeclaration(".concat(_(r),")")
 break
-default:console.log("exportDefaultDeclaration =>",r.type)}return t}function E(e){var t=e.id,r=e.body,n=e.params
-return"j.functionDeclaration(\n  j.identifier('".concat(t.name,"'),\n  [").concat(a(n),"],\n  j.blockStatement([").concat(m(r.body),"])\n  )")}function _(e){var t=e.id,r=e.body,n=e.params
-return t?"j.functionExpression(\n  j.identifier('".concat(t.name,"'),\n  [").concat(a(n),"],\n  j.blockStatement([").concat(m(r.body),"])\n  )"):"j.functionExpression(\n  null,\n  [".concat(a(n),"],\n  j.blockStatement([").concat(m(r.body),"])\n  )")}function x(e){var t=e.params,i=e.body,o=""
-switch(i.type){case"BlockStatement":o="j.arrowFunctionExpression(\n      [".concat(a(t),"],\n      j.blockStatement([").concat(m(i.body),"])\n      )")
+default:console.log("exportDefaultDeclaration =>",r.type)}return t}function S(e){var t=e.id,r=e.body,n=e.params
+return"j.functionDeclaration(\n  j.identifier('".concat(t.name,"'),\n  [").concat(u(n),"],\n  j.blockStatement([").concat(y(r.body),"])\n  )")}function w(e){var t=e.id,r=e.body,n=e.params
+return t?"j.functionExpression(\n  j.identifier('".concat(t.name,"'),\n  [").concat(u(n),"],\n  j.blockStatement([").concat(y(r.body),"])\n  )"):"j.functionExpression(\n  null,\n  [".concat(u(n),"],\n  j.blockStatement([").concat(y(r.body),"])\n  )")}function C(e){var t=e.params,r=e.body,n=""
+switch(r.type){case"BlockStatement":n="j.arrowFunctionExpression(\n      [".concat(u(t),"],\n      j.blockStatement([").concat(y(r.body),"])\n      )")
 break
-case"Literal":o="j.arrowFunctionExpression(\n      [".concat(a(t),"],\n      ").concat(n(i),"\n      )")
+case"Literal":n="j.arrowFunctionExpression(\n      [".concat(u(t),"],\n      ").concat(o(r),"\n      )")
 break
-case"CallExpression":o="j.arrowFunctionExpression(\n      [".concat(a(t),"],\n      ").concat(r(i),"\n      )")}return o}function S(e){return"j.blockStatement([".concat(m(e),"])")}e.exports={arrowFunctionExpression:x,classDeclaration:y,exportDefaultDeclaration:b,expressionStatement:d,functionDeclaration:E,ifStatement:g,importDeclaration:c,variableDeclaration:l,buildAST:function(e){return e.program.body.map((function(e){switch(e.type){case"VariableDeclaration":return l(e)
-case"ImportDeclaration":return c(e)
-case"ExpressionStatement":return d(e)
-case"IfStatement":return g(e)
-case"ExportDefaultDeclaration":return b(e)
-case"ClassDeclaration":return y(e)
-case"FunctionDeclaration":return E(e)
-case"ArrowFunctionExpression":return x(e)
-case"ReturnStatement":return f(e)
-case"SwitchStatement":return function(e){var t=e.cases,r=e.discriminant,o=""
-switch(r.type){case"Identifier":o=i(r)
+case"CallExpression":n="j.arrowFunctionExpression(\n      [".concat(u(t),"],\n      ").concat(i(r),"\n      )")}return n}function D(e){return"j.blockStatement([".concat(y(e),"])")}e.exports=(n(r={arrowFunctionExpression:C,assignmentExpression:p,binaryExpression:b,classDeclaration:_,exportDefaultDeclaration:x,expressionStatement:m,functionDeclaration:S,identifier:a,ifStatement:E,importDeclaration:d,variableDeclaration:h,buildAST:function(e){return e.program.body.map((function(e){switch(e.type){case"VariableDeclaration":return h(e)
+case"ImportDeclaration":return d(e)
+case"ExpressionStatement":return m(e)
+case"IfStatement":return E(e)
+case"ExportDefaultDeclaration":return x(e)
+case"ClassDeclaration":return _(e)
+case"FunctionDeclaration":return S(e)
+case"ArrowFunctionExpression":return C(e)
+case"ReturnStatement":return v(e)
+case"SwitchStatement":return function(e){var t=e.cases,r=e.discriminant,n=""
+switch(r.type){case"Identifier":n=a(r)
 break
-default:console.log("switchStatement::discriminant => ",r.type)}return"j.switchStatement(".concat(o,",[").concat(function(e){return e.map((function(e){var t=e.test,r=e.consequent,i=""
-if(t)switch(t.type){case"Literal":i="j.switchCase(".concat(n(t),", [").concat(m(r),"])")
+default:console.log("switchStatement::discriminant => ",r.type)}return"j.switchStatement(".concat(n,",[").concat(function(e){return e.map((function(e){var t=e.test,r=e.consequent,n=""
+if(t)switch(t.type){case"Literal":n="j.switchCase(".concat(o(t),", [").concat(y(r),"])")
 break
-default:console.log("buildSwitchCases => ",t.type)}else i="j.switchCase(null, [".concat(m(r),"])")
-return i})).join(",")}(t),"])")}(e)
+default:console.log("buildSwitchCases => ",t.type)}else n="j.switchCase(null, [".concat(y(r),"])")
+return n})).join(",")}(t),"])")}(e)
 case"TryStatement":return function(e){var t=e.block,r=e.handler,n=e.finalizer
-return"j.tryStatement(\n    ".concat(S(t.body),",\n    ").concat(function(e){var t=e.param,r=(e.guard,e.body)
-return"j.catchClause(\n  ".concat(i(t),",\n  null,\n  ").concat(S(r.body),"\n  )")}(r),",\n    ").concat(S(n.body),"\n  )")}(e)
-case"ForStatement":return function(e){var t=e.init,r=e.test,n=e.update,o=e.body,a="",s="",u=""
-switch(t.type){case"VariableDeclaration":a=l(t)
+return"j.tryStatement(\n    ".concat(D(t.body),",\n    ").concat(function(e){var t=e.param,r=(e.guard,e.body)
+return"j.catchClause(\n  ".concat(a(t),",\n  null,\n  ").concat(D(r.body),"\n  )")}(r),",\n    ").concat(D(n.body),"\n  )")}(e)
+case"ForStatement":return function(e){var t=e.init,r=e.test,n=e.update,i=e.body,o="",s="",u=""
+switch(t.type){case"VariableDeclaration":o=h(t)
 break
-default:console.log("forStatement::init =>",t.type)}switch(r.type){case"BinaryExpression":s=v(r)
+default:console.log("forStatement::init =>",t.type)}switch(r.type){case"BinaryExpression":s=b(r)
 break
 default:console.log("forStatement::test => ",r.type)}switch(n.type){case"UpdateExpression":u=function(e){var t=e.operator,r=e.argument,n=e.prefix
-return"j.updateExpression(\n  '".concat(t,"', \n  ").concat(i(r),",\n  ").concat(n,"\n  )")}(n)
+return"j.updateExpression(\n  '".concat(t,"', \n  ").concat(a(r),",\n  ").concat(n,"\n  )")}(n)
 break
-default:console.log("forStatement::test => ",n.type)}return"j.forStatement(\n    ".concat(a,",\n    ").concat(s,",\n    ").concat(u,",\n    ").concat(S(o.body),"\n  )")}(e)
-case"ForInStatement":return function(e){var t=e.left,r=e.right,n=e.body,o=e.each
-return"j.forInStatement(\n  ".concat(l(t),",\n  ").concat(i(r),",\n  ").concat(S(n.body),",\n  ").concat(o,"\n  )")}(e)
-default:return console.log("buildAST => ",e.type),""}}))},callExpression:r,literal:n,identifier:i,memberExpression:h}},function(e,t,r){"use strict"
+default:console.log("forStatement::test => ",n.type)}return"j.forStatement(\n    ".concat(o,",\n    ").concat(s,",\n    ").concat(u,",\n    ").concat(D(i.body),"\n  )")}(e)
+case"ForInStatement":return function(e){var t=e.left,r=e.right,n=e.body,i=e.each
+return"j.forInStatement(\n  ".concat(h(t),",\n  ").concat(a(r),",\n  ").concat(D(n.body),",\n  ").concat(i,"\n  )")}(e)
+default:return console.log("buildAST => ",e.type),""}}))},callExpression:i,literal:o},"identifier",a),n(r,"memberExpression",f),r)},function(e,t,r){"use strict"
 function n(e){var t=""
 switch(e.type){case"Identifier":t=" object: { name: '".concat(e.name,"' } ")
 break
