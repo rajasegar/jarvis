@@ -1,6 +1,13 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
-import { buildAST } from 'ast-node-builder';
+import { 
+  buildAST, 
+  callExpression, 
+  memberExpression,
+  assignmentExpression,
+  identifier,
+  binaryExpression
+} from 'ast-node-builder';
 import { dispatchNodes } from 'ast-node-finder';
 import { parse } from 'recast';
 import { inject as service } from '@ember/service';
@@ -47,7 +54,7 @@ export default Controller.extend({
 
       case 'replace':
         str = `.replaceWith(path => {
-          return ${buildAST(parse(this.get('dest')))};
+          return ${this._buildReplaceNode(parse(this.get('dest')))};
         })`;
         break;
 
@@ -67,6 +74,67 @@ export default Controller.extend({
   actions: {
     opChanged(op) {
       this.set('nodeOp', op);
+    },
+
+    setInsertOption(opt) {
+      this.set('insertOption', opt);
     }
+  },
+
+  _buildReplaceNode(ast) {
+    return ast.program.body.map(node => {
+    let str = '';
+      switch(node.type) {
+        case 'ExpressionStatement':
+          str = this._buildExpression(node.expression);
+          break;
+
+        default:
+          console.log('_buildReplaceNode => ', node.type); // eslint-disable-line
+          break;
+
+      }
+      return str;
+    }).join('');
+
+  },
+
+  _buildExpression(expression) {
+    let str = '';
+    let { extra } = expression;
+    switch(expression.type) {
+      case 'MemberExpression':
+        str = memberExpression(expression);
+        break;
+
+      case 'CallExpression':
+        if(extra && extra.parenthesized) {
+          str = `
+       j.parenthesizedExpression(
+       ${callExpression(expression)}
+       )`;
+        } else {
+          str = callExpression(expression);
+        }
+        break;
+
+      case 'AssignmentExpression':
+        str = assignmentExpression(expression);      
+        break;
+
+      case 'Identifier':
+        str = identifier(expression);
+        break;
+
+      case 'BinaryExpression':
+        str = binaryExpression(expression);
+        break;
+
+      default:
+        console.log('_buildExpression => ', expression.type); // eslint-disable-line
+        break;
+    }
+
+    return str;
   }
 });

@@ -31,7 +31,7 @@
 	  <span>Insert</span>
 	{{/radio-button}}
 	{{#if showInsertOptions}}
-	  <select onchange={{action (mut insertOption)}} value="target.value">
+	  <select onchange={{action 'setInsertOption'}} value="target.value">
 	    <option value="before">Before</option>
 	    <option value="after">After</option>
 	  </select>
