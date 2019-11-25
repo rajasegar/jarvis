@@ -1,11 +1,13 @@
 <div class="grid-col">
   <div class="grid-row">
     <div>
+      <p>Enter source code here:</p>
       {{ivy-codemirror 
         value=source 
         options=(hash lineNumbers=true mode="javascript" theme=theme)
         valueUpdated=(action (mut source))
       }}
+      <p>Choose any node operations:</p>
       <div class="mode-options">
         {{#radio-button
           value="remove"
@@ -31,12 +33,19 @@
       </div>
     </div>
     {{#if showDest}}
-      {{ivy-codemirror 
-        value=dest 
-        options=(hash mode=jsonMode theme=theme foldGutter=true readOnly=true)}}
+      <div>
+	<p>Enter destination code here:</p>
+	{{ivy-codemirror 
+	  value=dest 
+	  valueUpdated=(action (mut dest))
+	  options=(hash mode=jsonMode theme=theme foldGutter=true)}}
+      </div>
     {{/if}}
   </div>
   <div class="grid-row">
-    {{ivy-codemirror value=nodeApi options=(hash lineNumbers=true mode="javascript" theme=theme autoIndent=true )}}
+    <div>
+      <p>Codemod contents here:</p>
+      {{ivy-codemirror value=nodeApi options=(hash lineNumbers=true mode="javascript" theme=theme autoIndent=true )}}
+    </div>
   </div>
 </div>
