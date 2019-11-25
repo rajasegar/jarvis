@@ -3,38 +3,38 @@
     <div>
       <p><strong>1.</strong> Enter source code here:</p>
       {{ivy-codemirror 
-        value=source 
-        options=(hash lineNumbers=true mode="javascript" theme=theme)
-        valueUpdated=(action (mut source))
+	value=source 
+	options=(hash lineNumbers=true mode="javascript" theme=theme)
+	valueUpdated=(action (mut source))
       }}
       <p><strong>2.</strong> Choose any AST node operation:</p>
       <div class="mode-options">
-        {{#radio-button
-          value="remove"
-          groupValue=nodeOp
-          changed=(action "opChanged")
-          }}
-          <span>Remove</span>
-        {{/radio-button}}
-        {{#radio-button
-          value="replace"
-          groupValue=nodeOp
-          changed=(action "opChanged")
-          }}
-          <span>Replace</span>
-        {{/radio-button}}
-        {{#radio-button
-          value="insert"
-          groupValue=nodeOp
-          changed=(action "opChanged")
-          }}
-          <span>Insert</span>
-        {{/radio-button}}
-        {{#if showInsertOptions}}
-	<select onchange={{action (mut insertOption)}} value="target.value">
-	  <option value="before">Before</option>
-	  <option value="after">After</option>
-	</select>
+	{{#radio-button
+	value="remove"
+	groupValue=nodeOp
+	changed=(action "opChanged")
+	}}
+	  <span>Remove</span>
+	{{/radio-button}}
+	{{#radio-button
+	  value="replace"
+	  groupValue=nodeOp
+	  changed=(action "opChanged")
+	  }}
+	  <span>Replace</span>
+	{{/radio-button}}
+	{{#radio-button
+	  value="insert"
+	  groupValue=nodeOp
+	  changed=(action "opChanged")
+	  }}
+	  <span>Insert</span>
+	{{/radio-button}}
+	{{#if showInsertOptions}}
+	  <select onchange={{action (mut insertOption)}} value="target.value">
+	    <option value="before">Before</option>
+	    <option value="after">After</option>
+	  </select>
 	{{/if}}
 
       </div>
@@ -51,7 +51,7 @@
   </div>
   <div class="grid-row">
     <div>
-      <p><strong>3.</strong> Codemod contents here:</p>
+      <p><strong>3.</strong> Codemod : (You can copy/paste in <a href="http://astexplorer.net">ast-explorer</a> and check)</p>
       {{ivy-codemirror value=nodeApi options=(hash lineNumbers=true mode="javascript" theme=theme autoIndent=true )}}
     </div>
   </div>
