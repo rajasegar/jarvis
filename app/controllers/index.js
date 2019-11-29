@@ -8,12 +8,17 @@ import {
   identifier,
   binaryExpression
 } from 'ast-node-builder';
+
 import { dispatchNodes } from 'ast-node-finder';
+
 import { parse } from 'recast';
 import { inject as service } from '@ember/service';
 
+
 const _source = 'foo()';
 const _dest = 'foo.bar()';
+const showDestOpCodes = ['insert-before', 'insert-after', 'replace'];
+
 export default Controller.extend({
   customize: service(),
   theme: computed.reads('customize.theme'),
@@ -21,7 +26,8 @@ export default Controller.extend({
   dest: _dest,
   nodeOp: 'remove', 
   showDest: computed('nodeOp', function() {
-    let _show  = this.get('nodeOp') === 'replace' || this.get('nodeOp') === 'insert';
+    let _nodeOp = this.get('nodeOp'); 
+    let _show  = showDestOpCodes.includes(_nodeOp);
     return  _show;
   }),
   insertOption: 'before',
@@ -44,9 +50,12 @@ export default Controller.extend({
     return transformTemplate;
   }),
 
+  output: computed('nodeApi', function() {
+    return this.get('nodeApi');
+  }),
+
   opQuery: computed('nodeOp', 'dest', 'insertOption', function() {
     let str = '';
-    let insert = this.get('insertOption') === 'before' ? 'unshift' : 'push';
     switch(this.get('nodeOp')) {
       case 'remove':
         str = `.remove();`        
@@ -58,12 +67,17 @@ export default Controller.extend({
         })`;
         break;
 
-      case 'insert':
+      case 'insert-before':
         str =  `.forEach(path => {
-        body.${insert}(${buildAST(parse(this.get('dest')))});
+        path.insertBefore(${buildAST(parse(this.get('dest')))});
         })`;
         break;
 
+      case 'insert-after':
+        str =  `.forEach(path => {
+        path.insertAfter(${buildAST(parse(this.get('dest')))});
+        })`;
+        break;
 
     }
     return str;
