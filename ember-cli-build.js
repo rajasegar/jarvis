@@ -7,9 +7,10 @@ module.exports = function(defaults) {
     autoImport: {
       webpack: { 
         node: { 
-          path: true 
+          path: true,
+          fs: 'empty'
         }
-      }
+      },
     },
     codemirror: {
       themes: ['solarized'],

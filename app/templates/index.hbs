@@ -9,47 +9,47 @@
       }}
       <p><strong>2.</strong> Choose any AST node operation:</p>
       <div class="mode-options">
-	{{#radio-button
+        {{#radio-button
 	value="remove"
 	groupValue=nodeOp
 	changed=(action "opChanged")
 	}}
-	  <span>Remove</span>
-	{{/radio-button}}
-	{{#radio-button
+          <span>Remove</span>
+        {{/radio-button}}
+        {{#radio-button
 	  value="replace"
 	  groupValue=nodeOp
 	  changed=(action "opChanged")
 	  }}
-	  <span>Replace</span>
-	{{/radio-button}}
-	{{#radio-button
+          <span>Replace</span>
+        {{/radio-button}}
+        {{#radio-button
 	  value="insert-before"
 	  groupValue=nodeOp
 	  changed=(action "opChanged")
 	  }}
-	  <span>Insert Before</span>
-	{{/radio-button}}
-	{{#radio-button
+          <span>Insert Before</span>
+        {{/radio-button}}
+        {{#radio-button
 	  value="insert-after"
 	  groupValue=nodeOp
 	  changed=(action "opChanged")
 	  }}
-	  <span>Insert After</span>
-	{{/radio-button}}
-	{{#if showInsertOptions}}
-	  <select onchange={{action 'setInsertOption'}} value="target.value">
-	    <option value="before">Before</option>
-	    <option value="after">After</option>
-	  </select>
-	{{/if}}
+          <span>Insert After</span>
+        {{/radio-button}}
+        {{#if showInsertOptions}}
+          <select onchange={{action "setInsertOption"}} value="target.value">
+            <option value="before">Before</option>
+            <option value="after">After</option>
+          </select>
+        {{/if}}
 
       </div>
     </div>
     {{#if showDest}}
       <div>
-	<p><strong>2.a.</strong> Enter destination code here:</p>
-	{{ivy-codemirror 
+        <p><strong>2.a.</strong> Enter destination code here:</p>
+        {{ivy-codemirror 
 	  value=dest 
 	  valueUpdated=(action (mut dest))
 	  options=(hash lineNumbers=true mode=jsonMode theme=theme foldGutter=true)}}
@@ -62,7 +62,7 @@
       {{ivy-codemirror value=nodeApi options=(hash lineNumbers=true mode="javascript" theme=theme autoIndent=true )}}
     </div>
     <div>
-      <p><strong>4.</strong> Output : (You can verify in <a href="http://astexplorer.net">ast-explorer</a>)</p>
+      <p><strong>4.</strong> Output :</p>
       {{ivy-codemirror value=output options=(hash lineNumbers=true mode="javascript" theme=theme autoIndent=true )}}
  
     </div>

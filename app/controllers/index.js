@@ -13,11 +13,21 @@ import { dispatchNodes } from 'ast-node-finder';
 
 import { parse } from 'recast';
 import { inject as service } from '@ember/service';
-
+import jscodeshift from 'jscodeshift';
 
 const _source = 'foo()';
 const _dest = 'foo.bar()';
 const showDestOpCodes = ['insert-before', 'insert-after', 'replace'];
+
+function compileModule(code, globals = {}) {
+  let exports = {};
+  let module = { exports };
+  let globalNames = Object.keys(globals);
+  let keys = ['module', 'exports', ...globalNames];
+  let values = [module, exports, ...globalNames.map(key => globals[key])];
+  new Function(keys.join(), code).apply(exports, values);
+  return module.exports;
+}
 
 export default Controller.extend({
   customize: service(),
@@ -38,20 +48,39 @@ export default Controller.extend({
     let ast = parse(this.get('source'));
     let transformLogic = dispatchNodes(ast).join();
     let _opQuery = this.get('opQuery');
-    const transformTemplate = `export default function transformer(file, api) {
-  const j = api.jscodeshift;
+    const transformTemplate = `
+    module.exports = function transformer(file, api) {
+   const j = api.jscodeshift;
   const root = j(file.source);
   const body = root.get().value.program.body;
   ${transformLogic}
   ${_opQuery}
   return root.toSource();
-}
+};
 `;
     return transformTemplate;
   }),
 
   output: computed('nodeApi', function() {
-    return this.get('nodeApi');
+    const transformModule = compileModule(this.get('nodeApi'));
+    const transform = transformModule.__esModule ?
+      transformModule.default :
+      transformModule;
+
+    let _source = this.get('source');
+    const result = transform(
+      {
+        path: 'Live.js',
+        source: _source,
+      },
+      {
+        jscodeshift: transformModule.parser ?
+        jscodeshift.withParser(transformModule.parser) :
+        jscodeshift,
+      },
+      {},
+    );
+    return result;
   }),
 
   opQuery: computed('nodeOp', 'dest', 'insertOption', function() {
@@ -69,13 +98,13 @@ export default Controller.extend({
 
       case 'insert-before':
         str =  `.forEach(path => {
-        path.insertBefore(${buildAST(parse(this.get('dest')))});
+        path.parent.insertBefore(${buildAST(parse(this.get('dest')))});
         })`;
         break;
 
       case 'insert-after':
         str =  `.forEach(path => {
-        path.insertAfter(${buildAST(parse(this.get('dest')))});
+        path.parent.insertAfter(${buildAST(parse(this.get('dest')))});
         })`;
         break;
 
