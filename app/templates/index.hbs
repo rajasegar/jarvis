@@ -46,7 +46,6 @@
 
       </div>
     </div>
-    {{#if showDest}}
       <div>
         <p><strong>2.a.</strong> Enter destination code here:</p>
         {{ivy-codemirror 
@@ -54,7 +53,6 @@
 	  valueUpdated=(action (mut dest))
 	  options=(hash lineNumbers=true mode=jsonMode theme=theme foldGutter=true)}}
       </div>
-    {{/if}}
   </div>
   <div class="grid-row">
     <div>

@@ -2,12 +2,16 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { 
   buildAST, 
+  core
+} from 'ast-node-builder';
+
+const {
   callExpression, 
   memberExpression,
   assignmentExpression,
   identifier,
   binaryExpression
-} from 'ast-node-builder';
+} = core;
 
 import { dispatchNodes } from 'ast-node-finder';
 
@@ -48,6 +52,8 @@ export default Controller.extend({
     let ast = parse(this.get('source'));
     let transformLogic = dispatchNodes(ast).join();
     let _opQuery = this.get('opQuery');
+
+    // TODO: Need to change to es6 export default
     const transformTemplate = `
     module.exports = function transformer(file, api) {
    const j = api.jscodeshift;
@@ -62,6 +68,7 @@ export default Controller.extend({
   }),
 
   output: computed('nodeApi', function() {
+    // TODO: Need to transpile the es6 export default
     const transformModule = compileModule(this.get('nodeApi'));
     const transform = transformModule.__esModule ?
       transformModule.default :
