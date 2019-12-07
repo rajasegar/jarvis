@@ -15,7 +15,7 @@ const {
 
 import { dispatchNodes } from 'ast-node-finder';
 
-import { parse } from 'recast';
+import { parse, prettyPrint } from 'recast';
 import { inject as service } from '@ember/service';
 import jscodeshift from 'jscodeshift';
 
@@ -64,7 +64,8 @@ export default Controller.extend({
   return root.toSource();
 };
 `;
-    return transformTemplate;
+    let _transform = prettyPrint(parse(transformTemplate), { tabWidth: 2 }).code;
+    return  _transform;
   }),
 
   output: computed('nodeApi', function() {
