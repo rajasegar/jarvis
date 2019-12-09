@@ -7609,9 +7609,28 @@ Object.defineProperty(t,"__esModule",{value:!0})
 var n={parser:r(127),tabWidth:4,useTabs:!1,reuseWhitespace:!0,lineTerminator:r(43).EOL||"\n",wrapColumn:74,sourceFileName:null,sourceMapName:null,sourceRoot:null,inputSourceMap:null,range:!1,tolerant:!0,quote:null,trailingComma:!1,arrayBracketSpacing:!1,objectCurlySpacing:!0,arrowParensAlways:!1,flowObjectCommas:!0,tokens:!0},i=n.hasOwnProperty
 t.normalize=function(e){var t=e||n
 function r(e){return i.call(t,e)?t[e]:n[e]}return{tabWidth:+r("tabWidth"),useTabs:!!r("useTabs"),reuseWhitespace:!!r("reuseWhitespace"),lineTerminator:r("lineTerminator"),wrapColumn:Math.max(r("wrapColumn"),0),sourceFileName:r("sourceFileName"),sourceMapName:r("sourceMapName"),sourceRoot:r("sourceRoot"),inputSourceMap:r("inputSourceMap"),parser:r("esprima")||r("parser"),range:r("range"),tolerant:r("tolerant"),quote:r("quote"),trailingComma:r("trailingComma"),arrayBracketSpacing:r("arrayBracketSpacing"),objectCurlySpacing:r("objectCurlySpacing"),arrowParensAlways:r("arrowParensAlways"),flowObjectCommas:r("flowObjectCommas"),tokens:!!r("tokens")}}},function(e,t,r){var n=r(20)
-function i(e){return"j.jsxIdentifier('".concat(e.name,"')")}function a(e){var t=e.name,r=e.value
-return"j.jsxAttribute(\n  ".concat(i(t),",\n  j.literal('").concat(r.value,"')\n)")}function s(e){var t,r=e.attributes,n=e.name,s=e.selfClosing
-return"j.jsxOpeningElement(\n    ".concat(i(n),",\n    [").concat((t=r,t.map((function(e){return a(e)})).join(",")),"],\n    ").concat(s,"\n  )")}function o(e){var t=e.arguments,r=e.callee
+function i(e){return"j.jsxIdentifier('".concat(e.name,"')")}function a(e){var t="",r=e.name,n=e.value
+switch(e.type){case"JSXAttribute":t="j.jsxAttribute(\n        ".concat(i(r),",\n        j.literal('").concat(n.value,"')\n      )")
+break
+case"JSXSpreadAttribute":t=function(e){var t=""
+switch(e.argument.type){case"CallExpression":t=c(e.argument)
+break
+default:console.log("JSX::spreadAttribute => ",e.argument.type)}return"j.jsxSpreadAttribute(".concat(t,")")}(e)
+break
+default:console.log("JSX::attribute => ",e.type)}return t}function s(e){return e.map((function(e){return a(e)})).join(",")}function o(e){var t=e.object,r=e.property,n=""
+switch(t.type){case"JSXMemberExpression":n="".concat(o(t))
+break
+case"JSXIdentifier":n=i(t)
+break
+default:console.log("jsxMemberExpression::object => ",t.type)}var a=""
+switch(r.type){case"JSXIdentifier":a=i(r)
+break
+default:console.log("memberExpression.property => ",r.type)}return"j.jsxMemberExpression(\n ".concat(n,",\n ").concat(a,"\n  )")}function u(e){var t=e.attributes,r=e.name,n=e.selfClosing,a=""
+switch(r.type){case"JSXIdentifier":case"Identifier":a="j.jsxOpeningElement(\n    ".concat(i(r),",\n    [").concat(s(t),"],\n    ").concat(n,"\n  )")
+break
+case"JSXMemberExpression":a="j.jsxOpeningElement(\n    ".concat(o(r),",\n    [").concat(s(t),"],\n    ").concat(n,"\n  )")
+break
+default:console.log("JSX::openingElement => ",r.type)}return a}function c(e){var t=e.arguments,r=e.callee
 return"MemberExpression"===r.type?"j.callExpression(\n          ".concat(function e(t){var r=t.object,i=t.property,a=t.computed,s=""
 switch(r.type){case"ThisExpression":s="j.thisExpression()"
 break
@@ -7619,38 +7638,46 @@ case"MemberExpression":s="".concat(e(r))
 break
 case"Identifier":s=n.identifier(r)
 break
-case"CallExpression":s=o(r)
+case"CallExpression":s=c(r)
 break
 case"ArrayExpression":s=function(t){var r=t.elements.map((function(t){switch(t.type){case"Literal":return n.literal(t)
 case"MemberExpression":return e(t)
 default:return console.log("arrayExpression => ",t.type),""}})).join(",")
 return"j.arrayExpression([".concat(r,"])")}(r)
 break
-default:console.log("memberExpression => ",r.type)}var u=""
-switch(i.type){case"Identifier":u=n.identifier(i)
+default:console.log("memberExpression => ",r.type)}var o=""
+switch(i.type){case"Identifier":o=n.identifier(i)
 break
-case"Literal":u=n.literal(i)
+case"Literal":o=n.literal(i)
 break
-case"CallExpression":u=o(i)
+case"CallExpression":o=c(i)
 break
-default:console.log("memberExpression.property => ",i.type)}return"j.memberExpression(\n ".concat(s,",\n ").concat(u,",\n ").concat(a,"\n  )")}(r),",\n          [").concat(u(t),"]\n        )"):"j.callExpression(\n          ".concat(n.identifier(r),",\n          [").concat(u(t),"]\n        )")}function u(e){return e.map((function(e){switch(e.type){case"Literal":return n.literal(e)
+default:console.log("memberExpression.property => ",i.type)}return"j.memberExpression(\n ".concat(s,",\n ").concat(o,",\n ").concat(a,"\n  )")}(r),",\n          [").concat(l(t),"]\n        )"):"j.callExpression(\n          ".concat(n.identifier(r),",\n          [").concat(l(t),"]\n        )")}function l(e){return e.map((function(e){switch(e.type){case"Literal":return n.literal(e)
 case"Identifier":return n.identifier(e)
 case"StringLiteral":return n.literal(e)
-default:return console.log("buildArgs => ",e.type),""}})).join(",")}function c(e){return e.map((function(e){var t=""
+default:return console.log("buildArgs => ",e.type),""}})).join(",")}function f(e){return e.map((function(e){var t=""
 switch(e.type){case"Literal":t="j.literal('".concat(e.value.replace("\n","\\n"),"')")
 break
-case"JSXElement":t=l(e)
+case"JSXElement":t=h(e)
 break
-case"JSXText":t="j.jsxText('".concat(e.value.replace("\n","\\n"),"')")
+case"JSXText":t="j.jsxText('".concat(e.value.replace(/\n/g,"\\n"),"')")
 break
 case"JSXExpressionContainer":t=function(e){var t=e.expression,r=""
-switch(t.type){case"CallExpression":r=o(t)
+switch(t.type){case"CallExpression":r=c(t)
+break
+case"StringLiteral":r="j.literal('".concat(t.value,"')")
+break
+case"Identifier":r=n.identifier(t)
 break
 default:console.log("JSX::expressionContainer => ",t.type)}return"j.jsxExpressionContainer(".concat(r,")")}(e)
 break
-default:console.log("JSX::buildChildren => ",e.type)}return t})).join(",")}function l(e){var t=e.openingElement,r=e.closingElement,n=e.children,a=e.extra,o=!(!a||!a.parenthesized)
-return null!==r?"j.jsxElement(\n  ".concat(s(t),",\n  ").concat(function(e){var t=e.name
-return"j.jsxClosingElement(\n    ".concat(i(t),"\n  )")}(r),",\n  [").concat(c(n),"],\n  ").concat(o,"\n  )"):"j.jsxElement(\n  ".concat(s(t),",")+"null,"+"[".concat(c(n),"],\n  ").concat(o,"\n  )")}e.exports={attribute:a,element:l}},function(e,t){function r(e){return(r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}var n
+default:console.log("JSX::buildChildren => ",e.type)}return t})).join(",")}function h(e){var t=e.openingElement,r=e.closingElement,n=e.children,a=e.extra,s=!(!a||!a.parenthesized)
+return null!==r?"j.jsxElement(\n  ".concat(u(t),",\n  ").concat(function(e){var t=e.name,r=""
+switch(t.type){case"JSXIdentifier":r="j.jsxClosingElement(\n        ".concat(i(t),"\n      )")
+break
+case"JSXMemberExpression":r="j.jsxClosingElement(\n          ".concat(o(t),"\n        )")
+break
+default:console.log("JSX::closingElement => ",t.type)}return r}(r),",\n  [").concat(f(n),"],\n  ").concat(s,"\n  )"):"j.jsxElement(\n  ".concat(u(t),",")+"null,"+"[".concat(f(n),"],\n  ").concat(s,"\n  )")}e.exports={attribute:a,element:h}},function(e,t){function r(e){return(r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}var n
 n=function(){return this}()
 try{n=n||new Function("return this")()}catch(e){"object"===("undefined"==typeof window?"undefined":r(window))&&(n=window)}e.exports=n},function(e,t,r){var n=Array.prototype,i=(n.slice,n.map,Object.prototype.hasOwnProperty)
 e.exports=function(e){var t=e.use(r(0)),n=t.builtInTypes.array,a=t.builtInTypes.number
@@ -10064,6 +10091,7 @@ case"ExpressionStatement":return t?c(e):a(e.expression)
 case"IfStatement":return f(e)
 case"ExportDefaultDeclaration":return o(e)
 case"ExportNamedDeclaration":return u(e)
+case"EmptyStatement":return"j.emptyStatement()"
 case"ClassDeclaration":return s(e)
 case"FunctionDeclaration":return l(e)
 case"ArrowFunctionExpression":return x(e)
@@ -10081,7 +10109,7 @@ switch(r.type){case"BlockStatement":n="j.arrowFunctionExpression(\n      [".conc
 break
 case"Literal":n="j.arrowFunctionExpression(\n      [".concat(b(t),"],\n      ").concat(i(r),"\n      )")
 break
-case"CallExpression":n="j.arrowFunctionExpression(\n      [".concat(b(t),"],\n      ").concat(x(r),"\n      )")}return n}function b(e){return e.map((function(e){switch(e.type){case"Literal":return i(e)
+case"CallExpression":n="j.arrowFunctionExpression(\n      [".concat(b(t),"],\n      ").concat(x(r),"\n      )")}return n}function b(e){return e.map((function(e){switch(e.type){case"StringLiteral":case"NumericLiteral":case"BooleanLiteral":case"Literal":return i(e)
 case"Identifier":return a(e)
 case"SpreadElement":return d(e)
 case"FunctionExpression":return R(e)
@@ -10097,7 +10125,7 @@ return"MemberExpression"===r.type?"j.callExpression(\n          ".concat(_(r),",
 case"UnaryExpression":return l(e)
 case"SpreadElement":return d(e)
 default:return console.log("arrayExpression => ",e.type),""}})).join(",")
-return"j.arrayExpression([".concat(t,"])")}function w(e){switch(e.type){case"Literal":return i(e)
+return"j.arrayExpression([".concat(t,"])")}function w(e){switch(e.type){case"StringLiteral":case"NumericLiteral":case"BooleanLiteral":case"Literal":return i(e)
 case"ObjectExpression":return k(e)
 case"CallExpression":return x(e)
 case"ArrayExpression":return E(e)
@@ -10174,6 +10202,8 @@ break
 case"TaggedTemplateExpression":n="j.expressionStatement(".concat(v(t),")")
 break
 case"Literal":n="j.expressionStatement(".concat(i(t),")")
+break
+case"JSXElement":n="j.expressionStatement(".concat(y.element(t),")")
 break
 default:console.log("expressionStatement => ",t.type)}return n}function P(e){var t=e.argument,r=""
 switch(t.type){case"CallExpression":r="j.returnStatement(".concat(x(t),")")
@@ -10273,31 +10303,38 @@ break
 default:console.log("findQuery => ",e.type)}return t}e.exports={findQuery:p,dispatchNodes:function(e){return e.program.body.map((function(e){switch(e.type){case"ExpressionStatement":return p(e.expression)
 case"VariableDeclaration":return p(e.declarations[0])
 case"ImportDeclaration":case"ExportDefaultDeclaration":case"FunctionDeclaration":return p(e)
-default:return console.log("dispatchNodes => ",e.type),""}}))},query:n}},function(e,t,r){function n(){var e=s(["\n  root.find(j.CallExpression, {\n    ","\n  })"])
-return n=function(){return e},e}function i(){var e=s(["callee: {\n      ",",\n      ","\n    }"])
-return i=function(){return e},e}function a(){var e=s(["\n      object: { "," ,\n        property: { name: '","' }\n      }"])
-return a=function(){return e},e}function s(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var o=r(139).stripIndent
-function u(e){var t=""
+default:return console.log("dispatchNodes => ",e.type),""}}))},query:n}},function(e,t,r){function n(){var e=o(["\n  root.find(j.CallExpression, {\n    ","\n  })"])
+return n=function(){return e},e}function i(){var e=o(["\n  root.find(j.CallExpression, {\n    ","\n  })\n  .filter(path => {\n    return ","\n  })"])
+return i=function(){return e},e}function a(){var e=o(["callee: {\n      ",",\n      ","\n    }"])
+return a=function(){return e},e}function s(){var e=o(["\n      object: { "," ,\n        property: { name: '","' }\n      }"])
+return s=function(){return e},e}function o(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var u=r(139).stripIndent
+function c(e){var t=""
 switch(e.type){case"Identifier":t="object: { name: '".concat(e.name,"' }")
 break
-case"CallExpression":t="object: { ".concat(c(e.callee)," }")
+case"CallExpression":t="object: { ".concat(l(e.callee)," }")
 break
-case"MemberExpression":t=o(a(),u(e.object),e.property.name)
+case"MemberExpression":t=u(s(),c(e.object),e.property.name)
 break
 case"ThisExpression":t='object: { type: "ThisExpression" }'
 break
-default:console.log("objectQuery::object => ",e.type)}return t}function c(e){var t=""
-if("MemberExpression"===e.type){var r,n=e.object,a=e.property,s=""
-switch(r=u(n),a.type){case"Identifier":s="property: { name: '".concat(a.name,"' }")
+default:console.log("objectQuery::object => ",e.type)}return t}function l(e){var t=""
+if("MemberExpression"===e.type){var r,n=e.object,i=e.property,s=""
+switch(r=c(n),i.type){case"Identifier":s="property: { name: '".concat(i.name,"' }")
 break
-default:console.log("calleeQuery::property => ",a.type)}t=o(i(),r,s)}else"Identifier"===e.type?t="callee: { name: '".concat(e.name,"' }"):console.error("Unknown node type in calleeQuery")
-return t}e.exports={callExpressionQuery:function(e){return o(n(),c(e.callee))},literalQuery:function(e){var t="string"==typeof e.value?"'".concat(e.value,"'"):e.value
+default:console.log("calleeQuery::property => ",i.type)}t=u(a(),r,s)}else"Identifier"===e.type?t="callee: { name: '".concat(e.name,"' }"):console.error("Unknown node type in calleeQuery")
+return t}e.exports={callExpressionQuery:function(e){var t=e.arguments.filter((function(e){return["Literal","Identifier"].includes(e.type)})),r=t.map((function(e,t){var r=""
+switch(e.type){case"Literal":r="path.value.arguments[".concat(t,"].raw === '").concat(e.raw.replace(/'/g,""),"'")
+break
+case"Identifier":r="path.value.arguments[".concat(t,"].name === '").concat(e.name,"'")
+break
+default:console.log("callExpressionQuery::filter => ",e.type)}return r})).join("\n  && ")
+return t.length>0?u(i(),l(e.callee),r):u(n(),l(e.callee))},literalQuery:function(e){var t="string"==typeof e.value?"'".concat(e.value,"'"):e.value
 return"root.find(j.Literal, { value: ".concat(t," })")},memberExpressionQuery:function(e){var t,r=e.object,n=e.property,i=""
-switch(t=u(r),n.type){case"Identifier":i="property: { name: '".concat(n.name,"' }")
+switch(t=c(r),n.type){case"Identifier":i="property: { name: '".concat(n.name,"' }")
 break
 default:console.log("buildMemberExpressionQuery::property => ",n.type)}return"root.find(j.MemberExpression, {\n    ".concat(t,",\n    ").concat(i,"\n    })")},newExpressionQuery:function(e){return"root.find(j.NewExpression, {\n  callee: { name: '".concat(e.callee.name,"' }\n})")},expressionStatementQuery:function(e){var t=e.expression,r=""
-switch(t.type){case"CallExpression":case"MemberExpression":r="root.find(j.ExpressionStatement, {\n      expression: {\n      ".concat(c(t),"\n      }\n      })")}return r},variableDeclaratorQuery:function(e){return"root.find(j.VariableDeclarator, {\n  id: { name: '".concat(e.id.name,"' }\n  });")},importDeclarationQuery:function(e){return"root.find(j.ImportDeclaration, {\n  source: ".concat(e.source.raw,"\n})")},exportDefaultDeclarationQuery:function(e){var t=""
-switch(e.declaration.type){case"CallExpression":t="root.find(j.ExportDefaultDeclaration, {\n  declaration: { ".concat(c(e.declaration.callee)," }\n  })")
+switch(t.type){case"CallExpression":case"MemberExpression":r="root.find(j.ExpressionStatement, {\n      expression: {\n      ".concat(l(t),"\n      }\n      })")}return r},variableDeclaratorQuery:function(e){return"root.find(j.VariableDeclarator, {\n  id: { name: '".concat(e.id.name,"' }\n  });")},importDeclarationQuery:function(e){return"root.find(j.ImportDeclaration, {\n  source: ".concat(e.source.raw,"\n})")},exportDefaultDeclarationQuery:function(e){var t=""
+switch(e.declaration.type){case"CallExpression":t="root.find(j.ExportDefaultDeclaration, {\n  declaration: { ".concat(l(e.declaration.callee)," }\n  })")
 break
 default:console.log("exportDefaultDeclaration => ",e.declaration.type)}return t},identifier:function(e){return"root.find(j.Identifier, {\n  name: '".concat(e.name,"'\n  })")},functionDeclaration:function(e){return"root.find(j.FunctionDeclaration, {\n  id: { name: '".concat(e.id.name,"' }\n  })")}}},function(e,t,r){e.exports=r(72)},function(e,t,r){"use strict"
 var n=r(16),i=r(102),a=r(104),s=r(46),o=r(9),u=r(113),c=o.types.namedTypes.Node,l=o.types.NodePath
