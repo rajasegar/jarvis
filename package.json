@@ -51,8 +51,8 @@
     "node": "8.* || >= 10.*"
   },
   "dependencies": {
-    "ast-node-builder": "^1.1.2",
-    "ast-node-finder": "^1.0.6",
+    "ast-node-builder": "^1.1.4",
+    "ast-node-finder": "^1.0.7",
     "jscodeshift": "^0.6.4",
     "recast": "^0.18.5"
   }
