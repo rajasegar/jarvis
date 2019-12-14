@@ -1,9 +1,13 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { 
-  buildAST, 
-  core
-} from 'ast-node-builder';
+import { inject as service } from '@ember/service';
+import { buildAST, core } from 'ast-node-builder';
+import { dispatchNodes } from 'ast-node-finder';
+import recast from 'recast';
+import etr from "ember-template-recast";
+import jscodeshift from 'jscodeshift';
+import recastBabel from "recastBabel";
+import recastBabylon from "recastBabylon";
 
 const {
   callExpression, 
@@ -13,17 +17,6 @@ const {
   binaryExpression
 } = core;
 
-import { dispatchNodes } from 'ast-node-finder';
-
-import recast from 'recast';
-import etr from "ember-template-recast";
-import { inject as service } from '@ember/service';
-import jscodeshift from 'jscodeshift';
-import recastBabel from "recastBabel";
-import recastBabylon from "recastBabylon";
-const b = etr.builders;
-
-const _source = 'foo()';
 const _dest = 'foo.bar()';
 const showDestOpCodes = ['insert-before', 'insert-after', 'replace'];
 
@@ -40,7 +33,6 @@ function compileModule(code, globals = {}) {
 export default Component.extend({
 customize: service(),
   theme: computed.reads('customize.theme'),
-  source: _source,
   dest: _dest,
   nodeOp: 'remove', 
   parse: computed("parser", function() {
@@ -69,14 +61,18 @@ customize: service(),
   showInsertOptions: computed('nodeOp', function() {
   return this.get('nodeOp') === 'insert' ? true : false;
   }),
-  codemod: computed('source', 'opQuery', 'insertOption', function() {
+  codemod: computed('code', 'opQuery', 'insertOption', 'mode', function() {
+    debugger
     let parse = this.get('parse');
-    let ast = parse(this.get('source'));
+    let ast = parse(this.get('code'));
+    let _mode = this.get('mode');
+    let jsTransform = '';
+    if(_mode === 'javascript') {
     let transformLogic = dispatchNodes(ast).join();
     let _opQuery = this.get('opQuery');
 
     // TODO: Need to change to es6 export default
-    const jsTransform = `
+    jsTransform = `
     module.exports = function transformer(file, api) {
    const j = api.jscodeshift;
   const root = j(file.source);
@@ -86,6 +82,7 @@ customize: service(),
   return root.toSource();
 };
 `;
+    }
 
     const hbsTransform = `
     module.exports = function(env) {
@@ -98,8 +95,11 @@ customize: service(),
   };
 };`;
 
-    const transformTemplate = this.get('mode') === 'javascript' ? jsTransform : hbsTransform;
-    let _transform = recast.prettyPrint(parse(transformTemplate), { tabWidth: 2 }).code;
+    let transformTemplate = '';
+    let _transform = '';
+     transformTemplate = _mode === 'javascript' ? jsTransform : hbsTransform;
+     _transform = recast.prettyPrint(recast.parse(transformTemplate), { tabWidth: 2 }).code;
+    
     return  _transform;
   }),
 
