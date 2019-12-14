@@ -18,11 +18,13 @@ h1 {
 
 nav ul {
   display:flex;
+  justify-content: space-evenly;
 }
 
 nav ul li {
   list-style: none;
   margin:0 10px;
+  display:flex;
 }
 
 nav ul li a.active {

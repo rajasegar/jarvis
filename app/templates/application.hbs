@@ -3,6 +3,17 @@
   <nav>
     <ul>
       <li>
+          <PowerSelect @selected={{language}} @options={{languages}} @onChange={{action (mut language)}} as |lang|>
+            {{lang}}
+          </PowerSelect>
+      </li>
+      <li>
+        <span class="label-text">Parser:</span>
+        <PowerSelect @selected={{parser}} @options={{parsers}} @onChange={{action (mut parser)}} as |parser|>
+          {{parser}}
+        </PowerSelect>
+      </li>
+      <li>
         <a href="https://rajasegar.github.io/ast-builder/">ast-builder</a>
       </li>
       <li>
@@ -19,7 +30,10 @@
   </nav>
 </header>
 <main>
-  {{outlet}}
+  <AstMaker 
+  @mode={{mode}} 
+  @code={{sampleCode}}
+  @parser={{parser}}></AstMaker>
 </main>
 <footer>
   <p>

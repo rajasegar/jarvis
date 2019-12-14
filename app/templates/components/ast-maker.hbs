@@ -1,0 +1,88 @@
+<div class="grid-col">
+  <div class="grid-row">
+    <div>
+      <p><strong>1.</strong> Enter source code here:</p>
+      {{ivy-codemirror 
+	value=code 
+        options=(hash 
+        lineNumbers=true 
+        mode=mode 
+        theme=theme)
+	valueUpdated=(action (mut source))
+      }}
+      <p><strong>2.</strong> Choose any AST node operation:</p>
+      <div class="mode-options">
+        {{#radio-button
+	value="remove"
+	groupValue=nodeOp
+	changed=(action "opChanged")
+	}}
+          <span>Remove</span>
+        {{/radio-button}}
+        {{#radio-button
+	  value="replace"
+	  groupValue=nodeOp
+	  changed=(action "opChanged")
+	  }}
+          <span>Replace</span>
+        {{/radio-button}}
+        {{#radio-button
+	  value="insert-before"
+	  groupValue=nodeOp
+	  changed=(action "opChanged")
+	  }}
+          <span>Insert Before</span>
+        {{/radio-button}}
+        {{#radio-button
+	  value="insert-after"
+	  groupValue=nodeOp
+	  changed=(action "opChanged")
+	  }}
+          <span>Insert After</span>
+        {{/radio-button}}
+        {{#if showInsertOptions}}
+          <select onchange={{action "setInsertOption"}} value="target.value">
+            <option value="before">Before</option>
+            <option value="after">After</option>
+          </select>
+        {{/if}}
+
+      </div>
+    </div>
+    <div>
+      <p><strong>2.a.</strong> Enter destination code here:</p>
+      {{ivy-codemirror 
+        value=dest 
+        valueUpdated=(action (mut dest))
+        options=(hash 
+        lineNumbers=true 
+        mode=jsonMode 
+        theme=theme 
+        foldGutter=true)}}
+    </div>
+  </div>
+  <div class="grid-row">
+    <div>
+      <p><strong>3.</strong> Codemod : </p>
+      {{ivy-codemirror 
+        value=codemod 
+        options=(hash 
+        lineNumbers=true 
+        mode="javascript" 
+        theme=theme 
+        autoIndent=true )
+     	valueUpdated=(action (mut codemod))
+      }}
+    </div>
+    <div>
+      <p><strong>4.</strong> Output :</p>
+      {{ivy-codemirror 
+        value=output 
+        options=(hash 
+        lineNumbers=true 
+        mode=mode 
+        theme=theme 
+        autoIndent=true )}}
+    </div>
+  </div>
+</div>

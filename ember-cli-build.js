@@ -5,6 +5,12 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     autoImport: {
+   alias: {
+        'recastBabel': 'recast/parsers/babel',
+        'recastBabylon': 'recast/parsers/babylon',
+        'recastFlow': 'recast/parsers/flow',
+        'recastTypeScript': 'recast/parsers/typescript'
+      },
       webpack: { 
         node: { 
           path: true,
