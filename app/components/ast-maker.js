@@ -4,10 +4,10 @@ import { inject as service } from '@ember/service';
 import { buildAST, core } from 'ast-node-builder';
 import { dispatchNodes } from 'ast-node-finder';
 import recast from 'recast';
-import etr from "ember-template-recast";
-import jscodeshift from 'jscodeshift';
 import recastBabel from "recastBabel";
 import recastBabylon from "recastBabylon";
+import etr from "ember-template-recast";
+import jscodeshift from 'jscodeshift';
 
 const {
   callExpression, 
@@ -18,7 +18,6 @@ const {
 } = core;
 
 const _dest = 'foo.bar()';
-const showDestOpCodes = ['insert-before', 'insert-after', 'replace'];
 
 function compileModule(code, globals = {}) {
   let exports = {};
@@ -36,6 +35,7 @@ customize: service(),
   dest: _dest,
   nodeOp: 'remove', 
   parse: computed("parser", function() {
+
     let parse = recast.parse;
     let _parser = this.get("parser");
     switch (_parser) {
@@ -52,55 +52,11 @@ customize: service(),
     }
     return parse;
   }),
-  showDest: computed('nodeOp', function() {
-    let _nodeOp = this.get('nodeOp'); 
-    let _show  = showDestOpCodes.includes(_nodeOp);
-    return  _show;
-  }),
+  
   insertOption: 'before',
-  showInsertOptions: computed('nodeOp', function() {
-  return this.get('nodeOp') === 'insert' ? true : false;
-  }),
-  codemod: computed('code', 'opQuery', 'insertOption', 'mode', function() {
-    debugger
-    let parse = this.get('parse');
-    let ast = parse(this.get('code'));
-    let _mode = this.get('mode');
-    let jsTransform = '';
-    if(_mode === 'javascript') {
-    let transformLogic = dispatchNodes(ast).join();
-    let _opQuery = this.get('opQuery');
-
-    // TODO: Need to change to es6 export default
-    jsTransform = `
-    module.exports = function transformer(file, api) {
-   const j = api.jscodeshift;
-  const root = j(file.source);
-  const body = root.get().value.program.body;
-  ${transformLogic}
-  ${_opQuery}
-  return root.toSource();
-};
-`;
-    }
-
-    const hbsTransform = `
-    module.exports = function(env) {
-  let b = env.syntax.builders;
-
-  return {
-    ElementNode(node) {
-      node.tag = node.tag.split('').reverse().join('');
-    }
-  };
-};`;
-
-    let transformTemplate = '';
-    let _transform = '';
-     transformTemplate = _mode === 'javascript' ? jsTransform : hbsTransform;
-     _transform = recast.prettyPrint(recast.parse(transformTemplate), { tabWidth: 2 }).code;
-    
-    return  _transform;
+  
+  codemod: computed( 'parse', 'mode',  function() {
+    return this._buildCodemod();
   }),
 
   output: computed('codemod', function() {
@@ -133,7 +89,7 @@ customize: service(),
     return result;
   }),
 
-  opQuery: computed('nodeOp', 'dest', 'insertOption', function() {
+  opQuery: computed('nodeOp', 'dest', function() {
     let parse = this.get('parse');
     let str = '';
     switch(this.get('nodeOp')) {
@@ -164,10 +120,57 @@ customize: service(),
 
   }),
 
+  _buildCodemod() {
+
+    let parse = this.get('parse');
+    let ast = parse(this.get('code'));
+    let _mode = this.get('mode');
+    let jsTransform = '';
+    if(_mode === 'javascript') {
+      let transformLogic = dispatchNodes(ast).join();
+      let _opQuery = this.get('opQuery');
+
+      // TODO: Need to change to es6 export default
+      jsTransform = `
+          module.exports = function transformer(file, api) {
+         const j = api.jscodeshift;
+        const root = j(file.source);
+        const body = root.get().value.program.body;
+        ${transformLogic}
+        ${_opQuery}
+        return root.toSource();
+      };
+      `;
+    }
+
+    const hbsTransform = `
+    module.exports = function(env) {
+  let b = env.syntax.builders;
+
+  return {
+    ElementNode(node) {
+      node.tag = node.tag.split('').reverse().join('');
+    }
+  };
+};`;
+
+    let transformTemplate = '';
+    let _transform = '';
+     transformTemplate = _mode === 'javascript' ? jsTransform : hbsTransform;
+     _transform = recast.prettyPrint(recast.parse(transformTemplate), { tabWidth: 2 }).code;
+    return _transform;
+
+  },
+
+  didUpdateAttrs() {
+    this._super(...arguments);
+    this.set('codemod', this._buildCodemod());
+  },
 
   actions: {
     opChanged(op) {
       this.set('nodeOp', op);
+      this.set('codemod', this._buildCodemod());
     },
 
     setInsertOption(opt) {

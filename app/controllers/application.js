@@ -5,11 +5,7 @@ import ENV from "jarvis/config/environment";
 import PARSERS from 'jarvis/constants/parsers';
 
 // Sample code to test
-const jscode = `const profile = <div>
-    <img src="avatar.png" className="profile" />
-    <h3>{[user.firstName, user.lastName].join(' ')}</h3>
-  </div>;
-`;
+const jscode = `foo();`;
 
 const hbscode = `<div class="entry">
   <h1>{{title}}</h1>
@@ -26,7 +22,7 @@ const modes = {
 
 export default Controller.extend({
 customize: service(),
-  language: "Handlebars",
+  language: "Javascript",
   parser: computed('language', function() {
     return Object.keys(PARSERS[this.get("language")])[0];
   }),
