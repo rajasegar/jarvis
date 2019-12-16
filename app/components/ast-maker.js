@@ -1,38 +1,18 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { buildAST, core } from 'ast-node-builder';
-import { dispatchNodes } from 'ast-node-finder';
+import { dispatchNodes, glimmer } from 'ast-node-finder';
 import recast from 'recast';
 import recastBabel from "recastBabel";
 import recastBabylon from "recastBabylon";
 import etr from "ember-template-recast";
 import jscodeshift from 'jscodeshift';
-
-const {
-  callExpression, 
-  memberExpression,
-  assignmentExpression,
-  identifier,
-  binaryExpression
-} = core;
-
-const _dest = 'foo.bar()';
-
-function compileModule(code, globals = {}) {
-  let exports = {};
-  let module = { exports };
-  let globalNames = Object.keys(globals);
-  let keys = ['module', 'exports', ...globalNames];
-  let values = [module, exports, ...globalNames.map(key => globals[key])];
-  new Function(keys.join(), code).apply(exports, values);
-  return module.exports;
-}
+import compileModule from 'jarvis/utils/compile-module';
+import opQuery from 'jarvis/utils/op-query';
 
 export default Component.extend({
 customize: service(),
   theme: computed.reads('customize.theme'),
-  dest: _dest,
   nodeOp: 'remove', 
   parse: computed("parser", function() {
 
@@ -55,7 +35,8 @@ customize: service(),
   
   insertOption: 'before',
   
-  codemod: computed( 'parse', 'mode',  function() {
+  codemod: computed( 'dest', 'parser', 'mode',  function() {
+    debugger
     return this._buildCodemod();
   }),
 
@@ -90,34 +71,10 @@ customize: service(),
   }),
 
   opQuery: computed('nodeOp', 'dest', function() {
-    let parse = this.get('parse');
-    let str = '';
-    switch(this.get('nodeOp')) {
-      case 'remove':
-        str = `.remove();`        
-        break;
-
-      case 'replace':
-        str = `.replaceWith(path => {
-          return ${this._buildReplaceNode(parse(this.get('dest')))};
-        })`;
-        break;
-
-      case 'insert-before':
-        str =  `.forEach(path => {
-        path.parent.insertBefore(${buildAST(parse(this.get('dest')))});
-        })`;
-        break;
-
-      case 'insert-after':
-        str =  `.forEach(path => {
-        path.parent.insertAfter(${buildAST(parse(this.get('dest')))});
-        })`;
-        break;
-
-    }
-    return str;
-
+    let _mode = this.get('mode');
+    let _nodeOp = this.get('nodeOp');
+    let _dest = this.get('dest');
+    return opQuery(_mode, _nodeOp, _dest);
   }),
 
   _buildCodemod() {
@@ -125,13 +82,14 @@ customize: service(),
     let parse = this.get('parse');
     let ast = parse(this.get('code'));
     let _mode = this.get('mode');
-    let jsTransform = '';
+    let _transformTemplate = '';
+    let transformLogic = '';
     if(_mode === 'javascript') {
-      let transformLogic = dispatchNodes(ast).join();
+      transformLogic = dispatchNodes(ast).join();
       let _opQuery = this.get('opQuery');
 
       // TODO: Need to change to es6 export default
-      jsTransform = `
+      _transformTemplate = `
           module.exports = function transformer(file, api) {
          const j = api.jscodeshift;
         const root = j(file.source);
@@ -139,32 +97,48 @@ customize: service(),
         ${transformLogic}
         ${_opQuery}
         return root.toSource();
-      };
-      `;
+      };`;
+    } else {
+
+      let _opQuery = this.get('opQuery');
+      transformLogic = glimmer.dispatchNodes(ast, _opQuery).join();
+
+      _transformTemplate = `
+          module.exports = function(env) {
+        let b = env.syntax.builders;
+
+        ${transformLogic}
+        
+      };`;
     }
 
-    const hbsTransform = `
-    module.exports = function(env) {
-  let b = env.syntax.builders;
-
-  return {
-    ElementNode(node) {
-      node.tag = node.tag.split('').reverse().join('');
-    }
-  };
-};`;
-
-    let transformTemplate = '';
-    let _transform = '';
-     transformTemplate = _mode === 'javascript' ? jsTransform : hbsTransform;
-     _transform = recast.prettyPrint(recast.parse(transformTemplate), { tabWidth: 2 }).code;
-    return _transform;
+     return recast.prettyPrint(recast.parse(_transformTemplate), { tabWidth: 2 }).code;
 
   },
 
   didUpdateAttrs() {
     this._super(...arguments);
     this.set('codemod', this._buildCodemod());
+    let _dest = '';
+    let _mode = this.get('mode');
+    if(_mode === 'javascript') {
+      _dest =  'foo.bar()';
+    } else {
+      _dest =  `{{foo}}`;
+    }
+    this.set('dest', _dest);
+  },
+
+  init() {
+    this._super(...arguments);
+    let _dest = '';
+    let _mode = this.get('mode');
+    if(_mode === 'javascript') {
+      _dest =  'foo.bar()';
+    } else {
+      _dest =  `{{foo}}`;
+    }
+    this.set('dest', _dest);
   },
 
   actions: {
@@ -173,65 +147,9 @@ customize: service(),
       this.set('codemod', this._buildCodemod());
     },
 
-    setInsertOption(opt) {
-      this.set('insertOption', opt);
+    destChanged(val) {
+      this.set('dest', val);
     }
-  },
-
-  _buildReplaceNode(ast) {
-    return ast.program.body.map(node => {
-    let str = '';
-      switch(node.type) {
-        case 'ExpressionStatement':
-          str = this._buildExpression(node.expression);
-          break;
-
-        default:
-          console.log('_buildReplaceNode => ', node.type); // eslint-disable-line
-          break;
-
-      }
-      return str;
-    }).join('');
-
-  },
-
-  _buildExpression(expression) {
-    let str = '';
-    let { extra } = expression;
-    switch(expression.type) {
-      case 'MemberExpression':
-        str = memberExpression(expression);
-        break;
-
-      case 'CallExpression':
-        if(extra && extra.parenthesized) {
-          str = `
-       j.parenthesizedExpression(
-       ${callExpression(expression)}
-       )`;
-        } else {
-          str = callExpression(expression);
-        }
-        break;
-
-      case 'AssignmentExpression':
-        str = assignmentExpression(expression);      
-        break;
-
-      case 'Identifier':
-        str = identifier(expression);
-        break;
-
-      case 'BinaryExpression':
-        str = binaryExpression(expression);
-        break;
-
-      default:
-        console.log('_buildExpression => ', expression.type); // eslint-disable-line
-        break;
-    }
-
-    return str;
   }
+  
 });
