@@ -36,7 +36,6 @@ customize: service(),
   insertOption: 'before',
   
   codemod: computed( 'dest', 'parser', 'mode',  function() {
-    debugger
     return this._buildCodemod();
   }),
 
