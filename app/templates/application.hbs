@@ -1,33 +1,18 @@
 <header>
   <h1>JARVIS</h1>
-  <nav>
-    <ul>
-      <li>
-        <PowerSelect @selected={{language}} @options={{languages}} @onChange={{action (mut language)}} as |lang|>
-          {{lang}}
-        </PowerSelect>
-      </li>
-      <li>
-        <span class="label-text">Parser:</span>
-        <PowerSelect @selected={{parser}} @options={{parsers}} @onChange={{action (mut parser)}} as |parser|>
-          {{parser}}
-        </PowerSelect>
-      </li>
-      <li>
-        <a href="https://rajasegar.github.io/ast-builder/">ast-builder</a>
-      </li>
-      <li>
-        <a href="https://rajasegar.github.io/ast-finder/">ast-finder</a>
-      </li>
-      <li>
-        <a href="https://astexplorer.net/">ast-explorer</a>
-      </li>
-      <li>
-        <span>Enable Dark theme: <Input @type="checkbox" @click={{action "toggleDarkMode"}}/></span>
-      </li>
-
-    </ul>
-  </nav>
+  <div class="parser_wrapper">
+    <PowerSelect @selected={{language}} @options={{languages}} @onChange={{action (mut language)}} as |lang|>
+      {{lang}}
+    </PowerSelect>
+    <span class="label-text">Parser:</span>
+    <PowerSelect @selected={{parser}} @options={{parsers}} @onChange={{action (mut parser)}} as |parser|>
+      {{parser}}
+    </PowerSelect>
+  </div>
+  <div id="options">
+    <p>DarkMode: <Input @type="checkbox" @click={{action "toggleDarkMode"}}/></p>
+  </div>
+  <span class="label-text">{{parser}}: <strong>{{parserVersion}}</strong></span>
 </header>
 <main>
   <AstMaker 
@@ -40,6 +25,9 @@
     Built with <a href="https://emberjs.com">Ember.js: {{emberVersion}}</a> |
     <a href="https://github.com/rajasegar/ast-node-builder">ast-node-builder: {{nodeBuilderVersion}}</a> |
     <a href="https://github.com/rajasegar/ast-node-finder">ast-node-finder: {{nodeFinderVersion}}</a> |
+    <a href="https://rajasegar.github.io/ast-builder/">ast-builder</a> |
+    <a href="https://rajasegar.github.io/ast-finder/">ast-finder</a> |
+    <a href="https://astexplorer.net/">ast-explorer</a> |
     <a href="https://github.com/rajasegar/jarvis">Github</a> |
     <a href="https://github.com/rajasegar/jarvis/issues">Report issues</a> 
   </p>

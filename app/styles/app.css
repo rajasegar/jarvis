@@ -6,20 +6,30 @@ body {
 
 header {
   display: grid;
-  grid-template-columns: 200px 1fr 200px;
+  grid-template-columns: 150px 1fr 150px 300px;
   background: #eee;
   border-bottom: 1px solid #ddd;
-  padding: 0 10px;
 }
 
+header p {
+  margin: 0;
+  line-height: 50px;
+}
+
+p { 
+  margin: .25em 0;
+}
 h1 {
-    margin: .15em 0;
+    margin: .15em 0 0 .25em;
   }
 
 nav ul {
   display:flex;
   justify-content: space-evenly;
+  padding: 0;
+  margin: 10px 0 0 0;
 }
+
 
 nav ul li {
   list-style: none;
@@ -37,9 +47,6 @@ a {
   padding: .25em;
 }
 
-p { 
-margin: .25em;
-}
 footer p {
   text-align:center;
 }
@@ -65,4 +72,28 @@ footer p {
   grid-column-gap: 10px;
 }
 
+.parser_wrapper {
+  display: flex;
+}
 
+.ember-power-select-trigger {
+  max-height: 30px;
+  margin: 10px;
+  width: 200px;
+}
+
+.label-text {
+  line-height: 50px;
+}
+
+#options {
+  margin-right: 10px;
+}
+
+
+.dark-mode {
+  background: black;
+}
+.dark-mode p {
+  color: white;
+}
