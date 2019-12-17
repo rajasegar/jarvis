@@ -11397,16 +11397,16 @@ default:console.log("buildMemberExpressionQuery::property => ",n.type)}return"ro
 switch(t.type){case"CallExpression":case"MemberExpression":r="root.find(j.ExpressionStatement, {\n      expression: {\n      ".concat(f(t),"\n      }\n      })")}return r},variableDeclaratorQuery:function(e){return"root.find(j.VariableDeclarator, {\n  id: { name: '".concat(e.id.name,"' }\n  });")},importDeclarationQuery:function(e){return"root.find(j.ImportDeclaration, {\n  source: ".concat(e.source.raw,"\n})")},exportDefaultDeclarationQuery:function(e){var t=""
 switch(e.declaration.type){case"CallExpression":t="root.find(j.ExportDefaultDeclaration, {\n  declaration: { ".concat(f(e.declaration.callee)," }\n  })")
 break
-default:console.log("exportDefaultDeclaration => ",e.declaration.type)}return t},identifier:function(e){return"root.find(j.Identifier, {\n  name: '".concat(e.name,"'\n  })")},functionDeclaration:function(e){return"root.find(j.FunctionDeclaration, {\n  id: { name: '".concat(e.id.name,"' }\n  })")}}},function(e,t,r){function n(){var e=o(["\n  return {\n    MustacheStatement(node) {\n      ","\n    }\n  };"])
-return n=function(){return e},e}function i(){var e=o(["\n  return {\n    BlockStatement(node) {\n      ","\n    }\n  };"])
-return i=function(){return e},e}function a(){var e=o(["\n  return {\n    ElementNode(node) {\n      ","\n    }\n  };"])
+default:console.log("exportDefaultDeclaration => ",e.declaration.type)}return t},identifier:function(e){return"root.find(j.Identifier, {\n  name: '".concat(e.name,"'\n  })")},functionDeclaration:function(e){return"root.find(j.FunctionDeclaration, {\n  id: { name: '".concat(e.id.name,"' }\n  })")}}},function(e,t,r){function n(){var e=o(["\n  return {\n    MustacheStatement(node) {\n      if(node.path.original === '","') {\n        ","\n      }\n    }\n  };"])
+return n=function(){return e},e}function i(){var e=o(["\n  return {\n    BlockStatement(node) {\n      if(node.path.original === '","') {\n        ","\n      }\n    }\n  };"])
+return i=function(){return e},e}function a(){var e=o(["\n  return {\n    ElementNode(node) {\n      if(node.tag === '","') {\n        ","\n      }\n    }\n  };"])
 return a=function(){return e},e}function s(){var e=o(["\n  return {\n    TextNode(node) {\n      ","\n    }\n  };"])
 return s=function(){return e},e}function o(e,t){return t||(t=e.slice(0)),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var u=r(75).stripIndent
 e.exports={dispatchNodes:function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"return node;"
 return(e&&e.body?e.body:[]).map((function(e){switch(e.type){case"TextNode":return function(e,t){return u(s(),t)}(0,t)
-case"ElementNode":return function(e,t){return t=t||'node.tag = node.tag.split("").reverse().join("");',u(a(),t)}(0,t)
-case"BlockStatement":return function(e,t){return u(i(),t)}(0,t)
-case"MustacheStatement":return function(e,t){return u(n(),t)}(0,t)
+case"ElementNode":return function(e,t){return t=t||'node.tag = node.tag.split("").reverse().join("");',u(a(),e.tag,t)}(e,t)
+case"BlockStatement":return function(e,t){return u(i(),e.path.original,t)}(e,t)
+case"MustacheStatement":return function(e,t){return u(n(),e.path.original,t)}(e,t)
 default:console.log("dispatchNodes => ",e.type)}}))}}},function(e,t,r){var n=r(76),i=n.traverse,a=n.builders,s=n.Walker,o=r(106),u=new WeakMap
 function c(e){var t=new o(e)
 return u.set(t.ast,t),t.ast}function l(e){return u.get(e).print()}e.exports={builders:a,parse:c,print:l,transform:function(e,t){var r
