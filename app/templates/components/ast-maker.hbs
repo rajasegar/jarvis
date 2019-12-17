@@ -46,7 +46,7 @@
       <p><strong>2.a.</strong> Enter destination code here:</p>
       {{ivy-codemirror 
         value=dest 
-        valueUpdated=(action "destChanged")
+        valueUpdated=(action (mut dest))
         options=(hash 
         lineNumbers=true 
         mode=jsonMode 

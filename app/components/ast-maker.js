@@ -145,11 +145,8 @@ customize: service(),
     opChanged(op) {
       this.set('nodeOp', op);
       this.set('codemod', this._buildCodemod());
-    },
-
-    destChanged(val) {
-      this.set('dest', val);
     }
+
   }
   
 });
