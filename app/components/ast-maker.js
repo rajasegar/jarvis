@@ -77,7 +77,6 @@ customize: service(),
   }),
 
   _buildCodemod() {
-
     let parse = this.get('parse');
     let ast = parse(this.get('code'));
     let _mode = this.get('mode');
