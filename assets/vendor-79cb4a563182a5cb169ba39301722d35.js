@@ -11323,7 +11323,7 @@ case"NumberLiteral":return"b.pair('".concat(t,"', b.number('").concat(r.original
 case"PathExpression":return"b.pair('".concat(t,"', b.path('").concat(r.original,"'))")
 case"BooleanLiteral":return"b.pair('".concat(t,"', b.boolean(").concat(r.original,"))")
 default:console.log("Glimmer::buildHash =>",r.type)}})).join(",")}function o(e){var t=e.path,r=e.program,n=e.params,a=e.hash
-return"\n      b.block(\n        b.path('".concat(t.original,"'),\n        [").concat(function(e){return e.map((function(e){return"b.path('".concat(e.original,"')")})).join(",")}(n),"],\n        b.hash([").concat(s(a),"]),\n        b.blockItself(\n          [").concat(i(r.body),"], \n          [").concat(function(e){return e.map((function(e){return"'".concat(e,"'")})).join(",")}(r.blockParams),"])\n      )")}e.exports={textNode:r,elementNode:a,buildAST:function(e){return(e&&e.body?e.body:[]).map((function(e){switch(e.type){case"TextNode":return r(e)
+return"b.block(\n        b.path('".concat(t.original,"'),\n        [").concat(function(e){return e.map((function(e){return"b.path('".concat(e.original,"')")})).join(",")}(n),"],\n        b.hash([").concat(s(a),"]),\n        b.blockItself(\n          [").concat(i(r.body),"], \n          [").concat(function(e){return e.map((function(e){return"'".concat(e,"'")})).join(",")}(r.blockParams),"])\n      )")}e.exports={textNode:r,elementNode:a,buildAST:function(e){return(e&&e.body?e.body:[]).map((function(e){switch(e.type){case"TextNode":return r(e)
 case"ElementNode":return a(e)
 case"BlockStatement":return o(e)
 case"MustacheStatement":return n(e)

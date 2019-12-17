@@ -133,4 +133,4 @@ case"insert-before":o=".forEach(path => {\n        path.parent.insertBefore(".co
 break
 case"insert-after":o=".forEach(path => {\n        path.parent.insertAfter(".concat((0,n.buildAST)(r.default.parse(t)),");\n        })")}return o}(l,d)}return c}
 var o=n.core.callExpression,a=n.core.memberExpression,i=n.core.assignmentExpression,u=n.core.identifier,s=n.core.binaryExpression})),define("jarvis/config/environment",[],(function(){try{var e="jarvis/config/environment",t=document.querySelector('meta[name="'+e+'"]').getAttribute("content"),r={default:JSON.parse(decodeURIComponent(t))}
-return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("jarvis/app").default.create({name:"jarvis",version:"0.0.0+762e27ab"})
+return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("jarvis/app").default.create({name:"jarvis",version:"0.0.0+a801d4ad"})
