@@ -13,7 +13,8 @@ import opQuery from 'jarvis/utils/op-query';
 export default Component.extend({
 customize: service(),
   theme: computed.reads('customize.theme'),
-  nodeOp: 'remove', 
+  nodeOp: 'replace', 
+
   parse: computed("parser", function() {
 
     let parse = recast.parse;
@@ -39,7 +40,7 @@ customize: service(),
     return this._buildCodemod();
   }),
 
-  output: computed('codemod', function() {
+  output: computed('codemod', 'mode', 'parser', function() {
     // TODO: Need to transpile the es6 export default
     const transformModule = compileModule(this.get('codemod'));
     const transform = transformModule.__esModule ?
@@ -69,7 +70,7 @@ customize: service(),
     return result;
   }),
 
-  opQuery: computed('nodeOp', 'dest', function() {
+  opQuery: computed('nodeOp', 'dest', 'mode', function() {
     let _mode = this.get('mode');
     let _nodeOp = this.get('nodeOp');
     let _dest = this.get('dest');
@@ -117,26 +118,10 @@ customize: service(),
   didUpdateAttrs() {
     this._super(...arguments);
     this.set('codemod', this._buildCodemod());
-    let _dest = '';
-    let _mode = this.get('mode');
-    if(_mode === 'javascript') {
-      _dest =  'foo.bar()';
-    } else {
-      _dest =  `{{foo}}`;
-    }
-    this.set('dest', _dest);
   },
 
   init() {
     this._super(...arguments);
-    let _dest = '';
-    let _mode = this.get('mode');
-    if(_mode === 'javascript') {
-      _dest =  'foo.bar()';
-    } else {
-      _dest =  `{{foo}}`;
-    }
-    this.set('dest', _dest);
   },
 
   actions: {

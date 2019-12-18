@@ -53,6 +53,13 @@ customize: service(),
       return hbscode;
     }
   }),
+  destCode: computed('language', function() {
+    if (this.get("language") === "Javascript") {
+      return 'foo.bar()';
+    } else {
+      return '{{foo}}';
+    }
+  }),
   init() {
     this._super(...arguments);
     this.set("languages", Object.keys(PARSERS));
