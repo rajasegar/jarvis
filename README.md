@@ -6,6 +6,8 @@ JARVIS is actually a playground for writing codemods, where in you can specify t
 
 Read the introductory blog post [here](http://hangaroundtheweb.com/2019/12/jarvis-write-me-a-codemod/)
 
+![screenshot](https://github.com/rajasegar/jarvis/blob/master/public/jarvis-annotated.jpg)
+
 ## Related Tools
 - [ast-builder](https://rajasegar.github.io/ast-builder/)
 - [ast-finder](https://rajasegar.github.io/ast-finder/)
