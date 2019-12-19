@@ -41,6 +41,7 @@
     "ember-radio-button": "^2.0.1",
     "ember-resolver": "^6.0.0",
     "ember-source": "~3.14.2",
+    "ember-split-view-modifier": "0.0.3",
     "eslint-plugin-ember": "^7.6.0",
     "eslint-plugin-node": "^10.0.0",
     "gh-pages": "^2.1.1",

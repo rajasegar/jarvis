@@ -1,7 +1,7 @@
-<div class="grid-col">
-  <div class="grid-row">
+<div {{split-view sizes=(array 50 50)}}>
+  <div {{split-view sizes=(array 55 45) direction="vertical"}}>
     <div>
-      <p><strong>1.</strong> Enter source code here:</p>
+      {{!-- <p><strong>1.</strong> Enter source code here:</p> --}}
       {{ivy-codemirror 
 	value=code 
         options=(hash 
@@ -10,7 +10,7 @@
         theme=theme)
 	valueUpdated=(action (mut code))
       }}
-      <p><strong>2.</strong> Choose any AST node operation:</p>
+      {{!-- <p><strong>2.</strong> Choose any AST node operation:</p> --}}
       <div class="mode-options">
         {{#radio-button
 	value="remove"
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div>
-      <p><strong>2.a.</strong> Enter destination code here:</p>
+      {{!-- <p><strong>2.a.</strong> Enter destination code here:</p> --}}
       {{ivy-codemirror 
         value=dest 
         valueUpdated=(action (mut dest))
@@ -56,9 +56,9 @@
         foldGutter=true)}}
     </div>
   </div>
-  <div class="grid-row">
+  <div {{split-view sizes=(array 55 45) direction="vertical"}}>
     <div>
-      <p><strong>3.</strong> Codemod : </p>
+      {{!-- <p><strong>3.</strong> Codemod : </p> --}}
       {{ivy-codemirror 
         value=codemod 
         options=(hash 
@@ -70,7 +70,7 @@
       }}
     </div>
     <div>
-      <p><strong>4.</strong> Output :</p>
+      {{!-- <p><strong>4.</strong> Output :</p> --}}
       {{ivy-codemirror 
         value=output 
         options=(hash 

@@ -3,6 +3,8 @@
 :root {
   --dark-mode-bg: #333;
   --dark-mode-fg: #eee;
+  --dark-mode-border: #444;
+  --dark-mode-header-bg: #222;
 }
 
 body {
@@ -52,22 +54,17 @@ a {
   padding: .25em;
 }
 
+footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  margin: 0 auto;
+  background: #eee;
+  padding: 5px 0;
+  border-top: 1px solid #ddd;
+}
 footer p {
   text-align:center;
-}
-
-
-.grid-row {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-row-gap: 5px;
-}
-
-.grid-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 5px;
-  padding: 0 10px;
 }
 
 .mode-options {
@@ -95,14 +92,6 @@ footer p {
   margin-right: 10px;
 }
 
-.Codemirror {
-  width: 50vw;
-  max-width: 100%;
-}
-
-.ember-power-select-trigger {
-  background: inherit;
-}
 
 .dark-mode {
   background: var(--dark-mode-bg);
@@ -113,8 +102,8 @@ footer p {
 }
 
 .dark-mode header {
-  background: #222;
-  border-bottom: 1px solid #444;
+  background: var(--dark-mode-header-bg);
+  border-bottom: 1px solid var(--dark-mode-border);
 }
 
 .dark-mode a {
@@ -126,5 +115,15 @@ footer p {
   color: var(--dark-mode-fg);
 }
 
+.dark-mode .gutter {
+  background-color: var(--dark-mode-border);
+}
 
+.dark-mode .ember-power-select-trigger {
+  background: var(--dark-mode-border);
+}
 
+.dark-mode footer {
+  background: var(--dark-mode-header-bg);
+  border-top: 1px solid var(--dark-mode-border);
+}
