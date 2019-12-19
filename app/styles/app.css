@@ -1,5 +1,10 @@
 @import 'normalize.css';
 
+:root {
+  --dark-mode-bg: #333;
+  --dark-mode-fg: #eee;
+}
+
 body {
   font-family: sans-serif;
 }
@@ -90,10 +95,36 @@ footer p {
   margin-right: 10px;
 }
 
+.Codemirror {
+  width: 50vw;
+  max-width: 100%;
+}
+
+.ember-power-select-trigger {
+  background: inherit;
+}
 
 .dark-mode {
-  background: black;
+  background: var(--dark-mode-bg);
+  color: var(--dark-mode-fg);
 }
 .dark-mode p {
-  color: white;
+  color: var(--dark-mode-fg);
 }
+
+.dark-mode header {
+  background: #222;
+  border-bottom: 1px solid #444;
+}
+
+.dark-mode a {
+  color: wheat;
+}
+
+.dark-mode .ember-power-select-option[aria-current="false"] {
+  background: var(--dark-mode-bg);
+  color: var(--dark-mode-fg);
+}
+
+
+

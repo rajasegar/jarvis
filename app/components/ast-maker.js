@@ -15,6 +15,9 @@ customize: service(),
   theme: computed.reads('customize.theme'),
   nodeOp: 'replace', 
 
+  showInsertOptions: computed('mode', function() {
+    return this.get('mode') === 'javascript';
+  }),
   parse: computed("parser", function() {
 
     let parse = recast.parse;

@@ -109,18 +109,6 @@ function opQueryGlimmer(nodeOp, dest) {
       str = `return ${hbsBuilder.buildAST(etr.parse(dest))};`;
       break;
 
-    case 'insert-before':
-      str =  `.forEach(path => {
-        path.parent.insertBefore(${buildAST(etr.parse(dest))});
-        })`;
-      break;
-
-    case 'insert-after':
-      str =  `.forEach(path => {
-        path.parent.insertAfter(${buildAST(etr.parse(dest))});
-        })`;
-      break;
-
   }
   return str;
 }

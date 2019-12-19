@@ -12,5 +12,10 @@ export default Service.extend({
   toggleDarkMode() {
     let dm = this.get('darkMode');
     this.set('darkMode', !dm);
+    if(dm) {
+      document.body.classList.remove('dark-mode');
+    } else {
+      document.body.classList.add('dark-mode');
+    }
   }
 });

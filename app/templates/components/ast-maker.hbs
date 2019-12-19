@@ -26,20 +26,22 @@
 	  }}
           <span>Replace</span>
         {{/radio-button}}
-        {{#radio-button
-	  value="insert-before"
-	  groupValue=nodeOp
-	  changed=(action "opChanged")
-	  }}
-          <span>Insert Before</span>
-        {{/radio-button}}
-        {{#radio-button
-	  value="insert-after"
-	  groupValue=nodeOp
-	  changed=(action "opChanged")
-	  }}
-          <span>Insert After</span>
-        {{/radio-button}}
+        {{#if showInsertOptions}}
+          {{#radio-button
+            value="insert-before"
+            groupValue=nodeOp
+            changed=(action "opChanged")
+            }}
+            <span>Insert Before</span>
+          {{/radio-button}}
+          {{#radio-button
+            value="insert-after"
+            groupValue=nodeOp
+            changed=(action "opChanged")
+            }}
+            <span>Insert After</span>
+          {{/radio-button}}
+        {{/if}}
       </div>
     </div>
     <div>
@@ -49,7 +51,7 @@
         valueUpdated=(action (mut dest))
         options=(hash 
         lineNumbers=true 
-        mode=jsonMode 
+        mode=mode 
         theme=theme 
         foldGutter=true)}}
     </div>
