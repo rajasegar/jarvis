@@ -1,5 +1,5 @@
 <div {{split-view sizes=(array 50 50)}}>
-  <div {{split-view sizes=(array 55 45) direction="vertical"}}>
+  <div {{split-view sizes=(array 50 40) direction="vertical"}}>
     <div>
       {{!-- <p><strong>1.</strong> Enter source code here:</p> --}}
       {{ivy-codemirror 
@@ -10,39 +10,6 @@
         theme=theme)
 	valueUpdated=(action (mut code))
       }}
-      {{!-- <p><strong>2.</strong> Choose any AST node operation:</p> --}}
-      <div class="mode-options">
-        {{#radio-button
-	value="remove"
-	groupValue=nodeOp
-	changed=(action "opChanged")
-	}}
-          <span>Remove</span>
-        {{/radio-button}}
-        {{#radio-button
-	  value="replace"
-	  groupValue=nodeOp
-	  changed=(action "opChanged")
-	  }}
-          <span>Replace</span>
-        {{/radio-button}}
-        {{#if showInsertOptions}}
-          {{#radio-button
-            value="insert-before"
-            groupValue=nodeOp
-            changed=(action "opChanged")
-            }}
-            <span>Insert Before</span>
-          {{/radio-button}}
-          {{#radio-button
-            value="insert-after"
-            groupValue=nodeOp
-            changed=(action "opChanged")
-            }}
-            <span>Insert After</span>
-          {{/radio-button}}
-        {{/if}}
-      </div>
     </div>
     <div>
       {{!-- <p><strong>2.a.</strong> Enter destination code here:</p> --}}
@@ -56,7 +23,7 @@
         foldGutter=true)}}
     </div>
   </div>
-  <div {{split-view sizes=(array 55 45) direction="vertical"}}>
+  <div {{split-view sizes=(array 50 40) direction="vertical"}}>
     <div>
       {{!-- <p><strong>3.</strong> Codemod : </p> --}}
       {{ivy-codemirror 

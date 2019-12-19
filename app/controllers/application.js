@@ -20,9 +20,18 @@ const modes = {
   Handlebars: "handlebars"
 };
 
+const OPCODES = [
+  'replace',
+  'remove',
+  'insert-before',
+  'insert-after'
+];
+
 export default Controller.extend({
 customize: service(),
   language: "Javascript",
+  nodeOps: OPCODES,
+  opCode: 'replace',
   parser: computed('language', function() {
     return Object.keys(PARSERS[this.get("language")])[0];
   }),

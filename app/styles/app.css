@@ -62,6 +62,8 @@ footer {
   background: #eee;
   padding: 5px 0;
   border-top: 1px solid #ddd;
+  z-index: 9999;
+
 }
 footer p {
   text-align:center;
@@ -127,3 +129,10 @@ footer p {
   background: var(--dark-mode-header-bg);
   border-top: 1px solid var(--dark-mode-border);
 }
+
+.CodeMirror {
+  height: 350px;
+}
+
+
+

@@ -8,6 +8,10 @@
     <PowerSelect @selected={{parser}} @options={{parsers}} @onChange={{action (mut parser)}} as |parser|>
       {{parser}}
     </PowerSelect>
+    <span class="label-text">OPCODE:</span>
+    <PowerSelect @selected={{opCode}} @options={{nodeOps}} @onChange={{action (mut opCode)}} as |opcode|>
+      {{opcode}}
+    </PowerSelect>
   </div>
   <div id="options">
     <p>DarkMode: <Input @type="checkbox" @click={{action "toggleDarkMode"}}/></p>
@@ -19,6 +23,7 @@
   @mode={{mode}} 
   @code={{sampleCode}}
   @dest={{destCode}}
+  @nodeOp={{opCode}}
   @parser={{parser}}></AstMaker>
 </main>
 <footer>

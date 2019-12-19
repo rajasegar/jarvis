@@ -13,7 +13,7 @@ import opQuery from 'jarvis/utils/op-query';
 export default Component.extend({
 customize: service(),
   theme: computed.reads('customize.theme'),
-  nodeOp: 'replace', 
+  //nodeOp: 'replace', 
 
   showInsertOptions: computed('mode', function() {
     return this.get('mode') === 'javascript';
@@ -127,12 +127,5 @@ customize: service(),
     this._super(...arguments);
   },
 
-  actions: {
-    opChanged(op) {
-      this.set('nodeOp', op);
-      this.set('codemod', this._buildCodemod());
-    }
-
-  }
   
 });
