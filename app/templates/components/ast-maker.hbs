@@ -3,19 +3,19 @@
     <div>
       {{!-- <p><strong>1.</strong> Enter source code here:</p> --}}
       {{ivy-codemirror 
-	value=code 
+	value=codemod.sourceCode 
         options=(hash 
         lineNumbers=true 
         mode=mode 
         theme=theme)
-	valueUpdated=(action (mut code))
+	valueUpdated=(action (mut codemod.sourceCode))
       }}
     </div>
     <div>
       {{!-- <p><strong>2.a.</strong> Enter destination code here:</p> --}}
       {{ivy-codemirror 
-        value=dest 
-        valueUpdated=(action (mut dest))
+        value=codemod.destCode 
+        valueUpdated=(action (mut codemod.destCode))
         options=(hash 
         lineNumbers=true 
         mode=mode 
@@ -27,13 +27,13 @@
     <div>
       {{!-- <p><strong>3.</strong> Codemod : </p> --}}
       {{ivy-codemirror 
-        value=codemod 
+        value=transform 
         options=(hash 
         lineNumbers=true 
         mode="javascript" 
         theme=theme 
         autoIndent=true )
-     	valueUpdated=(action (mut codemod))
+     	valueUpdated=(action (mut transform))
       }}
     </div>
     <div>

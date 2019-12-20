@@ -12,6 +12,7 @@ import opQuery from 'jarvis/utils/op-query';
 
 export default Component.extend({
 customize: service(),
+codemod: service(),
   theme: computed.reads('customize.theme'),
   //nodeOp: 'replace', 
 
@@ -39,13 +40,18 @@ customize: service(),
   
   insertOption: 'before',
   
-  codemod: computed( 'dest', 'parser', 'mode',  function() {
+  transform: computed( 'gistTransform','dest', 'parser', 'mode',  function() {
+    if(this.get('gistTransform')) {
+      return this.get('gistTransform');
+    }
+      else {
     return this._buildCodemod();
+      }
   }),
 
-  output: computed('codemod', 'mode', 'parser', function() {
+  output: computed('transform', 'mode', 'parser', function() {
     // TODO: Need to transpile the es6 export default
-    const transformModule = compileModule(this.get('codemod'));
+    const transformModule = compileModule(this.get('transform'));
     const transform = transformModule.__esModule ?
       transformModule.default :
       transformModule;
@@ -114,13 +120,19 @@ customize: service(),
       };`;
     }
 
-     return recast.prettyPrint(recast.parse(_transformTemplate), { tabWidth: 2 }).code;
+     let _codemod = recast.prettyPrint(recast.parse(_transformTemplate), { tabWidth: 2 }).code;
+    this.codemod.set('codemod', _codemod);
+    return _codemod;
 
   },
 
   didUpdateAttrs() {
     this._super(...arguments);
-    this.set('codemod', this._buildCodemod());
+    if(this.get('gistTransform')) {
+    this.set('transform', this.get('gistTransform'));
+    } else {
+    this.set('transform', this._buildCodemod());
+    }
   },
 
   init() {

@@ -1,30 +1,27 @@
 <header>
   <h1 title="Write me a Codemod">JARVIS</h1>
   <div class="parser_wrapper">
-    <PowerSelect @selected={{language}} @options={{languages}} @onChange={{action (mut language)}} as |lang|>
+    <span class="label-text"><a href="/">New</a></span>
+    <button type="button" {{action "saveGist"}}>Save</button>
+    <PowerSelect @selected={{codemod.language}} @options={{codemod.languages}} @onChange={{action (mut codemod.language)}} as |lang|>
       {{lang}}
     </PowerSelect>
     <span class="label-text">Parser:</span>
-    <PowerSelect @selected={{parser}} @options={{parsers}} @onChange={{action (mut parser)}} as |parser|>
+    <PowerSelect @selected={{codemod.parser}} @options={{codemod.parsers}} @onChange={{action (mut codemod.parser)}} as |parser|>
       {{parser}}
     </PowerSelect>
     <span class="label-text">OPCODE:</span>
-    <PowerSelect @selected={{opCode}} @options={{nodeOps}} @onChange={{action (mut opCode)}} as |opcode|>
+    <PowerSelect @selected={{codemod.opCode}} @options={{codemod.nodeOps}} @onChange={{action (mut codemod.opCode)}} as |opcode|>
       {{opcode}}
     </PowerSelect>
   </div>
   <div id="options">
     <p>DarkMode: <Input @type="checkbox" @click={{action "toggleDarkMode"}}/></p>
   </div>
-  <span class="label-text">{{parser}}: <strong>{{parserVersion}}</strong></span>
+  <span class="label-text">{{codemod.parser}}: <strong>{{codemod.parserVersion}}</strong></span>
 </header>
 <main>
-  <AstMaker 
-  @mode={{mode}} 
-  @code={{sampleCode}}
-  @dest={{destCode}}
-  @nodeOp={{opCode}}
-  @parser={{parser}}></AstMaker>
+  {{outlet}}
 </main>
 <footer>
   <p>
