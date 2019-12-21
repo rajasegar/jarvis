@@ -1,8 +1,14 @@
 <header>
   <h1 title="Write me a Codemod">JARVIS</h1>
   <div class="parser_wrapper">
-    <span class="label-text"><a href="/">New</a></span>
-    <button type="button" {{action "saveGist"}}>Save</button>
+    <span class="label-text"><LinkTo @route="index">New</LinkTo></span>
+    <button 
+          type="button" 
+          class="btn btn-outline-secondary btn-sm" 
+          disabled={{buttonDisabled}}
+          {{action "saveGist"}}>
+      {{buttonText}}
+    </button>
     <PowerSelect @selected={{codemod.language}} @options={{codemod.languages}} @onChange={{action (mut codemod.language)}} as |lang|>
       {{lang}}
     </PowerSelect>

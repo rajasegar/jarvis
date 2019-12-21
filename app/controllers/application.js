@@ -17,6 +17,13 @@ export default Controller.extend({
   nodeFinderVersion: computed(function() {
     return ENV.pkg.dependencies["ast-node-finder"];
   }),
+  buttonText: computed(function() { 
+    return 'Save';
+  }),
+
+  buttonDisabled: computed(function() {
+    return false;
+  }),
   
   actions: {
     toggleDarkMode() {
@@ -24,10 +31,14 @@ export default Controller.extend({
     },
 
     saveGist() {
+      this.set('buttonText', 'Saving...');
+      this.set('buttonDisabled', true);
       this.codemod.saveGist()
 	.then(data => {
-	  console.log(data);
-	  this.router.transitionTo('gists', data.id);
+          console.log(data);
+          this.set('buttonText', 'Save');
+          this.set('buttonDisabled', false);
+          this.router.transitionTo('gists', data.id);
 	});
     }
   }

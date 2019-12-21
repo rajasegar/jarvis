@@ -20,8 +20,7 @@ module.exports = function(defaults) {
     },
     codemirror: {
       themes: ['solarized'],
-      modes: ['javascript', 'handlebars'],
-      addonFiles: ['fold/foldcode.js', 'fold/foldgutter.js']
+      modes: ['javascript', 'handlebars']
     }
   });
 
