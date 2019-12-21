@@ -2,8 +2,8 @@ import Service from '@ember/service';
 import { computed } from '@ember/object';
 import PARSERS from 'jarvis/constants/parsers';
 import Octokit from '@octokit/rest';
+import ENV from "jarvis/config/environment";
 
-const api_key = 'e90b7d3ce06fb766a8290aaaba369a1ada63bc6c';
 // Sample code to test
 const jscode = `foo();`;
 
@@ -64,7 +64,7 @@ export default Service.extend({
     let _mode = this.get('mode');
     let sourceFileName = _mode === 'javascript' ? 'source.js' : 'source.hbs';
     let destFileName = _mode === 'javascript' ? 'destination.js' : 'destination.hbs';
-  const octokit = new Octokit({ auth: api_key });
+  const octokit = new Octokit({ auth: ENV.GITHUB_API_TOKEN });
 
   octokit.gists
     .get({
@@ -89,7 +89,7 @@ export default Service.extend({
   },
 
   saveGist() {
-    const octokit = new Octokit({ auth: api_key });
+    const octokit = new Octokit({ auth: ENV.GITHUB_API_TOKEN });
     let _mode = this.get('mode');
     let sourceFileName = _mode === 'javascript' ? 'source.js' : 'source.hbs';
     let destFileName = _mode === 'javascript' ? 'destination.js' : 'destination.hbs';
