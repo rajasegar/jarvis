@@ -1,5 +1,5 @@
-<div {{split-view sizes=(array 50 50)}}>
-  <div {{split-view sizes=(array 50 40) direction="vertical"}}>
+<SplitViewHorizontal>
+  <SplitViewVertical>
     <div>
       {{!-- <p><strong>1.</strong> Enter source code here:</p> --}}
       {{ivy-codemirror 
@@ -22,8 +22,8 @@
         theme=theme 
         foldGutter=true)}}
     </div>
-  </div>
-  <div {{split-view sizes=(array 50 50) direction="vertical"}}>
+  </SplitViewVertical>
+  <SplitViewVertical>
     <div>
       {{!-- <p><strong>3.</strong> Codemod : </p> --}}
       {{ivy-codemirror 
@@ -46,5 +46,5 @@
         theme=theme 
         autoIndent=true )}}
     </div>
-  </div>
-</div>
+  </SplitViewVertical>
+</SplitViewHorizontal>
