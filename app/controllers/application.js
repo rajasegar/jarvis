@@ -4,7 +4,6 @@ import { computed } from "@ember/object";
 import ENV from "jarvis/config/environment";
 
 export default Controller.extend({
-  customize: service(),
   codemod: service(),
   router: service(),
   
@@ -26,9 +25,6 @@ export default Controller.extend({
   }),
   
   actions: {
-    toggleDarkMode() {
-      this.customize.toggleDarkMode();
-    },
 
     saveGist() {
       this.set('buttonText', 'Saving...');

@@ -1,7 +1,6 @@
 <SplitViewHorizontal>
   <SplitViewVertical>
     <div>
-      {{!-- <p><strong>1.</strong> Enter source code here:</p> --}}
       {{ivy-codemirror 
 	value=codemod.sourceCode 
         options=(hash 
@@ -12,7 +11,6 @@
       }}
     </div>
     <div>
-      {{!-- <p><strong>2.a.</strong> Enter destination code here:</p> --}}
       {{ivy-codemirror 
         value=codemod.destCode 
         valueUpdated=(action (mut codemod.destCode))
@@ -25,7 +23,6 @@
   </SplitViewVertical>
   <SplitViewVertical>
     <div>
-      {{!-- <p><strong>3.</strong> Codemod : </p> --}}
       {{ivy-codemirror 
         value=transform 
         options=(hash 
@@ -37,7 +34,6 @@
       }}
     </div>
     <div>
-      {{!-- <p><strong>4.</strong> Output :</p> --}}
       {{ivy-codemirror 
         value=output 
         options=(hash 
