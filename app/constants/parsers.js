@@ -1,9 +1,5 @@
 export default {
   'Javascript': {
-    'recast': {
-      name: 'recast',
-      version: '0.18.5'
-    },
     'babel': {
       name: 'babel',
       version: '7.6.4'
@@ -11,7 +7,11 @@ export default {
     'babylon': {
       name: 'babylon',
       version: '7.6.4'
-    }
+    },
+    'recast': {
+      name: 'recast',
+      version: '0.18.5'
+    },
   },
   'Handlebars': {
     'ember-template-recast': {
