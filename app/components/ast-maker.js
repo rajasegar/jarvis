@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { dispatchNodes, glimmer } from 'ast-node-finder';
+import { babel, glimmer } from 'ast-node-finder';
 import recast from 'recast';
 import recastBabel from "recastBabel";
 import recastBabylon from "recastBabylon";
@@ -10,11 +10,11 @@ import jscodeshift from 'jscodeshift';
 import compileModule from 'jarvis/utils/compile-module';
 import opQuery from 'jarvis/utils/op-query';
 
+const { dispatchNodes } = babel;
 export default Component.extend({
-customize: service(),
-codemod: service(),
+  customize: service(),
+  codemod: service(),
   theme: computed.reads('customize.theme'),
-  //nodeOp: 'replace', 
 
   showInsertOptions: computed('mode', function() {
     return this.get('mode') === 'javascript';
