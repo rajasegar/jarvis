@@ -5,7 +5,8 @@ import Octokit from '@octokit/rest';
 import ENV from "jarvis/config/environment";
 
 // Sample code to test
-const jscode = `foo();`;
+const jscode = `let hello = "bangkok";`;
+const jsOutput = `let bangkok = "bangkok";`;
 
 const hbscode = `<div class="entry">
   <h1>{{title}}</h1>
@@ -42,7 +43,7 @@ export default Service.extend({
   }),
   destCode: computed('language', function() {
     if (this.get("language") === "Javascript") {
-      return 'foo.bar()';
+      return jsOutput;
     } else {
       return '{{foo}}';
     }

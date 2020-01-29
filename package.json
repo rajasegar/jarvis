@@ -22,6 +22,7 @@
     "@ember/optional-features": "^1.1.0",
     "babel-eslint": "^10.0.3",
     "broccoli-asset-rev": "^3.0.0",
+    "deep-diff": "^1.0.2",
     "ember-auto-import": "^1.5.3",
     "ember-cli": "~3.14.0",
     "ember-cli-app-version": "^3.2.0",
@@ -56,7 +57,7 @@
   "dependencies": {
     "@octokit/rest": "^16.36.0",
     "ast-node-builder": "^3.0.6",
-    "ast-node-finder": "^2.0.0",
+    "ast-node-finder": "^2.0.3",
     "ember-template-recast": "^3.3.0",
     "jscodeshift": "^0.6.4",
     "recast": "^0.18.5"

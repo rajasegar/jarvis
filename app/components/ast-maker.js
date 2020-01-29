@@ -9,6 +9,7 @@ import etr from "ember-template-recast";
 import jscodeshift from 'jscodeshift';
 import compileModule from 'jarvis/utils/compile-module';
 import opQuery from 'jarvis/utils/op-query';
+import smartOp from 'jarvis/utils/smart-op';
 
 const { dispatchNodes } = babel;
 export default Component.extend({
@@ -49,6 +50,22 @@ export default Component.extend({
       }
   }),
 
+  inputNodeType: computed('code', function() {
+    let _ast = this.get('parse')(this.get('code'));
+    let _type = _ast.program.body[0].type;
+    console.log('InputNodeType => ', _type);
+    return _type;
+  }),
+
+  outputNodeType: computed('dest', function() {
+    let _ast = this.get('parse')(this.get('dest'));
+    let _type = _ast.program.body[0].type;
+    console.log('OutputNodeType => ', _type);
+    return _type;
+  }),
+
+  isSmartUpdate: computed.equal('inputNodeType', 'outputNodeType'),
+
   output: computed('transform', 'mode', 'parser', function() {
     // TODO: Need to transpile the es6 export default
     const transformModule = compileModule(this.get('transform'));
@@ -86,15 +103,34 @@ export default Component.extend({
     return opQuery(_mode, _nodeOp, _dest);
   }),
 
+  smartOp: computed('code', 'dest', function() {
+
+    let _input = this.get('code');
+    let _output = this.get('dest');
+    return smartOp(_input, _output);
+  }),
+
   _buildCodemod() {
     let parse = this.get('parse');
     let ast = parse(this.get('code'));
+    let _inputNodeType = ast.program.body[0].type;
+    console.log(_inputNodeType);
+
+    let outAst = parse(this.get('dest'));
+    let _outputNodeType = outAst.program.body[0].type;
+    console.log(_outputNodeType);
+
+    const isSmartUpdate = _inputNodeType === _outputNodeType && this.get('nodeOp') === 'replace';
+
+    console.log(isSmartUpdate);
+
     let _mode = this.get('mode');
     let _transformTemplate = '';
     let transformLogic = '';
     if(_mode === 'javascript') {
       transformLogic = dispatchNodes(ast).join();
-      let _opQuery = this.get('opQuery');
+      console.log(transformLogic);
+      let _opQuery = isSmartUpdate? this.get('smartOp') : this.get('opQuery');
 
       // TODO: Need to change to es6 export default
       _transformTemplate = `

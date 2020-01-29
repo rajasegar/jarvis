@@ -1,3 +1,7 @@
 header {
-  grid-template-columns: 150px 1fr 150px 300px;
+  grid-template-columns: 150px 1fr 350px 300px;
+}
+
+.ember-power-select-trigger {
+  width: auto;
 }
