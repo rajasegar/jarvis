@@ -31,7 +31,6 @@ export default Controller.extend({
       this.set('buttonDisabled', true);
       this.codemod.saveGist()
 	.then(data => {
-          console.log(data);
           this.set('buttonText', 'Save');
           this.set('buttonDisabled', false);
           this.router.transitionTo('gists', data.id);

@@ -16,6 +16,7 @@ export default Component.extend({
   customize: service(),
   codemod: service(),
   theme: computed.reads('customize.theme'),
+  allowSmartUpdate: computed.reads('customize.smartUpdate'),
 
   showInsertOptions: computed('mode', function() {
     return this.get('mode') === 'javascript';
@@ -53,14 +54,12 @@ export default Component.extend({
   inputNodeType: computed('code', function() {
     let _ast = this.get('parse')(this.get('code'));
     let _type = _ast.program.body[0].type;
-    console.log('InputNodeType => ', _type);
     return _type;
   }),
 
   outputNodeType: computed('dest', function() {
     let _ast = this.get('parse')(this.get('dest'));
     let _type = _ast.program.body[0].type;
-    console.log('OutputNodeType => ', _type);
     return _type;
   }),
 
@@ -114,23 +113,20 @@ export default Component.extend({
     let parse = this.get('parse');
     let ast = parse(this.get('code'));
     let _inputNodeType = ast.program.body[0].type;
-    console.log(_inputNodeType);
 
     let outAst = parse(this.get('dest'));
     let _outputNodeType = outAst.program.body[0].type;
-    console.log(_outputNodeType);
 
     const isSmartUpdate = _inputNodeType === _outputNodeType && this.get('nodeOp') === 'replace';
 
-    console.log(isSmartUpdate);
 
     let _mode = this.get('mode');
+    let _allowSmartUpdate = this.get('allowSmartUpdate');
     let _transformTemplate = '';
     let transformLogic = '';
     if(_mode === 'javascript') {
       transformLogic = dispatchNodes(ast).join();
-      console.log(transformLogic);
-      let _opQuery = isSmartUpdate? this.get('smartOp') : this.get('opQuery');
+      let _opQuery = isSmartUpdate && _allowSmartUpdate ? this.get('smartOp') : this.get('opQuery');
 
       // TODO: Need to change to es6 export default
       _transformTemplate = `

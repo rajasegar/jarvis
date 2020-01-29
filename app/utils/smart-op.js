@@ -15,7 +15,6 @@ function varDeclUpdate(source, dest) {
       return ~['loc', 'tokens', 'raw', 'start', 'end'].indexOf(key);
     }
   });
-  console.log(differences);
   let updates = differences.map(d => {
     return `${buildPath(['path','value', ...d.path])} = '${d.rhs}';`;
   });
@@ -45,7 +44,7 @@ export default function smartOp(input, output) {
       break;
 
     default:
-      console.log('smartOp => ', nodeType);
+      console.log('smartOp => ', nodeType); // eslint-disable-line
       break;
 
   }
