@@ -112,6 +112,10 @@ export default Component.extend({
   _buildCodemod() {
     let parse = this.get('parse');
     let ast = parse(this.get('code'));
+   let _transformTemplate = '';
+    let transformLogic = '';
+    let _mode = this.get('mode');
+    if(_mode === 'javascript') {
     let _inputNodeType = ast.program.body[0].type;
 
     let outAst = parse(this.get('dest'));
@@ -120,11 +124,8 @@ export default Component.extend({
     const isSmartUpdate = _inputNodeType === _outputNodeType && this.get('nodeOp') === 'replace';
 
 
-    let _mode = this.get('mode');
     let _allowSmartUpdate = this.get('allowSmartUpdate');
-    let _transformTemplate = '';
-    let transformLogic = '';
-    if(_mode === 'javascript') {
+ 
       transformLogic = dispatchNodes(ast).join();
       let _opQuery = isSmartUpdate && _allowSmartUpdate ? this.get('smartOp') : this.get('opQuery');
 
