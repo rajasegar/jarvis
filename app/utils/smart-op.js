@@ -1,5 +1,7 @@
 import recastBabel from "recastBabel";
 import { diff } from 'deep-diff';
+import { es6  } from 'ast-node-builder';
+const { buildAST } = es6;
 
 function getDiff(source, dest) {
 const differences = diff(source, dest, {
@@ -34,9 +36,42 @@ function varDeclUpdate(source, dest) {
 
 function expressionUpdate(source, dest) {
   const differences = getDiff(source, dest);
-  console.log(differences);
 
   let updates = [];
+  console.log(differences);
+
+  differences.forEach(diff => {
+    let _update = '';
+    switch(diff.kind) {
+      case 'E': // DiffEdit
+        _update = `${buildPath(['path', 'value', ...diff.path])} = '${diff.rhs}';`;
+        updates.push(_update);
+        break;
+
+      case 'A': // DiffArray
+        switch(diff.item.kind) {
+          case 'N': // DiffNew
+          _update = `${buildPath(['path', 'value', ...diff.path])}.push(j.literal(${diff.item.rhs.value}));`;
+          updates.push(_update);
+            break;
+
+          case 'D': // DiffNew
+          _update = `${buildPath(['path', 'value', ...diff.path])}.removeAt(${diff.index}, 1);`;
+          updates.push(_update);
+            break;
+
+          default:
+            break;
+        }
+        break;
+
+      default:
+        break;
+    }
+  });
+
+
+
 
   return `.forEach(path => {
   ${updates.join('\n')}
