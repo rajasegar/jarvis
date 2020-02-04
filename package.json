@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^16.36.0",
-    "ast-node-builder": "^3.0.6",
+    "ast-node-builder": "^3.0.10",
     "ast-node-finder": "^2.0.3",
     "ember-template-recast": "^3.3.0",
     "jscodeshift": "^0.6.4",

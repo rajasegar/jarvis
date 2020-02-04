@@ -1,6 +1,15 @@
 import recastBabel from "recastBabel";
 import { diff } from 'deep-diff';
 
+function getDiff(source, dest) {
+const differences = diff(source, dest, {
+    prefilter: function(path, key) {
+      return ~['loc', 'tokens', 'raw', 'start', 'end'].indexOf(key);
+    }
+  });
+  return differences;
+}
+
 // Build object access path 
 // buildPath(['a','b','c']) => a.b.c
 function buildPath(items) {
@@ -22,6 +31,17 @@ function varDeclUpdate(source, dest) {
   ${updates.join('\n')}
   })`;
 }
+
+function expressionUpdate(source, dest) {
+  const differences = getDiff(source, dest);
+  console.log(differences);
+
+  let updates = [];
+
+  return `.forEach(path => {
+  ${updates.join('\n')}
+  })`;
+}
 export default function smartOp(input, output) {
 
   let inputAst = recastBabel.parse(input);
@@ -39,8 +59,9 @@ export default function smartOp(input, output) {
       break;
 
     case 'ExpressionStatement':
-      str = `.forEach(path => {
-      })`;
+      str = expressionUpdate(sourceNode.expression, destNode.expression);
+      //str = `.forEach(path => {
+      //})`;
       break;
 
     default:

@@ -7,7 +7,7 @@ function opQueryJS(nodeOp, dest) {
 
   let str = '';
 
-  let newNode = buildAST(recastBabel.parse(dest));
+  let newNode = buildAST(recastBabel.parse(dest), false);
   switch(nodeOp) {
     case 'remove':
       str = `.remove();`        
