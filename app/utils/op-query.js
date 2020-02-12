@@ -7,25 +7,28 @@ function opQueryJS(nodeOp, dest) {
 
   let str = '';
 
-  let newNode = buildAST(recastBabel.parse(dest), false);
+  let newNode;
   switch(nodeOp) {
     case 'remove':
       str = `.remove();`        
       break;
 
     case 'replace':
+  newNode = buildAST(recastBabel.parse(dest), false);
       str = `.replaceWith(path => {
           return ${newNode};
         })`;
       break;
 
     case 'insert-before':
+  newNode = buildAST(recastBabel.parse(dest));
       str =  `.forEach(path => {
         path.parent.insertBefore(${newNode});
         })`;
       break;
 
     case 'insert-after':
+  newNode = buildAST(recastBabel.parse(dest));
       str =  `.forEach(path => {
         path.parent.insertAfter(${newNode});
         })`;
