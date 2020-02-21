@@ -83,7 +83,7 @@ export default Service.extend({
 
     })
     .catch(err => {
-      console.log('Error: ', err);
+      console.log('Error: ', err); //eslint-disable-line
     });
 
 
@@ -125,7 +125,7 @@ export default Service.extend({
 	alert('Gist saved successfully!');
 	return data;
       }).catch(err => {
-	console.log('Error: ', err);
+        console.log('Error: ', err); //eslint-disable-line
       });
   },
   init() {

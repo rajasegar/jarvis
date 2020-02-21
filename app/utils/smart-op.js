@@ -1,7 +1,5 @@
 import recastBabel from "recastBabel";
 import { diff } from 'deep-diff';
-import { es6  } from 'ast-node-builder';
-const { buildAST } = es6;
 
 function getDiff(source, dest) {
 const differences = diff(source, dest, {
@@ -38,7 +36,7 @@ function expressionUpdate(source, dest) {
   const differences = getDiff(source, dest);
 
   let updates = [];
-  console.log(differences);
+  console.log(differences); //eslint-disable-line
 
   differences.forEach(diff => {
     let _update = '';
@@ -95,14 +93,11 @@ export default function smartOp(input, output) {
 
     case 'ExpressionStatement':
       str = expressionUpdate(sourceNode.expression, destNode.expression);
-      //str = `.forEach(path => {
-      //})`;
       break;
 
     default:
       console.log('smartOp => ', nodeType); // eslint-disable-line
       break;
-
   }
 
   return str;
