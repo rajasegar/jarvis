@@ -6198,7 +6198,7 @@ e.default=r})),define("ember-jarvis/constants/parsers",["exports"],(function(e){
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 e.default={Javascript:{recast:{name:"recast",version:"0.18.5"},babel:{name:"babel",version:"7.6.4"},babylon:{name:"babylon",version:"7.6.4"},flow:{name:"flow",version:"0.112.0"},typescript:{name:"typescript",version:"3.6.4"}},Handlebars:{"ember-template-recast":{name:"ember-template-recast",version:"3.2.8"}}}})),define("ember-jarvis/services/customize",["exports"],(function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var t=Ember.Service.extend({darkMode:!1,smartUpdate:!1,theme:Ember.computed("darkMode",(function(){return this.get("darkMode")?"solarized dark":"solarized light"})),toggleDarkMode:function(){var e=this.get("darkMode")
+var t=Ember.Service.extend({darkMode:!1,smartUpdate:!1,theme:Ember.computed("darkMode",(function(){return this.get("darkMode")?"solarized dark":"default"})),toggleDarkMode:function(){var e=this.get("darkMode")
 this.set("darkMode",!e),e?document.body.classList.remove("dark-mode"):document.body.classList.add("dark-mode")}})
 e.default=t})),define("ember-jarvis/templates/components/dark-mode-toggle",["exports"],(function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
