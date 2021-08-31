@@ -2118,7 +2118,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("jarvis/app")["default"].create({"name":"jarvis","version":"0.0.0+584ca656"});
+            require("jarvis/app")["default"].create({"name":"jarvis","version":"0.0.0+5b92d9df"});
           }
         
 //# sourceMappingURL=jarvis.map
