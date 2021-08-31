@@ -1,10 +1,10 @@
 # jarvis
 
-JARVIS is a tool which will profoundly transform the way how you write codemods.
+[JARVIS](https://rajasegar.github.io/jarvis) is a tool which will profoundly transform the way how you write codemods.
 
 JARVIS is actually a playground for writing codemods, where in you can specify the input and output code, choose the appropriate transformation you want to apply and the codemod is automatically generated for you.
 
-Read the introductory blog post [here](http://hangaroundtheweb.com/2019/12/jarvis-write-me-a-codemod/)
+Read the introductory blog post [here](http://hangaroundtheweb.com/posts/jarvis-write-me-a-codemod/)
 
 ![screenshot](https://github.com/rajasegar/jarvis/blob/master/public/jarvis-annotated.jpg)
 
