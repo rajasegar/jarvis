@@ -42,7 +42,7 @@
     "ember-power-select": "^4.0.0-beta.4",
     "ember-qunit": "^4.6.0",
     "ember-radio-button": "^2.0.1",
-    "ember-resolver": "^6.0.0",
+    "ember-resolver": "^8.0.2",
     "ember-source": "~3.14.2",
     "eslint-plugin-ember": "^7.6.0",
     "eslint-plugin-node": "^10.0.0",
