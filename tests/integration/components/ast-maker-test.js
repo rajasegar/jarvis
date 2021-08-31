@@ -1,26 +1,23 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
+import { module, test } from "qunit";
+import { setupRenderingTest } from "ember-qunit";
+import { render, findAll } from "@ember/test-helpers";
+import { hbs } from "ember-cli-htmlbars";
 
-module('Integration | Component | ast-maker', function(hooks) {
+module("Integration | Component | ast-maker", function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
-    await render(hbs`<AstMaker />`);
-
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      <AstMaker>
-        template block text
-      </AstMaker>
+  test("it renders", async function (assert) {
+    await render(hbs`<AstMaker 
+  @mode="javascript"
+  @code="foo();"
+  @dest="foo.bar()"
+  @nodeOp="replace"
+  @parser="recast">
+</AstMaker>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    // TODO: replace with better assertions
+    // Currently finding the number of .CodeMirror instances
+    assert.equal(findAll(".CodeMirror").length, 4);
   });
 });

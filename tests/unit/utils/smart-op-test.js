@@ -1,11 +1,10 @@
-import smartOp from 'jarvis/utils/smart-op';
-import { module, test } from 'qunit';
+import smartOp from "jarvis/utils/smart-op";
+import { module, test } from "qunit";
 
-module('Unit | Utility | smartOp', function() {
-
+module("Unit | Utility | smartOp", function () {
   // Replace this with your real tests.
-  test('it works', function(assert) {
-    let result = smartOp();
+  test("it works", function (assert) {
+    let result = smartOp("foo();", "foo.bar();");
     assert.ok(result);
   });
 });
