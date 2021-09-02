@@ -58,7 +58,7 @@
     "ast-node-builder": "^3.0.10",
     "ast-node-finder": "^2.0.8",
     "ember-template-recast": "^5.0.3",
-    "jscodeshift": "^0.6.4",
+    "jscodeshift": "^0.13.0",
     "recast": "^0.18.5"
   }
 }
