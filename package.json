@@ -44,7 +44,7 @@
     "ember-radio-button": "^2.0.1",
     "ember-resolver": "^8.0.2",
     "ember-source": "~3.14.2",
-    "eslint-plugin-ember": "^7.6.0",
+    "eslint-plugin-ember": "^8.14.0",
     "eslint-plugin-node": "^11.1.0",
     "ivy-codemirror": "^2.1.0",
     "loader.js": "^4.7.0",
