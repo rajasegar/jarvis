@@ -48,14 +48,14 @@
     "eslint-plugin-node": "^11.1.0",
     "ivy-codemirror": "^2.1.0",
     "loader.js": "^4.7.0",
-    "qunit-dom": "^0.9.2"
+    "qunit-dom": "^2.0.0"
   },
   "engines": {
     "node": "8.* || >= 10.*"
   },
   "dependencies": {
     "@octokit/rest": "^18.9.1",
-    "ast-node-builder": "^3.0.10",
+    "ast-node-builder": "^3.0.18",
     "ast-node-finder": "^2.0.8",
     "ember-template-recast": "^5.0.3",
     "jscodeshift": "^0.13.0",
