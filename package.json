@@ -39,7 +39,7 @@
     "ember-jarvis": "0.0.18",
     "ember-load-initializers": "^2.1.2",
     "ember-maybe-import-regenerator": "^0.1.6",
-    "ember-power-select": "^4.0.0-beta.4",
+    "ember-power-select": "^4.1.7",
     "ember-qunit": "^4.6.0",
     "ember-radio-button": "^2.0.1",
     "ember-resolver": "^8.0.2",
