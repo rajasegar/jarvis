@@ -1,23 +1,24 @@
 "use strict"
-function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}define("jarvis/app",["exports","jarvis/resolver","ember-load-initializers","jarvis/config/environment"],(function(e,t,r,n){function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function i(e,t){return(i=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function a(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1
+function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}define("jarvis/app",["exports","jarvis/resolver","ember-load-initializers","jarvis/config/environment"],(function(e,t,r,n){function o(e,t){for(var r=0;r<t.length;r++){var n=t[r]
+n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function a(e,t){return(a=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function s(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1
 if(Reflect.construct.sham)return!1
 if("function"==typeof Proxy)return!0
 try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],(function(){}))),!0}catch(e){return!1}}()
-return function(){var r,n=l(e)
-if(t){var o=l(this).constructor
+return function(){var r,n=d(e)
+if(t){var o=d(this).constructor
 r=Reflect.construct(n,arguments,o)}else r=n.apply(this,arguments)
-return s(this,r)}}function s(e,t){if(t&&("object"===_typeof(t)||"function"==typeof t))return t
+return u(this,r)}}function u(e,t){if(t&&("object"===_typeof(t)||"function"==typeof t))return t
 if(void 0!==t)throw new TypeError("Derived constructors may only return object or undefined")
-return u(e)}function u(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
-return e}function l(e){return(l=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function d(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var c=function(e){(function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function")
-e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&i(e,t)})(s,Ember.Application)
-var r=a(s)
-function s(){var e
-o(this,s)
-for(var i=arguments.length,a=new Array(i),l=0;l<i;l++)a[l]=arguments[l]
-return d(u(e=r.call.apply(r,[this].concat(a))),"modulePrefix",n.default.modulePrefix),d(u(e),"podModulePrefix",n.default.podModulePrefix),d(u(e),"Resolver",t.default),e}return s}()
-e.default=c,(0,r.default)(c,n.default.modulePrefix)})),define("jarvis/component-managers/glimmer",["exports","@glimmer/component/-private/ember-component-manager"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})})),define("jarvis/components/-dynamic-element-alt",["exports"],(function(e){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
+return l(e)}function l(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
+return e}function d(e){return(d=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function c(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
+var f=function(e){(function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function")
+Object.defineProperty(e,"prototype",{value:Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),writable:!1}),t&&a(e,t)})(p,Ember.Application)
+var r,u,d,f=s(p)
+function p(){var e
+i(this,p)
+for(var r=arguments.length,o=new Array(r),a=0;a<r;a++)o[a]=arguments[a]
+return c(l(e=f.call.apply(f,[this].concat(o))),"modulePrefix",n.default.modulePrefix),c(l(e),"podModulePrefix",n.default.podModulePrefix),c(l(e),"Resolver",t.default),e}return r=p,u&&o(r.prototype,u),d&&o(r,d),Object.defineProperty(r,"prototype",{writable:!1}),r}()
+e.default=f,(0,r.default)(f,n.default.modulePrefix)})),define("jarvis/component-managers/glimmer",["exports","@glimmer/component/-private/ember-component-manager"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})})),define("jarvis/components/-dynamic-element-alt",["exports"],(function(e){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var t=Ember.Component.extend()
 e.default=t})),define("jarvis/components/-dynamic-element",["exports"],(function(e){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var t=Ember.Component.extend()
@@ -84,25 +85,26 @@ e.default=n})),define("jarvis/instance-initializers/ember-gestures",["exports"],
 var t={name:"ember-gestures",initialize:function(e){"function"==typeof e.lookup?e.lookup("service:-gestures"):Ember.getOwner(e).lookup("service:-gestures")}}
 e.default=t})),define("jarvis/modifiers/did-insert",["exports","@ember/render-modifiers/modifiers/did-insert"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})})),define("jarvis/modifiers/did-update",["exports","@ember/render-modifiers/modifiers/did-update"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})})),define("jarvis/modifiers/recognize-gesture",["exports","ember-gestures/modifiers/recognize-gesture"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})})),define("jarvis/modifiers/split-view",["exports","ember-split-view-modifier/modifiers/split-view"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})})),define("jarvis/modifiers/style",["exports","ember-style-modifier/modifiers/style"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})})),define("jarvis/modifiers/will-destroy",["exports","@ember/render-modifiers/modifiers/will-destroy"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})})),define("jarvis/resolver",["exports","ember-resolver"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var r=t.default
-e.default=r})),define("jarvis/router",["exports","jarvis/config/environment"],(function(e,t){function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function n(e,t){return(n=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function o(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1
+e.default=r})),define("jarvis/router",["exports","jarvis/config/environment"],(function(e,t){function r(e,t){for(var r=0;r<t.length;r++){var n=t[r]
+n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}function n(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){return(o=Object.setPrototypeOf||function(e,t){return e.__proto__=t,e})(e,t)}function i(e){var t=function(){if("undefined"==typeof Reflect||!Reflect.construct)return!1
 if(Reflect.construct.sham)return!1
 if("function"==typeof Proxy)return!0
 try{return Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],(function(){}))),!0}catch(e){return!1}}()
-return function(){var r,n=s(e)
-if(t){var o=s(this).constructor
+return function(){var r,n=u(e)
+if(t){var o=u(this).constructor
 r=Reflect.construct(n,arguments,o)}else r=n.apply(this,arguments)
-return i(this,r)}}function i(e,t){if(t&&("object"===_typeof(t)||"function"==typeof t))return t
+return a(this,r)}}function a(e,t){if(t&&("object"===_typeof(t)||"function"==typeof t))return t
 if(void 0!==t)throw new TypeError("Derived constructors may only return object or undefined")
-return a(e)}function a(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
-return e}function s(e){return(s=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function u(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-var l=function(e){(function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function")
-e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),t&&n(e,t)})(s,Ember.Router)
-var i=o(s)
-function s(){var e
-r(this,s)
-for(var n=arguments.length,o=new Array(n),l=0;l<n;l++)o[l]=arguments[l]
-return u(a(e=i.call.apply(i,[this].concat(o))),"location",t.default.locationType),u(a(e),"rootURL",t.default.rootURL),e}return s}()
-e.default=l,l.map((function(){this.route("gists",{path:"/gists/:gist_id"})}))})),define("jarvis/routes/gists",["exports"],(function(e){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
+return s(e)}function s(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
+return e}function u(e){return(u=Object.setPrototypeOf?Object.getPrototypeOf:function(e){return e.__proto__||Object.getPrototypeOf(e)})(e)}function l(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
+var d=function(e){(function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function")
+Object.defineProperty(e,"prototype",{value:Object.create(t&&t.prototype,{constructor:{value:e,writable:!0,configurable:!0}}),writable:!1}),t&&o(e,t)})(f,Ember.Router)
+var a,u,d,c=i(f)
+function f(){var e
+n(this,f)
+for(var r=arguments.length,o=new Array(r),i=0;i<r;i++)o[i]=arguments[i]
+return l(s(e=c.call.apply(c,[this].concat(o))),"location",t.default.locationType),l(s(e),"rootURL",t.default.rootURL),e}return a=f,u&&r(a.prototype,u),d&&r(a,d),Object.defineProperty(a,"prototype",{writable:!1}),a}()
+e.default=d,d.map((function(){this.route("gists",{path:"/gists/:gist_id"})}))})),define("jarvis/routes/gists",["exports"],(function(e){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var t=Ember.Route.extend({model:function(e){return this.set("gist_id",e.gist_id),e},setupController:function(e,t){e.set("gist_id",this.get("gist_id")),this._super(e,t)}})
 e.default=t})),define("jarvis/routes/index",["exports"],(function(e){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var t=Ember.Route.extend({})
@@ -113,8 +115,8 @@ var i=r.default.extend({useCapture:o.useCapture})
 e.default=i})),define("jarvis/services/code-mirror",["exports","ivy-codemirror/services/code-mirror"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})})),define("jarvis/services/codemod",["exports","jarvis/constants/parsers","@octokit/rest","jarvis/config/environment"],(function(e,t,r,n){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var o={Javascript:"javascript",Handlebars:"handlebars"},i=Ember.Service.extend({language:"Javascript",nodeOps:["replace","remove","insert-before","insert-after"],opCode:"replace",mode:Ember.computed("language",(function(){return o[this.get("language")]})),sourceCode:Ember.computed("language",(function(){return"Javascript"===this.get("language")?"foo();":'<div class="entry">\n  <h1>{{title}}</h1>\n  <div class="body">\n    {{body}}\n  </div>\n</div>'})),destCode:Ember.computed("language",(function(){return"Javascript"===this.get("language")?"foo.bar();":"{{foo}}"})),parser:Ember.computed("language",(function(){return Object.keys(t.default[this.get("language")])[0]})),parsers:Ember.computed("language",(function(){return Object.keys(t.default[this.get("language")])})),parserVersion:Ember.computed("parser",(function(){var e=this.get("language")
 return t.default[e][this.get("parser")].version})),readGist:function(e){var t=this,o=this.get("mode"),i="javascript"===o?"source.js":"source.hbs",a="javascript"===o?"destination.js":"destination.hbs"
-new r.default({auth:n.default.GITHUB_API_TOKEN}).gists.get({gist_id:e}).then((function(e){var r=e.data,n=JSON.parse(r.files["jarvis-90f4d5ef8fbfb3d11bcb9d2d961f89d0.json"].content)
-t.set("parser",n.parser),t.set("language",n.lang),t.set("sourceCode",r.files[i].content||""),t.set("destCode",r.files[a].content||""),t.set("transform",r.files["transform.js"].content||"")})).catch((function(e){console.log("Error: ",e)}))},saveGist:function(){var e=new r.default({auth:n.default.GITHUB_API_TOKEN}),t=this.get("mode"),o="javascript"===t?"source.js":"source.hbs",i="javascript"===t?"destination.js":"destination.hbs",a={"jarvis-90f4d5ef8fbfb3d11bcb9d2d961f89d0.json":{content:'{\n       "lang": "'.concat(this.get("language"),'",\n       "parser": "').concat(this.get("parser"),'",\n       "version": "1.0",\n       "nodeOp": "').concat(this.get("opCode"),'"\n      }')},"transform.js":{content:this.get("codemod")}}
+new r.default({auth:n.default.GITHUB_API_TOKEN}).gists.get({gist_id:e}).then((function(e){var r=e.data,n=JSON.parse(r.files["jarvis-2e7cfbd3a7cbcd3483a3c5fc460c00f5.json"].content)
+t.set("parser",n.parser),t.set("language",n.lang),t.set("sourceCode",r.files[i].content||""),t.set("destCode",r.files[a].content||""),t.set("transform",r.files["transform.js"].content||"")})).catch((function(e){console.log("Error: ",e)}))},saveGist:function(){var e=new r.default({auth:n.default.GITHUB_API_TOKEN}),t=this.get("mode"),o="javascript"===t?"source.js":"source.hbs",i="javascript"===t?"destination.js":"destination.hbs",a={"jarvis-2e7cfbd3a7cbcd3483a3c5fc460c00f5.json":{content:'{\n       "lang": "'.concat(this.get("language"),'",\n       "parser": "').concat(this.get("parser"),'",\n       "version": "1.0",\n       "nodeOp": "').concat(this.get("opCode"),'"\n      }')},"transform.js":{content:this.get("codemod")}}
 return a[o]={content:this.get("sourceCode")},a[i]={content:this.get("destCode")},e.gists.create({files:a,description:"JARVIS gist v1"}).then((function(e){var t=e.data
 return alert("Gist saved successfully!"),t})).catch((function(e){console.log("Error: ",e)}))},init:function(){this._super.apply(this,arguments),this.set("languages",Object.keys(t.default))}})
 e.default=i})),define("jarvis/services/customize",["exports","ember-jarvis/services/customize"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})})),define("jarvis/services/text-measurer",["exports","ember-text-measurer/services/text-measurer"],(function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})})),define("jarvis/templates/application",["exports"],(function(e){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
@@ -168,4 +170,4 @@ case"D":t="".concat(i(["path","value"].concat(n(e.path))),".removeAt(").concat(e
 break
 default:console.log("smartOp => ",s)}var c,f,p
 return d}})),define("jarvis/config/environment",[],(function(){try{var e="jarvis/config/environment",t=document.querySelector('meta[name="'+e+'"]').getAttribute("content"),r={default:JSON.parse(decodeURIComponent(t))}
-return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("jarvis/app").default.create({name:"jarvis",version:"0.0.0+2632d304"})
+return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("jarvis/app").default.create({name:"jarvis",version:"0.0.0+09c29aff"})
