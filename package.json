@@ -19,8 +19,10 @@
     "lint": "npm run lint:js"
   },
   "devDependencies": {
+    "@babel/parser": "^7.17.8",
     "@ember/optional-features": "^1.1.0",
     "babel-eslint": "^10.1.0",
+    "babylon": "^6.18.0",
     "broccoli-asset-rev": "^3.0.0",
     "deep-diff": "^1.0.2",
     "ember-auto-import": "^1.5.3",
