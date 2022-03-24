@@ -1,42 +1,44 @@
-<header>
-  <h1 title="Write me a Codemod">JARVIS</h1>
-  <div class="parser_wrapper">
-    <span class="label-text"><LinkTo @route="index">New</LinkTo></span>
-    <button 
-          type="button" 
-          class="btn btn-outline-secondary btn-sm" 
-          disabled={{buttonDisabled}}
-          {{action "saveGist"}}>
-      {{buttonText}}
-    </button>
-    <PowerSelect @selected={{codemod.language}} @options={{codemod.languages}} @onChange={{action (mut codemod.language)}} as |lang|>
-      {{lang}}
-    </PowerSelect>
-    <span class="label-text">Parser:</span>
-    <PowerSelect @selected={{codemod.parser}} @options={{codemod.parsers}} @onChange={{action (mut codemod.parser)}} as |parser|>
-      {{parser}}
-    </PowerSelect>
-    <span class="label-text">OPCODE:</span>
-    <PowerSelect @selected={{codemod.opCode}} @options={{codemod.nodeOps}} @onChange={{action (mut codemod.opCode)}} as |opcode|>
-      {{opcode}}
-    </PowerSelect>
-  </div>
-  <div id="options">
-    <SmartUpdateToggle />
-    <DarkModeToggle/>
-  </div>
-  <span class="label-text">{{codemod.parser}}: <strong>{{codemod.parserVersion}}</strong></span>
-</header>
-<main>
-  {{outlet}}
-</main>
-<footer>
-  <p>
-    Built with <a href="https://emberjs.com">Ember.js: {{emberVersion}}</a> |
-    <a href="https://rajasegar.github.io/ast-builder/">AST-Builder</a> |
-    <a href="https://rajasegar.github.io/ast-finder/">AST-Finder</a> |
-    <a href="https://astexplorer.net/">AST-Explorer</a> |
-    <a href="https://github.com/rajasegar/jarvis">Github</a> |
-    <a href="https://github.com/rajasegar/jarvis/issues">Report issues</a> 
-  </p>
-</footer>
+<div class="ember-view">
+  <header>
+    <h1 title="Write me a Codemod">JARVIS</h1>
+    <div class="parser_wrapper">
+      <span class="label-text"><LinkTo @route="index">New</LinkTo></span>
+      <button 
+            type="button" 
+            class="btn btn-outline-secondary btn-sm" 
+            disabled={{buttonDisabled}}
+            {{action "saveGist"}}>
+        {{buttonText}}
+      </button>
+      <PowerSelect @selected={{codemod.language}} @options={{codemod.languages}} @onChange={{action (mut codemod.language)}} as |lang|>
+        {{lang}}
+      </PowerSelect>
+      <span class="label-text">Parser:</span>
+      <PowerSelect @selected={{codemod.parser}} @options={{codemod.parsers}} @onChange={{action (mut codemod.parser)}} as |parser|>
+        {{parser}}
+      </PowerSelect>
+      <span class="label-text">OPCODE:</span>
+      <PowerSelect @selected={{codemod.opCode}} @options={{codemod.nodeOps}} @onChange={{action (mut codemod.opCode)}} as |opcode|>
+        {{opcode}}
+      </PowerSelect>
+    </div>
+    <div id="options">
+      <SmartUpdateToggle />
+      <DarkModeToggle/>
+    </div>
+    <span class="label-text">{{codemod.parser}}: <strong>{{codemod.parserVersion}}</strong></span>
+  </header>
+  <main>
+    {{outlet}}
+  </main>
+  <footer>
+    <p>
+      Built with <a href="https://emberjs.com">Ember.js: {{emberVersion}}</a> |
+      <a href="https://rajasegar.github.io/ast-builder/">AST-Builder</a> |
+      <a href="https://rajasegar.github.io/ast-finder/">AST-Finder</a> |
+      <a href="https://astexplorer.net/">AST-Explorer</a> |
+      <a href="https://github.com/rajasegar/jarvis">Github</a> |
+      <a href="https://github.com/rajasegar/jarvis/issues">Report issues</a> 
+    </p>
+  </footer>
+</div>
