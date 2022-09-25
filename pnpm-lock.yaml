@@ -357,6 +357,8 @@ packages:
     resolution: {integrity: sha512-BoHhDJrJXqcg+ZL16Xv39H9n+AqJ4pcDrQBGZN+wHxIysrLZ3/ECwCBUch/1zUNhnsXULcONU3Ei5Hmkfk6kiQ==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+    dependencies:
+      '@babel/types': 7.15.0
 
   /@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining/7.14.5_@babel+core@7.15.0:
     resolution: {integrity: sha512-ZoJS2XCKPBfTmL122iP6NM9dOg+d4lc9fFk3zxc8iDjvt8Pk4+TlsHSKhIPf6X+L5ORCdBzqMZDjL/WHj7WknQ==}
@@ -1453,6 +1455,8 @@ packages:
       mkdirp: 0.5.5
       silent-error: 1.1.1
       util.promisify: 1.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@ember/render-modifiers/1.0.2:
@@ -2224,8 +2228,8 @@ packages:
     hasBin: true
     dev: true
 
-  /acorn/8.4.1:
-    resolution: {integrity: sha512-asabaBSkEKosYKMITunzX177CXxQ4Q8BSSzMTKD+FefUhipQC70gfW5SiUDhYQ3vk8G+81HqQk7Fv9OXwwn9KA==}
+  /acorn/8.8.0:
+    resolution: {integrity: sha512-QOxyigPVrpZ2GXT+PFyZTl6TtOFc5egxHIP9IlQ+RbupQuX4RkT/Bee4/kQuC02Xkzg84JcT7oLYtDIQxp+v7w==}
     engines: {node: '>=0.4.0'}
     hasBin: true
     dev: true
@@ -2358,6 +2362,8 @@ packages:
     dependencies:
       micromatch: 3.1.10
       normalize-path: 2.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /anymatch/3.1.2:
@@ -2463,6 +2469,8 @@ packages:
     engines: {node: '>=12.0.0'}
     dependencies:
       ember-template-recast: 6.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /ast-node-finder/2.0.8:
@@ -2472,6 +2480,8 @@ packages:
       common-tags: 1.8.0
       ember-template-recast: 5.0.3
       recast: 0.18.10
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /ast-types/0.13.3:
@@ -2500,6 +2510,8 @@ packages:
       rimraf: 2.7.1
       rsvp: 3.6.2
       username-sync: 1.0.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /async-disk-cache/2.1.0:
@@ -2527,6 +2539,8 @@ packages:
     dependencies:
       async: 2.6.3
       debug: 2.6.9
+    transitivePeerDependencies:
+      - supports-color
 
   /async/0.2.10:
     resolution: {integrity: sha1-trvgsGdLnXGXCMo43owjfLUmw9E=}
@@ -2581,6 +2595,8 @@ packages:
       private: 0.1.8
       slash: 1.0.0
       source-map: 0.5.7
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-core/7.0.0-bridge.0_@babel+core@7.15.0:
@@ -2627,6 +2643,8 @@ packages:
       babel-helper-explode-assignable-expression: 6.24.1
       babel-runtime: 6.26.0
       babel-types: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-helper-call-delegate/6.24.1:
@@ -2636,6 +2654,8 @@ packages:
       babel-runtime: 6.26.0
       babel-traverse: 6.26.0
       babel-types: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-helper-define-map/6.26.0:
@@ -2645,6 +2665,8 @@ packages:
       babel-runtime: 6.26.0
       babel-types: 6.26.0
       lodash: 4.17.21
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-helper-explode-assignable-expression/6.24.1:
@@ -2653,6 +2675,8 @@ packages:
       babel-runtime: 6.26.0
       babel-traverse: 6.26.0
       babel-types: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-helper-function-name/6.24.1:
@@ -2663,6 +2687,8 @@ packages:
       babel-template: 6.26.0
       babel-traverse: 6.26.0
       babel-types: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-helper-get-function-arity/6.24.1:
@@ -2702,6 +2728,8 @@ packages:
       babel-template: 6.26.0
       babel-traverse: 6.26.0
       babel-types: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-helper-replace-supers/6.24.1:
@@ -2713,6 +2741,8 @@ packages:
       babel-template: 6.26.0
       babel-traverse: 6.26.0
       babel-types: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-helpers/6.24.1:
@@ -2720,6 +2750,8 @@ packages:
     dependencies:
       babel-runtime: 6.26.0
       babel-template: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-loader/8.2.2_be352a5a80662835a7707f972edfcfde:
@@ -2911,6 +2943,8 @@ packages:
       babel-helper-remap-async-to-generator: 6.24.1
       babel-plugin-syntax-async-functions: 6.13.0
       babel-runtime: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-es2015-arrow-functions/6.22.0:
@@ -2933,6 +2967,8 @@ packages:
       babel-traverse: 6.26.0
       babel-types: 6.26.0
       lodash: 4.17.21
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-es2015-classes/6.24.1:
@@ -2947,6 +2983,8 @@ packages:
       babel-template: 6.26.0
       babel-traverse: 6.26.0
       babel-types: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-es2015-computed-properties/6.24.1:
@@ -2954,6 +2992,8 @@ packages:
     dependencies:
       babel-runtime: 6.26.0
       babel-template: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-es2015-destructuring/6.23.0:
@@ -2981,6 +3021,8 @@ packages:
       babel-helper-function-name: 6.24.1
       babel-runtime: 6.26.0
       babel-types: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-es2015-literals/6.22.0:
@@ -2995,6 +3037,8 @@ packages:
       babel-plugin-transform-es2015-modules-commonjs: 6.26.2
       babel-runtime: 6.26.0
       babel-template: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-es2015-modules-commonjs/6.26.2:
@@ -3004,6 +3048,8 @@ packages:
       babel-runtime: 6.26.0
       babel-template: 6.26.0
       babel-types: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-es2015-modules-systemjs/6.24.1:
@@ -3012,6 +3058,8 @@ packages:
       babel-helper-hoist-variables: 6.24.1
       babel-runtime: 6.26.0
       babel-template: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-es2015-modules-umd/6.24.1:
@@ -3020,6 +3068,8 @@ packages:
       babel-plugin-transform-es2015-modules-amd: 6.24.1
       babel-runtime: 6.26.0
       babel-template: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-es2015-object-super/6.24.1:
@@ -3027,6 +3077,8 @@ packages:
     dependencies:
       babel-helper-replace-supers: 6.24.1
       babel-runtime: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-es2015-parameters/6.24.1:
@@ -3038,6 +3090,8 @@ packages:
       babel-template: 6.26.0
       babel-traverse: 6.26.0
       babel-types: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-es2015-shorthand-properties/6.24.1:
@@ -3087,6 +3141,8 @@ packages:
       babel-helper-builder-binary-assignment-operator-visitor: 6.24.1
       babel-plugin-syntax-exponentiation-operator: 6.13.0
       babel-runtime: 6.26.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-plugin-transform-regenerator/6.26.0:
@@ -3143,6 +3199,8 @@ packages:
       browserslist: 3.2.8
       invariant: 2.2.4
       semver: 5.7.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-register/6.26.0:
@@ -3155,6 +3213,8 @@ packages:
       lodash: 4.17.21
       mkdirp: 0.5.5
       source-map-support: 0.4.18
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-runtime/6.26.0:
@@ -3172,6 +3232,8 @@ packages:
       babel-types: 6.26.0
       babylon: 6.18.0
       lodash: 4.17.21
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-traverse/6.26.0:
@@ -3186,6 +3248,8 @@ packages:
       globals: 9.18.0
       invariant: 2.2.4
       lodash: 4.17.21
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /babel-types/6.26.0:
@@ -3270,6 +3334,7 @@ packages:
 
   /bindings/1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     dev: true
@@ -3316,6 +3381,8 @@ packages:
       qs: 6.7.0
       raw-body: 2.4.0
       type-is: 1.6.18
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /body/5.1.0:
@@ -3364,6 +3431,8 @@ packages:
       snapdragon-node: 2.1.1
       split-string: 3.1.0
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
 
   /braces/3.0.2:
     resolution: {integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==}
@@ -3388,12 +3457,16 @@ packages:
       json-stable-stringify: 1.0.1
       minimatch: 3.0.4
       rsvp: 3.6.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-asset-rewrite/2.0.0:
     resolution: {integrity: sha512-dqhxdQpooNi7LHe8J9Jdxp6o3YPFWl4vQmint6zrsn2sVbOo+wpyiX3erUSt0IBtjNkAxqJjuvS375o2cLBHTA==}
     dependencies:
       broccoli-filter: 1.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-babel-transpiler/6.5.1:
@@ -3410,6 +3483,8 @@ packages:
       json-stable-stringify: 1.0.1
       rsvp: 4.8.5
       workerpool: 2.3.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-babel-transpiler/7.8.0:
@@ -3443,6 +3518,8 @@ packages:
       rimraf: 2.7.1
       rsvp: 3.6.2
       silent-error: 1.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-caching-writer/2.3.1:
@@ -3454,6 +3531,8 @@ packages:
       rimraf: 2.7.1
       rsvp: 3.6.2
       walk-sync: 0.2.7
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-caching-writer/3.0.3:
@@ -3465,6 +3544,8 @@ packages:
       rimraf: 2.7.1
       rsvp: 3.6.2
       walk-sync: 0.3.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-clean-css/1.1.0:
@@ -3474,6 +3555,8 @@ packages:
       clean-css-promise: 0.1.1
       inline-source-map-comment: 1.0.5
       json-stable-stringify: 1.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-concat/3.7.5:
@@ -3492,6 +3575,8 @@ packages:
       lodash.omit: 4.5.0
       lodash.uniq: 4.5.0
       walk-sync: 0.3.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-concat/4.2.5:
@@ -3509,12 +3594,16 @@ packages:
       lodash.merge: 4.6.2
       lodash.omit: 4.5.0
       lodash.uniq: 4.5.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-config-loader/1.0.1:
     resolution: {integrity: sha512-MDKYQ50rxhn+g17DYdfzfEM9DjTuSGu42Db37A8TQHQe8geYEcUZ4SQqZRgzdAI3aRQNlA1yBHJfOeGmOjhLIg==}
     dependencies:
       broccoli-caching-writer: 3.0.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-config-replace/1.1.2:
@@ -3524,6 +3613,8 @@ packages:
       broccoli-plugin: 1.3.1
       debug: 2.6.9
       fs-extra: 0.24.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-debug/0.6.5:
@@ -3535,6 +3626,8 @@ packages:
       heimdalljs-logger: 0.1.10
       symlink-or-copy: 1.3.1
       tree-sync: 1.4.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-file-creator/2.1.1:
@@ -3557,6 +3650,8 @@ packages:
       rsvp: 3.6.2
       symlink-or-copy: 1.3.1
       walk-sync: 0.3.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-funnel-reducer/1.0.0:
@@ -3580,6 +3675,8 @@ packages:
       rimraf: 2.7.1
       symlink-or-copy: 1.3.1
       walk-sync: 0.3.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-funnel/2.0.2:
@@ -3599,6 +3696,8 @@ packages:
       rimraf: 2.7.1
       symlink-or-copy: 1.3.1
       walk-sync: 0.3.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-funnel/3.0.8:
@@ -3656,6 +3755,8 @@ packages:
       heimdalljs-logger: 0.1.10
       rimraf: 2.7.1
       symlink-or-copy: 1.3.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-merge-trees/2.0.1:
@@ -3663,6 +3764,8 @@ packages:
     dependencies:
       broccoli-plugin: 1.3.1
       merge-trees: 1.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-merge-trees/3.0.2:
@@ -3671,6 +3774,8 @@ packages:
     dependencies:
       broccoli-plugin: 1.3.1
       merge-trees: 2.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-merge-trees/4.2.0:
@@ -3679,6 +3784,8 @@ packages:
     dependencies:
       broccoli-plugin: 4.0.7
       merge-trees: 2.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-middleware/2.1.1:
@@ -3709,6 +3816,8 @@ packages:
     resolution: {integrity: sha512-V/ozejo+snzNf75i/a6iTmp71k+rlvqjE3+jYfimuMwR1tjNNRdtfno+NGNQB2An9bIAeqZnKhMDurAznHAdtA==}
     dependencies:
       heimdalljs-logger: 0.1.10
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-output-wrapper/3.2.5:
@@ -3718,6 +3827,8 @@ packages:
       fs-extra: 8.1.0
       heimdalljs-logger: 0.1.10
       symlink-or-copy: 1.3.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-persistent-filter/1.4.6:
@@ -3736,6 +3847,8 @@ packages:
       rsvp: 3.6.2
       symlink-or-copy: 1.3.1
       walk-sync: 0.3.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-persistent-filter/2.3.1:
@@ -3756,6 +3869,8 @@ packages:
       symlink-or-copy: 1.3.1
       sync-disk-cache: 1.3.4
       walk-sync: 1.1.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-persistent-filter/3.1.2:
@@ -3816,6 +3931,8 @@ packages:
       quick-temp: 0.1.8
       rimraf: 2.7.1
       symlink-or-copy: 1.3.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-plugin/4.0.7:
@@ -3829,6 +3946,8 @@ packages:
       quick-temp: 0.1.8
       rimraf: 3.0.2
       symlink-or-copy: 1.3.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-slow-trees/3.1.0:
@@ -3861,6 +3980,8 @@ packages:
       rsvp: 3.6.2
       sri-toolbox: 0.2.0
       symlink-or-copy: 1.3.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-stew/1.6.0:
@@ -3881,6 +4002,8 @@ packages:
       rsvp: 4.8.5
       symlink-or-copy: 1.3.1
       walk-sync: 0.3.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /broccoli-stew/3.0.0:
@@ -4100,7 +4223,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.5
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -4225,12 +4348,15 @@ packages:
       upath: 1.2.0
     optionalDependencies:
       fsevents: 1.2.13
+    transitivePeerDependencies:
+      - supports-color
     dev: true
     optional: true
 
   /chokidar/3.5.2:
     resolution: {integrity: sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==}
     engines: {node: '>= 8.10.0'}
+    requiresBuild: true
     dependencies:
       anymatch: 3.1.2
       braces: 3.0.2
@@ -4472,6 +4598,8 @@ packages:
       on-headers: 1.0.2
       safe-buffer: 5.1.2
       vary: 1.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /concat-map/0.0.1:
@@ -4507,6 +4635,8 @@ packages:
       finalhandler: 1.1.2
       parseurl: 1.3.3
       utils-merge: 1.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /console-browserify/1.2.0:
@@ -4528,11 +4658,173 @@ packages:
       through2: 3.0.2
     dev: true
 
-  /consolidate/0.15.1:
+  /consolidate/0.15.1_mustache@3.2.1:
     resolution: {integrity: sha512-DW46nrsMJgy9kqAbPt5rKaCr7uFtpo4mSUvLHIUbJEjm0vo+aY5QLwBUq3FK4tRnJr/X0Psc0C4jf/h+HtXSMw==}
     engines: {node: '>= 0.10.0'}
+    peerDependencies:
+      arc-templates: ^0.5.3
+      atpl: '>=0.7.6'
+      babel-core: ^6.26.3
+      bracket-template: ^1.1.5
+      coffee-script: ^1.12.7
+      dot: ^1.1.3
+      dust: ^0.3.0
+      dustjs-helpers: ^1.7.4
+      dustjs-linkedin: ^2.7.5
+      eco: ^1.1.0-rc-3
+      ect: ^0.5.9
+      ejs: ^3.1.5
+      haml-coffee: ^1.14.1
+      hamlet: ^0.3.3
+      hamljs: ^0.6.2
+      handlebars: ^4.7.6
+      hogan.js: ^3.0.2
+      htmling: ^0.0.8
+      jade: ^1.11.0
+      jazz: ^0.0.18
+      jqtpl: ~1.1.0
+      just: ^0.1.8
+      liquid-node: ^3.0.1
+      liquor: ^0.0.5
+      lodash: ^4.17.20
+      marko: ^3.14.4
+      mote: ^0.2.0
+      mustache: ^4.0.1
+      nunjucks: ^3.2.2
+      plates: ~0.4.11
+      pug: ^3.0.0
+      qejs: ^3.0.5
+      ractive: ^1.3.12
+      razor-tmpl: ^1.3.1
+      react: ^16.13.1
+      react-dom: ^16.13.1
+      slm: ^2.0.0
+      squirrelly: ^5.1.0
+      swig: ^1.4.2
+      swig-templates: ^2.0.3
+      teacup: ^2.0.0
+      templayed: '>=0.2.3'
+      then-jade: '*'
+      then-pug: '*'
+      tinyliquid: ^0.2.34
+      toffee: ^0.3.6
+      twig: ^1.15.2
+      twing: ^5.0.2
+      underscore: ^1.11.0
+      vash: ^0.13.0
+      velocityjs: ^2.0.1
+      walrus: ^0.10.1
+      whiskers: ^0.4.0
+    peerDependenciesMeta:
+      arc-templates:
+        optional: true
+      atpl:
+        optional: true
+      babel-core:
+        optional: true
+      bracket-template:
+        optional: true
+      coffee-script:
+        optional: true
+      dot:
+        optional: true
+      dust:
+        optional: true
+      dustjs-helpers:
+        optional: true
+      dustjs-linkedin:
+        optional: true
+      eco:
+        optional: true
+      ect:
+        optional: true
+      ejs:
+        optional: true
+      haml-coffee:
+        optional: true
+      hamlet:
+        optional: true
+      hamljs:
+        optional: true
+      handlebars:
+        optional: true
+      hogan.js:
+        optional: true
+      htmling:
+        optional: true
+      jade:
+        optional: true
+      jazz:
+        optional: true
+      jqtpl:
+        optional: true
+      just:
+        optional: true
+      liquid-node:
+        optional: true
+      liquor:
+        optional: true
+      lodash:
+        optional: true
+      marko:
+        optional: true
+      mote:
+        optional: true
+      mustache:
+        optional: true
+      nunjucks:
+        optional: true
+      plates:
+        optional: true
+      pug:
+        optional: true
+      qejs:
+        optional: true
+      ractive:
+        optional: true
+      razor-tmpl:
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+      slm:
+        optional: true
+      squirrelly:
+        optional: true
+      swig:
+        optional: true
+      swig-templates:
+        optional: true
+      teacup:
+        optional: true
+      templayed:
+        optional: true
+      then-jade:
+        optional: true
+      then-pug:
+        optional: true
+      tinyliquid:
+        optional: true
+      toffee:
+        optional: true
+      twig:
+        optional: true
+      twing:
+        optional: true
+      underscore:
+        optional: true
+      vash:
+        optional: true
+      velocityjs:
+        optional: true
+      walrus:
+        optional: true
+      whiskers:
+        optional: true
     dependencies:
       bluebird: 3.7.2
+      mustache: 3.2.1
     dev: true
 
   /constants-browserify/1.0.0:
@@ -4728,11 +5020,21 @@ packages:
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.0.0
 
   /debug/3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.1.3
     dev: true
@@ -5050,6 +5352,7 @@ packages:
       git-repo-version: 1.0.2
     transitivePeerDependencies:
       - '@babel/core'
+      - supports-color
     dev: true
 
   /ember-cli-babel-plugin-helpers/1.1.1:
@@ -5076,6 +5379,7 @@ packages:
       semver: 5.7.1
     transitivePeerDependencies:
       - '@babel/core'
+      - supports-color
     dev: true
 
   /ember-cli-babel/7.26.6:
@@ -5122,6 +5426,8 @@ packages:
       is-git-url: 1.0.0
       resolve: 1.20.0
       semver: 5.7.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli-dotenv/3.1.0:
@@ -5163,6 +5469,8 @@ packages:
       hash-for-dep: 1.5.1
       heimdalljs-logger: 0.1.10
       silent-error: 1.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli-htmlbars/1.3.5:
@@ -5173,6 +5481,8 @@ packages:
       hash-for-dep: 1.5.1
       json-stable-stringify: 1.0.1
       strip-bom: 2.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli-htmlbars/2.0.5:
@@ -5183,6 +5493,8 @@ packages:
       hash-for-dep: 1.5.1
       json-stable-stringify: 1.0.1
       strip-bom: 3.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli-htmlbars/3.1.0:
@@ -5193,6 +5505,8 @@ packages:
       hash-for-dep: 1.5.1
       json-stable-stringify: 1.0.1
       strip-bom: 3.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli-htmlbars/4.5.0:
@@ -5213,6 +5527,8 @@ packages:
       semver: 6.3.0
       strip-bom: 4.0.0
       walk-sync: 2.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli-htmlbars/5.7.1:
@@ -5266,12 +5582,16 @@ packages:
       debug: 2.6.9
       lodash: 4.17.21
       resolve: 1.20.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli-normalize-entity-name/1.0.0:
     resolution: {integrity: sha1-CxT3vLxZmqEXtf3cgeT9A8S61bc=}
     dependencies:
       silent-error: 1.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli-path-utils/1.0.0:
@@ -5285,6 +5605,8 @@ packages:
       broccoli-funnel: 2.0.2
       debug: 3.2.7
       process-relative-require: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli-sri/2.1.1:
@@ -5292,6 +5614,8 @@ packages:
     engines: {node: '>= 0.10.0'}
     dependencies:
       broccoli-sri-hash: 2.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli-string-utils/1.1.0:
@@ -5324,6 +5648,7 @@ packages:
       ember-cli-babel: 6.18.0
     transitivePeerDependencies:
       - '@babel/core'
+      - supports-color
     dev: true
 
   /ember-cli-typescript/2.0.2:
@@ -5447,6 +5772,8 @@ packages:
       resolve-package-path: 2.0.0
       semver: 6.3.0
       silent-error: 1.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli-version-checker/5.1.2:
@@ -5456,6 +5783,8 @@ packages:
       resolve-package-path: 3.1.0
       semver: 7.3.5
       silent-error: 1.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-cli/3.28.4:
@@ -5555,10 +5884,62 @@ packages:
       workerpool: 6.1.5
       yam: 1.0.0
     transitivePeerDependencies:
+      - arc-templates
+      - atpl
+      - babel-core
+      - bracket-template
       - bufferutil
+      - coffee-script
       - debug
+      - dot
+      - dust
+      - dustjs-helpers
+      - dustjs-linkedin
+      - eco
+      - ect
+      - ejs
+      - haml-coffee
+      - hamlet
+      - hamljs
+      - handlebars
+      - hogan.js
+      - htmling
+      - jade
+      - jazz
+      - jqtpl
+      - just
+      - liquid-node
+      - liquor
+      - lodash
+      - marko
+      - mote
+      - nunjucks
+      - plates
+      - pug
+      - qejs
+      - ractive
+      - razor-tmpl
+      - react
+      - react-dom
+      - slm
+      - squirrelly
       - supports-color
+      - swig
+      - swig-templates
+      - teacup
+      - templayed
+      - then-jade
+      - then-pug
+      - tinyliquid
+      - toffee
+      - twig
+      - twing
+      - underscore
       - utf-8-validate
+      - vash
+      - velocityjs
+      - walrus
+      - whiskers
     dev: true
 
   /ember-compatibility-helpers/1.2.5:
@@ -5571,6 +5952,7 @@ packages:
       semver: 5.7.1
     transitivePeerDependencies:
       - '@babel/core'
+      - supports-color
     dev: true
 
   /ember-concurrency-decorators/2.0.3:
@@ -5607,6 +5989,7 @@ packages:
       ember-cli-babel: 6.18.0
     transitivePeerDependencies:
       - '@babel/core'
+      - supports-color
     dev: true
 
   /ember-destroyable-polyfill/2.0.3:
@@ -5703,6 +6086,7 @@ packages:
       regenerator-runtime: 0.9.6
     transitivePeerDependencies:
       - '@babel/core'
+      - supports-color
     dev: true
 
   /ember-maybe-in-element/2.0.3:
@@ -5801,6 +6185,7 @@ packages:
       ember-cli-htmlbars: 1.3.5
     transitivePeerDependencies:
       - '@babel/core'
+      - supports-color
     dev: true
 
   /ember-resolver/8.0.3:
@@ -5841,6 +6226,7 @@ packages:
       ember-cli-version-checker: 2.2.0
     transitivePeerDependencies:
       - '@babel/core'
+      - supports-color
     dev: true
 
   /ember-source-channel-url/3.0.0:
@@ -5924,6 +6310,8 @@ packages:
       resolve: 1.20.0
       v8-compile-cache: 2.3.0
       yargs: 16.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /ember-template-recast/5.0.3:
@@ -5942,6 +6330,8 @@ packages:
       slash: 3.0.0
       tmp: 0.2.1
       workerpool: 6.1.5
+    transitivePeerDependencies:
+      - supports-color
 
   /ember-template-recast/6.1.2:
     resolution: {integrity: sha512-he0/LRZQYyt6Mxjy0OryqCgqnIRhUoxO6sO6UMIMAyqPKJD20uYHqxrtqX1wBM96fMMVziSLHR9EVCeLdjDCYQ==}
@@ -5959,6 +6349,8 @@ packages:
       slash: 3.0.0
       tmp: 0.2.1
       workerpool: 6.1.5
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /ember-test-waiters/1.2.0:
@@ -6442,6 +6834,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
 
   /expand-tilde/2.0.2:
     resolution: {integrity: sha1-l+gBqgUt8CRU3kawK/YhZCzchQI=}
@@ -6484,6 +6878,8 @@ packages:
       type-is: 1.6.18
       utils-merge: 1.0.1
       vary: 1.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /extend-shallow/2.0.1:
@@ -6520,6 +6916,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
 
   /extract-stack/2.0.0:
     resolution: {integrity: sha512-AEo4zm+TenK7zQorGK1f9mJ8L14hnTDi2ZQPR+Mub1NX8zimka1mXpV5LpH8x9HoUmFSHZCfLHqWvp0Y4FxxzQ==}
@@ -6566,6 +6964,8 @@ packages:
       source-map: 0.4.4
       source-map-url: 0.3.0
       sourcemap-validator: 1.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /fast-sourcemap-concat/2.1.0:
@@ -6580,6 +6980,8 @@ packages:
       source-map: 0.4.4
       source-map-url: 0.3.0
       sourcemap-validator: 1.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /fastboot-transform/0.1.3:
@@ -6587,6 +6989,8 @@ packages:
     dependencies:
       broccoli-stew: 1.6.0
       convert-source-map: 1.8.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /fastq/1.12.0:
@@ -6634,6 +7038,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -6673,6 +7078,8 @@ packages:
       parseurl: 1.3.3
       statuses: 1.5.0
       unpipe: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /find-babel-config/1.2.0:
@@ -6738,6 +7145,8 @@ packages:
     dependencies:
       fs-extra: 4.0.3
       micromatch: 3.1.10
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /find-yarn-workspace-root/2.0.0:
@@ -6951,6 +7360,8 @@ packages:
       fs-extra: 8.1.0
       fs-tree-diff: 2.0.1
       walk-sync: 2.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /fs-tree-diff/0.5.9:
@@ -6960,6 +7371,8 @@ packages:
       object-assign: 4.1.1
       path-posix: 1.0.0
       symlink-or-copy: 1.3.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /fs-tree-diff/2.0.1:
@@ -6971,6 +7384,8 @@ packages:
       object-assign: 4.1.1
       path-posix: 1.0.0
       symlink-or-copy: 1.3.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /fs-updater/1.0.4:
@@ -6982,6 +7397,8 @@ packages:
       heimdalljs: 0.2.6
       heimdalljs-logger: 0.1.10
       rimraf: 2.7.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /fs-write-stream-atomic/1.0.10:
@@ -7012,6 +7429,7 @@ packages:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -7326,6 +7744,8 @@ packages:
       path-root: 0.1.1
       resolve: 1.20.0
       resolve-package-path: 1.2.7
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /hash.js/1.1.7:
@@ -7343,6 +7763,8 @@ packages:
       extract-stack: 2.0.0
       heimdalljs: 0.2.6
       heimdalljs-logger: 0.1.10
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /heimdalljs-graph/1.0.0:
@@ -7355,6 +7777,8 @@ packages:
     dependencies:
       debug: 2.6.9
       heimdalljs: 0.2.6
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /heimdalljs/0.2.6:
@@ -7946,6 +8370,7 @@ packages:
       ember-cli-node-assets: 0.2.2
     transitivePeerDependencies:
       - '@babel/core'
+      - supports-color
     dev: true
 
   /jquery/3.6.0:
@@ -8011,7 +8436,7 @@ packages:
         optional: true
     dependencies:
       abab: 2.0.5
-      acorn: 8.4.1
+      acorn: 8.8.0
       acorn-globals: 6.0.0
       cssom: 0.4.4
       cssstyle: 2.3.0
@@ -8150,6 +8575,8 @@ packages:
       debug: 2.6.9
       lodash.assign: 3.2.0
       rsvp: 3.6.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /levn/0.3.0:
@@ -8568,6 +8995,8 @@ packages:
       heimdalljs-logger: 0.1.10
       rimraf: 2.7.1
       symlink-or-copy: 1.3.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /merge-trees/2.0.0:
@@ -8575,6 +9004,8 @@ packages:
     dependencies:
       fs-updater: 1.0.4
       heimdalljs: 0.2.6
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /merge2/1.4.1:
@@ -8603,6 +9034,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
 
   /micromatch/4.0.4:
     resolution: {integrity: sha512-pRmzw/XUcwXGpD9aI9q/0XOwLNygjETJ8y0ao0wdqprrzDa4YnxLcz7fQRZr8voh8V10kGhABbNcHVk5wHgWwg==}
@@ -8717,6 +9150,8 @@ packages:
       depd: 2.0.0
       on-finished: 2.3.0
       on-headers: 1.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /mout/1.2.2:
@@ -8764,6 +9199,7 @@ packages:
 
   /nan/2.15.0:
     resolution: {integrity: sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -8782,6 +9218,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
@@ -9348,6 +9786,8 @@ packages:
       async: 2.6.3
       debug: 3.2.7
       mkdirp: 0.5.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /posix-character-classes/0.1.1:
@@ -9388,8 +9828,15 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /promise-inflight/1.0.1:
+  /promise-inflight/1.0.1_bluebird@3.7.2:
     resolution: {integrity: sha1-mEcocL8igTL8vdhoEputEsPAKeM=}
+    peerDependencies:
+      bluebird: '*'
+    peerDependenciesMeta:
+      bluebird:
+        optional: true
+    dependencies:
+      bluebird: 3.7.2
     dev: true
 
   /promise-map-series/0.2.3:
@@ -9598,6 +10045,8 @@ packages:
       graceful-fs: 4.2.8
       micromatch: 3.1.10
       readable-stream: 2.3.7
+    transitivePeerDependencies:
+      - supports-color
     dev: true
     optional: true
 
@@ -9953,6 +10402,8 @@ packages:
       micromatch: 3.1.10
       minimist: 1.2.5
       walker: 1.0.7
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /saxes/5.0.1:
@@ -10018,6 +10469,8 @@ packages:
       on-finished: 2.3.0
       range-parser: 1.2.1
       statuses: 1.5.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /serialize-javascript/4.0.0:
@@ -10034,6 +10487,8 @@ packages:
       escape-html: 1.0.3
       parseurl: 1.3.3
       send: 0.17.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /set-blocking/2.0.0:
@@ -10119,6 +10574,8 @@ packages:
     resolution: {integrity: sha512-n4iEKyNcg4v6/jpb3c0/iyH2G1nzUNl7Gpqtn/mHIJK9S/q/7MCfoO4rwVOoO59qPFIc0hVHvMbiOJ0NdtxKKw==}
     dependencies:
       debug: 2.6.9
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /simple-html-tokenizer/0.5.11:
@@ -10175,6 +10632,8 @@ packages:
       source-map: 0.5.7
       source-map-resolve: 0.5.3
       use: 3.1.1
+    transitivePeerDependencies:
+      - supports-color
 
   /socket.io-adapter/2.3.3:
     resolution: {integrity: sha512-Qd/iwn3VskrpNO60BeRyCyr8ZWw9CPZyitW4AQwmRZ8zCiyDiL+znRnWX6tDHXnWn1sJrM1+b6Mn6wEDJJ4aYQ==}
@@ -10556,6 +11015,8 @@ packages:
       mkdirp: 0.5.5
       rimraf: 2.7.1
       username-sync: 1.0.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /sync-disk-cache/2.1.0:
@@ -10633,6 +11094,7 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
     dependencies:
+      acorn: 8.8.0
       commander: 2.20.3
       source-map: 0.6.1
       source-map-support: 0.5.19
@@ -10649,7 +11111,7 @@ packages:
       charm: 1.0.2
       commander: 2.20.3
       compression: 1.7.4
-      consolidate: 0.15.1
+      consolidate: 0.15.1_mustache@3.2.1
       execa: 1.0.0
       express: 4.17.1
       fireworm: 0.7.1
@@ -10673,10 +11135,62 @@ packages:
       tap-parser: 7.0.0
       tmp: 0.0.33
     transitivePeerDependencies:
+      - arc-templates
+      - atpl
+      - babel-core
+      - bracket-template
       - bufferutil
+      - coffee-script
       - debug
+      - dot
+      - dust
+      - dustjs-helpers
+      - dustjs-linkedin
+      - eco
+      - ect
+      - ejs
+      - haml-coffee
+      - hamlet
+      - hamljs
+      - handlebars
+      - hogan.js
+      - htmling
+      - jade
+      - jazz
+      - jqtpl
+      - just
+      - liquid-node
+      - liquor
+      - lodash
+      - marko
+      - mote
+      - nunjucks
+      - plates
+      - pug
+      - qejs
+      - ractive
+      - razor-tmpl
+      - react
+      - react-dom
+      - slm
+      - squirrelly
       - supports-color
+      - swig
+      - swig-templates
+      - teacup
+      - templayed
+      - then-jade
+      - then-pug
+      - tinyliquid
+      - toffee
+      - twig
+      - twing
+      - underscore
       - utf-8-validate
+      - vash
+      - velocityjs
+      - walrus
+      - whiskers
     dev: true
 
   /text-table/0.2.0:
@@ -10729,6 +11243,8 @@ packages:
       livereload-js: 3.3.2
       object-assign: 4.1.1
       qs: 6.10.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /tmp/0.0.28:
@@ -10772,7 +11288,7 @@ packages:
     dev: true
 
   /to-fast-properties/2.0.0:
-    resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}
+    resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
     engines: {node: '>=4'}
 
   /to-object-path/0.3.0:
@@ -10832,6 +11348,8 @@ packages:
       mkdirp: 0.5.5
       quick-temp: 0.1.8
       walk-sync: 0.3.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /tree-sync/2.1.0:
@@ -10910,6 +11428,7 @@ packages:
     resolution: {integrity: sha512-JhS3hmcVaXlp/xSo3PKY5R0JqKs5M3IV+exdLHW99qKvKivPO4Z8qbej6mte17SOPqAOVMjt/XGgWacnFSzM3g==}
     engines: {node: '>=0.8.0'}
     hasBin: true
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -11161,12 +11680,17 @@ packages:
       semver: 6.3.0
       silent-error: 1.1.1
       tmp: 0.1.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /watchpack-chokidar2/2.0.1:
     resolution: {integrity: sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww==}
+    requiresBuild: true
     dependencies:
       chokidar: 2.1.8
+    transitivePeerDependencies:
+      - supports-color
     dev: true
     optional: true
 
@@ -11178,6 +11702,8 @@ packages:
     optionalDependencies:
       chokidar: 3.5.2
       watchpack-chokidar2: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /wcwidth/1.0.1:
@@ -11238,6 +11764,8 @@ packages:
       terser-webpack-plugin: 1.4.5_webpack@4.46.0
       watchpack: 1.7.5
       webpack-sources: 1.4.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /websocket-driver/0.7.4:
