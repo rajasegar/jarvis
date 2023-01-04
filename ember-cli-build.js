@@ -1,29 +1,30 @@
-'use strict';
+"use strict";
 
-const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const EmberApp = require("ember-cli/lib/broccoli/ember-app");
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     autoImport: {
-   alias: {
-        'recastBabel': 'recast/parsers/babel',
-        'recastBabylon': 'recast/parsers/babylon',
-        'recastFlow': 'recast/parsers/flow',
-        'recastTypeScript': 'recast/parsers/typescript'
+      alias: {
+        recastBabel: "recast/parsers/babel",
+        recastBabylon: "recast/parsers/babylon",
+        recastFlow: "recast/parsers/flow",
+        recastTypeScript: "recast/parsers/typescript",
       },
-      webpack: { 
-        node: { 
-          path: true,
-          fs: 'empty'
-        }
+      webpack: {
+        resolve: {
+          fallback: {
+            path: require.resolve("path-browserify"),
+            os: require.resolve("os-browserify/browser"),
+            constants: require.resolve("constants-browserify"),
+            fs: false,
+          },
+        },
       },
     },
-    codemirror: {
-      themes: ['solarized'],
-      modes: ['javascript', 'handlebars']
-    }
   });
 
+  app.import("node_modules/codemirror/lib/codemirror.css");
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //

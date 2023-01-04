@@ -1,7 +1,18 @@
-<AstMaker 
-  @mode={{mode}} 
-  @code={{sampleCode}}
-  @dest={{destCode}}
-  @nodeOp={{opCode}}
-  @parser={{parser}}>
-</AstMaker>
+<div class="split" {{split-js direction="horizontal"}}>
+  <div id="split-0" {{split-js direction="vertical"}}>
+    <div id="split-01">
+      <div id="editor" {{code-mirror}}></div>
+    </div>
+    <div id="split-02">
+      <div {{code-mirror}}></div>
+    </div>
+  </div>
+  <div id="split-1" {{split-js direction="vertical"}}>
+    <div id="split-11">
+      <div id="ast-editor" {{code-mirror}}></div>
+    </div>
+    <div id="split-12">
+      <div {{code-mirror}}></div>
+    </div>
+  </div>
+</div>

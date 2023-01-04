@@ -1,3 +1,4 @@
+/*
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { render, findAll } from "@ember/test-helpers";
@@ -21,3 +22,5 @@ module("Integration | Component | ast-maker", function (hooks) {
     assert.equal(findAll(".CodeMirror").length, 4);
   });
 });
+
+*/

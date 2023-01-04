@@ -6,19 +6,20 @@
       <button 
             type="button" 
             class="btn btn-outline-secondary btn-sm" 
-            disabled={{buttonDisabled}}
-            {{action "saveGist"}}>
-        {{buttonText}}
+            disabled={{this.buttonDisabled}}
+            {{on "click" this.saveGist}}>
+        {{this.buttonText}}
       </button>
-      <PowerSelect @selected={{codemod.language}} @options={{codemod.languages}} @onChange={{action (mut codemod.language)}} as |lang|>
+      <PowerSelect @selected={{this.codemod.language}} @options={{this.codemod.languages}} @onChange={{action (mut this.codemod.language)}} as |lang|>
         {{lang}}
       </PowerSelect>
+
       <span class="label-text">Parser:</span>
-      <PowerSelect @selected={{codemod.parser}} @options={{codemod.parsers}} @onChange={{action (mut codemod.parser)}} as |parser|>
+      <PowerSelect @selected={{this.codemod.parser}} @options={{this.codemod.parsers}} @onChange={{action (mut this.codemod.parser)}} as |parser|>
         {{parser}}
       </PowerSelect>
       <span class="label-text">OPCODE:</span>
-      <PowerSelect @selected={{codemod.opCode}} @options={{codemod.nodeOps}} @onChange={{action (mut codemod.opCode)}} as |opcode|>
+      <PowerSelect @selected={{this.codemod.opCode}} @options={{this.codemod.nodeOps}} @onChange={{action (mut this.codemod.opCode)}} as |opcode|>
         {{opcode}}
       </PowerSelect>
     </div>
@@ -26,7 +27,7 @@
       <SmartUpdateToggle />
       <DarkModeToggle/>
     </div>
-    <span class="label-text">{{codemod.parser}}: <strong>{{codemod.parserVersion}}</strong></span>
+    <span class="label-text">{{this.codemod.parser}}: <strong>{{this.codemod.parserVersion}}</strong></span>
   </header>
   <main>
     {{outlet}}
