@@ -1,30 +1,39 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { inject as service } from '@ember/service';
-import { babel, glimmer } from 'ast-node-finder';
-import recast from 'recast';
-import recastBabel from "recastBabel";
-import recastBabylon from "recastBabylon";
-import etr from "ember-template-recast";
-import jscodeshift from 'jscodeshift';
-import compileModule from 'jarvis/utils/compile-module';
-import opQuery from 'jarvis/utils/op-query';
-import smartOp from 'jarvis/utils/smart-op';
+import Component from "@glimmer/component";
+import { service } from "@ember/service";
+import { action } from "@ember/object";
+import { tracked } from "@glimmer/tracking";
 
-const { dispatchNodes } = babel;
-export default Component.extend({
-  customize: service(),
-  codemod: service(),
-  theme: computed.reads('customize.theme'),
-  allowSmartUpdate: computed.reads('customize.smartUpdate'),
+import { parse } from "@babel/parser";
+import { babel, glimmer } from "ast-node-finder";
+import * as recast from "recast";
+// import recastBabel from "recastBabel";
+// import recastBabylon from "recastBabylon";
+// import etr from "ember-template-recast";
+// import jscodeshift from "jscodeshift";
+// import compileModule from "jarvis/utils/compile-module";
+import opQuery from "jarvis/utils/op-query";
+// import smartOp from "jarvis/utils/smart-op";
 
-  showInsertOptions: computed('mode', function() {
-    return this.get('mode') === 'javascript';
-  }),
-  parse: computed("parser", function() {
+export default class AstMaker extends Component {
+  @service customize;
+  @service codemod;
 
-    let parse = recast.parse;
-    let _parser = this.get("parser");
+  parser = "babel";
+  code = "foo()";
+  mode = "javascript";
+  allowSmartUpdate = false;
+  dest = "bar()";
+  @tracked transform = "";
+
+  constructor() {
+    super(...arguments);
+    this.transform = this.getCodeMod(this.code, this.dest);
+    console.log(this.args.opCode);
+  }
+
+  get parse() {
+    let parse;
+    let _parser = this.parser;
     switch (_parser) {
       case "babylon":
         parse = recastBabylon.parse;
@@ -38,8 +47,145 @@ export default Component.extend({
         break;
     }
     return parse;
-  }),
+  }
+
+  opQuery() {
+    return opQuery(this.mode, this.args.opCode, this.dest);
+  }
+
+  getCodeMod(src, dest) {
+    // let parse = this.parse;
+    let ast = parse(src);
+    let _transformTemplate = "";
+    let transformLogic = "";
+    let _mode = this.mode;
+    if (_mode === "javascript") {
+      let _inputNodeType = ast.program.body[0].type;
+
+      let outAst = parse(dest);
+      let _outputNodeType = outAst.program.body[0].type;
+
+      const isSmartUpdate =
+        _inputNodeType === _outputNodeType && this.args.opCode === "replace";
+
+      let _allowSmartUpdate = this.allowSmartUpdate;
+
+      const { dispatchNodes } = babel;
+      transformLogic = dispatchNodes(ast).join();
+      let _opQuery =
+        isSmartUpdate && _allowSmartUpdate ? this.smartOp : this.opQuery();
+
+      // TODO: Need to change to es6 export default
+      _transformTemplate = `
+          module.exports = function transformer(file, api) {
+         const j = api.jscodeshift;
+        const root = j(file.source);
+        const body = root.get().value.program.body;
+        ${transformLogic}
+        ${_opQuery}
+        return root.toSource();
+      };`;
+    } else {
+      let _opQuery = this.opQuery;
+      transformLogic = glimmer.dispatchNodes(ast, _opQuery).join();
+
+      _transformTemplate = `
+          module.exports = function(env) {
+        let b = env.syntax.builders;
+
+        ${transformLogic}
+        
+      };`;
+    }
+
+    let _codemod = recast.prettyPrint(recast.parse(_transformTemplate), {
+      tabWidth: 2,
+    }).code;
+
+    return _codemod;
+  }
+
+  @action
+  onUpdateSource(doc) {
+    // console.log(doc);
+    this.transform = this.getCodeMod(doc, this.dest);
+  }
+
+  @action
+  onUpdateDest(doc) {
+    this.transform = this.getCodeMod(this.code, doc);
+  }
+  @action
+  onUpdateCodemod(doc) {
+    // console.log(doc);
+  }
+  /*
+  get codemod() {
+    let parse = this.parse;
+    let ast = parse(this.code);
+    let _transformTemplate = "";
+    let transformLogic = "";
+    let _mode = this.mode;
+    if (_mode === "javascript") {
+      let _inputNodeType = ast.program.body[0].type;
+
+      let outAst = parse(this.dest);
+      let _outputNodeType = outAst.program.body[0].type;
+
+      const isSmartUpdate =
+        _inputNodeType === _outputNodeType && this.get("nodeOp") === "replace";
+
+      let _allowSmartUpdate = this.allowSmartUpdate;
+
+      transformLogic = dispatchNodes(ast).join();
+      let _opQuery =
+        isSmartUpdate && _allowSmartUpdate ? this.smartOp : this.opQuery;
+
+      // TODO: Need to change to es6 export default
+      _transformTemplate = `
+          module.exports = function transformer(file, api) {
+         const j = api.jscodeshift;
+        const root = j(file.source);
+        const body = root.get().value.program.body;
+        ${transformLogic}
+        ${_opQuery}
+        return root.toSource();
+      };`;
+    } else {
+      let _opQuery = this.opQuery;
+      transformLogic = glimmer.dispatchNodes(ast, _opQuery).join();
+
+      _transformTemplate = `
+          module.exports = function(env) {
+        let b = env.syntax.builders;
+
+        ${transformLogic}
+        
+      };`;
+    }
+
+    let _codemod = recast.prettyPrint(recast.parse(_transformTemplate), {
+      tabWidth: 2,
+    }).code;
+
+    return _codemod;
+  }
+    */
+}
+
+/*
   
+const { dispatchNodes } = babel;
+export default Component.extend({
+  customize: service(),
+  codemod: service(),
+  theme: computed.reads('customize.theme'),
+  allowSmartUpdate: computed.reads('customize.smartUpdate'),
+
+  showInsertOptions: computed('mode', function() {
+    return this.get('mode') === 'javascript';
+  }),
+    
   insertOption: 'before',
   
   transform: computed( 'gistTransform','dest', 'parser', 'mode',  function() {
@@ -109,55 +255,7 @@ export default Component.extend({
     return smartOp(_input, _output);
   }),
 
-  _buildCodemod() {
-    let parse = this.get('parse');
-    let ast = parse(this.get('code'));
-   let _transformTemplate = '';
-    let transformLogic = '';
-    let _mode = this.get('mode');
-    if(_mode === 'javascript') {
-    let _inputNodeType = ast.program.body[0].type;
-
-    let outAst = parse(this.get('dest'));
-    let _outputNodeType = outAst.program.body[0].type;
-
-    const isSmartUpdate = _inputNodeType === _outputNodeType && this.get('nodeOp') === 'replace';
-
-
-    let _allowSmartUpdate = this.get('allowSmartUpdate');
- 
-      transformLogic = dispatchNodes(ast).join();
-      let _opQuery = isSmartUpdate && _allowSmartUpdate ? this.get('smartOp') : this.get('opQuery');
-
-      // TODO: Need to change to es6 export default
-      _transformTemplate = `
-          module.exports = function transformer(file, api) {
-         const j = api.jscodeshift;
-        const root = j(file.source);
-        const body = root.get().value.program.body;
-        ${transformLogic}
-        ${_opQuery}
-        return root.toSource();
-      };`;
-    } else {
-
-      let _opQuery = this.get('opQuery');
-      transformLogic = glimmer.dispatchNodes(ast, _opQuery).join();
-
-      _transformTemplate = `
-          module.exports = function(env) {
-        let b = env.syntax.builders;
-
-        ${transformLogic}
-        
-      };`;
-    }
-
-     let _codemod = recast.prettyPrint(recast.parse(_transformTemplate), { tabWidth: 2 }).code;
-    this.codemod.set('codemod', _codemod);
-    return _codemod;
-
-  },
+  
 
   didUpdateAttrs() {
     this._super(...arguments);
@@ -174,3 +272,5 @@ export default Component.extend({
 
   
 });
+
+*/

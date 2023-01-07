@@ -1,46 +1,24 @@
-<SplitViewHorizontal>
-  <SplitViewVertical>
-    <div>
-      {{ivy-codemirror 
-	value=codemod.sourceCode 
-        options=(hash 
-        lineNumbers=true 
-        mode=mode 
-        theme=theme)
-	valueUpdated=(action (mut codemod.sourceCode))
-      }}
+<div class="split" {{split-js direction="horizontal"}}>
+  <div id="split-0" {{split-js direction="vertical"}}>
+    <div id="split-01">
+      <div
+        id="editor"
+        {{code-mirror content=this.code onUpdate=this.onUpdateSource}}
+      ></div>
     </div>
-    <div>
-      {{ivy-codemirror 
-        value=codemod.destCode 
-        valueUpdated=(action (mut codemod.destCode))
-        options=(hash 
-        lineNumbers=true 
-        mode=mode 
-        theme=theme 
-        foldGutter=true)}}
+    <div id="split-02">
+      <div {{code-mirror content=this.dest onUpdate=this.onUpdateDest}}></div>
     </div>
-  </SplitViewVertical>
-  <SplitViewVertical>
-    <div>
-      {{ivy-codemirror 
-        value=transform 
-        options=(hash 
-        lineNumbers=true 
-        mode="javascript" 
-        theme=theme 
-        autoIndent=true )
-     	valueUpdated=(action (mut transform))
-      }}
+  </div>
+  <div id="split-1" {{split-js direction="vertical"}}>
+    <div id="split-11">
+      <div
+        id="ast-editor"
+        {{code-mirror content=this.transform onUpdate=this.onUpdateCodemod}}
+      ></div>
     </div>
-    <div>
-      {{ivy-codemirror 
-        value=output 
-        options=(hash 
-        lineNumbers=true 
-        mode=mode 
-        theme=theme 
-        autoIndent=true )}}
+    <div id="split-12">
+      <div {{code-mirror content="bar();"}}></div>
     </div>
-  </SplitViewVertical>
-</SplitViewHorizontal>
+  </div>
+</div>
