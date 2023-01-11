@@ -13,7 +13,7 @@
       <PowerSelect
         @selected={{this.codemod.language}}
         @options={{this.codemod.languages}}
-        @onChange={{action (mut this.codemod.language)}}
+        @onChange={{this.onChangeLang}}
         as |lang|
       >
         {{lang}}
@@ -39,7 +39,7 @@
       </PowerSelect>
     </div>
     <div id="options">
-      <SmartUpdateToggle />
+      <SmartUpdateToggle @onUpdate={{this.toggleSmartUpdate}} />
       <DarkModeToggle />
     </div>
     <span class="label-text">{{this.codemod.parser}}:

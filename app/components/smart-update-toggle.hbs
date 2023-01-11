@@ -1,5 +1,6 @@
 <p>
   <label>
-    <Input @type="checkbox" @checked={{this.codemod.smartUpdate}} /> Smart Update
+    <Input @type="checkbox" {{on "input" this.handleCheck}} />
+    Smart Update
   </label>
 </p>
