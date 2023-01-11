@@ -16,7 +16,6 @@ export default modifier(function codeMirror(
   const listenChangesExtension = StateField.define({
     create: () => null,
     update: async (value, transaction) => {
-      console.log(value);
       if (transaction.docChanged) {
         const _input = transaction.newDoc.toString();
         onUpdate(_input);
@@ -38,6 +37,6 @@ export default modifier(function codeMirror(
   });
 
   return () => {
-    // element.removeEventListener(eventName, handler);
+    editor.destroy();
   };
 });
