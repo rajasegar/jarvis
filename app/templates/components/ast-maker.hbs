@@ -1,46 +1,87 @@
-<SplitViewHorizontal>
-  <SplitViewVertical>
-    <div>
-      {{ivy-codemirror 
-	value=codemod.sourceCode 
-        options=(hash 
-        lineNumbers=true 
-        mode=mode 
-        theme=theme)
-	valueUpdated=(action (mut codemod.sourceCode))
-      }}
+<div class="ember-view">
+  <header>
+    <h1 title="Write me a Codemod">JARVIS</h1>
+    <div class="parser_wrapper">
+      <span class="label-text"><LinkTo @route="index">New</LinkTo></span>
+      <button
+        type="button"
+        class="btn btn-outline-secondary btn-sm"
+        disabled={{this.buttonDisabled}}
+      >
+        {{this.buttonText}}
+      </button>
+      <PowerSelect
+        @selected={{this.language}}
+        @options={{this.languages}}
+        @onChange={{this.onChangeLang}}
+        as |lang|
+      >
+        {{lang}}
+      </PowerSelect>
+
+      <span class="label-text">OPCODE:</span>
+      <PowerSelect
+        @selected={{this.opCode}}
+        @options={{this.codemod.nodeOps}}
+        @onChange={{this.onChangeNodeOp}}
+        as |opcode|
+      >
+        {{opcode}}
+      </PowerSelect>
     </div>
-    <div>
-      {{ivy-codemirror 
-        value=codemod.destCode 
-        valueUpdated=(action (mut codemod.destCode))
-        options=(hash 
-        lineNumbers=true 
-        mode=mode 
-        theme=theme 
-        foldGutter=true)}}
+    <div id="options">
+      <SmartUpdateToggle @onUpdate={{this.toggleSmartUpdate}} />
+      <DarkModeToggle />
     </div>
-  </SplitViewVertical>
-  <SplitViewVertical>
-    <div>
-      {{ivy-codemirror 
-        value=transform 
-        options=(hash 
-        lineNumbers=true 
-        mode="javascript" 
-        theme=theme 
-        autoIndent=true )
-     	valueUpdated=(action (mut transform))
-      }}
+    <span class="label-text">{{this.codemod.parser}}:
+      <strong>{{this.codemod.parserVersion}}</strong></span>
+  </header>
+  <main>
+    <div class="split" {{split-js direction="horizontal"}}>
+      <div id="split-0" {{split-js direction="vertical"}}>
+        <div id="split-01">
+          <div
+            id="editor"
+            {{code-mirror
+              content=this.editorSource
+              onUpdate=this.onUpdateSource
+            }}
+          ></div>
+        </div>
+        <div id="split-02">
+          <div
+            {{code-mirror content=this.editorTarget onUpdate=this.onUpdateDest}}
+          ></div>
+        </div>
+      </div>
+      <div id="split-1" {{split-js direction="vertical"}}>
+        <div id="split-11">
+          <div
+            id="ast-editor"
+            {{code-mirror content=this.transform onUpdate=this.onUpdateCodemod}}
+          ></div>
+        </div>
+        <div id="split-12">
+          <div {{code-mirror content=this.output}}></div>
+        </div>
+      </div>
     </div>
-    <div>
-      {{ivy-codemirror 
-        value=output 
-        options=(hash 
-        lineNumbers=true 
-        mode=mode 
-        theme=theme 
-        autoIndent=true )}}
-    </div>
-  </SplitViewVertical>
-</SplitViewHorizontal>
+
+  </main>
+  <footer>
+    <p>
+      Built with
+      <a href="https://emberjs.com">Ember.js: {{emberVersion}}</a>
+      |
+      <a href="https://rajasegar.github.io/ast-builder/">AST-Builder</a>
+      |
+      <a href="https://rajasegar.github.io/ast-finder/">AST-Finder</a>
+      |
+      <a href="https://astexplorer.net/">AST-Explorer</a>
+      |
+      <a href="https://github.com/rajasegar/jarvis">Github</a>
+      |
+      <a href="https://github.com/rajasegar/jarvis/issues">Report issues</a>
+    </p>
+  </footer>
+</div>

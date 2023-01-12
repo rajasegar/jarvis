@@ -1,133 +1,121 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { inject as service } from '@ember/service';
-import { babel, glimmer } from 'ast-node-finder';
-import recast from 'recast';
-import recastBabel from "recastBabel";
-import recastBabylon from "recastBabylon";
-import etr from "ember-template-recast";
-import jscodeshift from 'jscodeshift';
-import compileModule from 'jarvis/utils/compile-module';
-import opQuery from 'jarvis/utils/op-query';
-import smartOp from 'jarvis/utils/smart-op';
+import Component from "@glimmer/component";
+import { service } from "@ember/service";
+import { action } from "@ember/object";
+import { tracked } from "@glimmer/tracking";
 
-const { dispatchNodes } = babel;
-export default Component.extend({
-  customize: service(),
-  codemod: service(),
-  theme: computed.reads('customize.theme'),
-  allowSmartUpdate: computed.reads('customize.smartUpdate'),
+import { babel, glimmer } from "ast-node-finder";
+import * as recast from "recast";
+import {
+  parse as etrParse,
+  transform as etrTransform,
+} from "ember-template-recast";
+import jscodeshift from "jscodeshift";
+import compileModule from "jarvis/utils/compile-module";
+import opQuery from "jarvis/utils/op-query";
+import smartOp from "jarvis/utils/smart-op";
 
-  showInsertOptions: computed('mode', function() {
-    return this.get('mode') === 'javascript';
-  }),
-  parse: computed("parser", function() {
+export default class AstMaker extends Component {
+  @service customize;
+  @service codemod;
 
-    let parse = recast.parse;
-    let _parser = this.get("parser");
-    switch (_parser) {
-      case "babylon":
-        parse = recastBabylon.parse;
-        break;
-      case "babel":
-        parse = recastBabel.parse;
-        break;
+  // source and target for codemirror editors
+  @tracked editorSource = "foo()";
+  @tracked editorTarget = "bar()";
 
-      case "ember-template-recast":
-        parse = etr.parse;
-        break;
-    }
-    return parse;
-  }),
-  
-  insertOption: 'before',
-  
-  transform: computed( 'gistTransform','dest', 'parser', 'mode',  function() {
-    if(this.get('gistTransform')) {
-      return this.get('gistTransform');
-    }
-      else {
-    return this._buildCodemod();
-      }
-  }),
+  @tracked mode = "javascript";
+  allowSmartUpdate = false;
+  @tracked transform = "";
+  @tracked opCode = "replace";
+  @tracked language = "JavaScript";
+  @tracked output = "bar()";
 
-  inputNodeType: computed('code', function() {
-    let _ast = this.get('parse')(this.get('code'));
-    let _type = _ast.program.body[0].type;
-    return _type;
-  }),
+  // source and target for codemod computation
+  @tracked source = "foo()";
+  @tracked target = "bar()";
 
-  outputNodeType: computed('dest', function() {
-    let _ast = this.get('parse')(this.get('dest'));
-    let _type = _ast.program.body[0].type;
-    return _type;
-  }),
+  modes = {
+    JavaScript: {
+      mode: "javascript",
+      source: "foo();",
+      dest: "bar();",
+    },
+    Handlebars: {
+      mode: "handlebars",
+      source: "{{foo}}",
+      dest: "{{bar}}",
+    },
+  };
 
-  isSmartUpdate: computed.equal('inputNodeType', 'outputNodeType'),
+  get emberVersion() {
+    return ENV.pkg.devDependencies["ember-source"];
+  }
 
-  output: computed('transform', 'mode', 'parser', function() {
-    // TODO: Need to transpile the es6 export default
-    const transformModule = compileModule(this.get('transform'));
-    const transform = transformModule.__esModule ?
-      transformModule.default :
-      transformModule;
+  get nodeBuilderVersion() {
+    return ENV.pkg.dependencies["ast-node-builder"];
+  }
 
-    let _source = this.get('code');
+  get nodeFinderVersion() {
+    return ENV.pkg.dependencies["ast-node-finder"];
+  }
 
-    let _mode = this.get('mode');
-    let result = '';
-    if(_mode === 'javascript') {
-    result = transform(
-      {
-        path: 'Live.js',
-        source: _source,
-      },
-      {
-        jscodeshift: transformModule.parser ?
-        jscodeshift.withParser(transformModule.parser) :
-        jscodeshift,
-      },
-      {},
-    );
-    } else {
-      result = etr.transform(_source, transform).code;
-    }
-    return result;
-  }),
+  get buttonText() {
+    return "Save";
+  }
 
-  opQuery: computed('nodeOp', 'dest', 'mode', function() {
-    let _mode = this.get('mode');
-    let _nodeOp = this.get('nodeOp');
-    let _dest = this.get('dest');
-    return opQuery(_mode, _nodeOp, _dest);
-  }),
+  buttonDisabled = false;
 
-  smartOp: computed('code', 'dest', function() {
+  @action
+  saveGist() {
+    this.set("buttonText", "Saving...");
+    this.set("buttonDisabled", true);
+    this.codemod.saveGist().then((data) => {
+      this.set("buttonText", "Save");
+      this.set("buttonDisabled", false);
+      this.router.transitionTo("gists", data.id);
+    });
+  }
 
-    let _input = this.get('code');
-    let _output = this.get('dest');
-    return smartOp(_input, _output);
-  }),
+  @action
+  onChangeNodeOp(val) {
+    this.opCode = val;
+    this.transform = this.getCodeMod();
+    this.output = this.getOutput();
+  }
 
-  _buildCodemod() {
-    let parse = this.get('parse');
-    let ast = parse(this.get('code'));
-   let _transformTemplate = '';
-    let transformLogic = '';
-    let _mode = this.get('mode');
-    if(_mode === 'javascript') {
-    let _inputNodeType = ast.program.body[0].type;
+  constructor() {
+    super(...arguments);
+    this.transform = this.getCodeMod();
+    this.output = this.getOutput(this.code);
+  }
 
-    let outAst = parse(this.get('dest'));
-    let _outputNodeType = outAst.program.body[0].type;
+  opQuery(mode, opCode, dest) {
+    return opQuery(mode, opCode, dest);
+  }
 
-    const isSmartUpdate = _inputNodeType === _outputNodeType && this.get('nodeOp') === 'replace';
+  getCodeMod() {
+    let ast = recast.parse(this.source, {
+      parser: require("recastBabel"),
+    });
+    let _transformTemplate = "";
+    let transformLogic = "";
+    let _mode = this.mode;
+    if (_mode === "javascript") {
+      let _inputNodeType = ast.program.body[0].type;
 
+      let outAst = recast.parse(this.target, {
+        parser: require("recastBabel"),
+      });
+      let _outputNodeType = outAst.program.body[0].type;
 
-    let _allowSmartUpdate = this.get('allowSmartUpdate');
- 
+      const isSmartUpdate =
+        _inputNodeType === _outputNodeType && this.opCode === "replace";
+
+      const { dispatchNodes } = babel;
       transformLogic = dispatchNodes(ast).join();
-      let _opQuery = isSmartUpdate && _allowSmartUpdate ? this.get('smartOp') : this.get('opQuery');
+      let _opQuery =
+        isSmartUpdate && this.allowSmartUpdate
+          ? this.smartOp()
+          : this.opQuery(this.mode, this.opCode, this.target);
 
       // TODO: Need to change to es6 export default
       _transformTemplate = `
@@ -138,10 +126,11 @@ export default Component.extend({
         ${transformLogic}
         ${_opQuery}
         return root.toSource();
-      };`;
+      };
+      module.exports.parser = 'babel'`;
     } else {
-
-      let _opQuery = this.get('opQuery');
+      ast = etrParse(this.source);
+      let _opQuery = this.opQuery(this.mode, this.opCode, this.target);
       transformLogic = glimmer.dispatchNodes(ast, _opQuery).join();
 
       _transformTemplate = `
@@ -153,24 +142,86 @@ export default Component.extend({
       };`;
     }
 
-     let _codemod = recast.prettyPrint(recast.parse(_transformTemplate), { tabWidth: 2 }).code;
-    this.codemod.set('codemod', _codemod);
+    let _codemod = recast.prettyPrint(recast.parse(_transformTemplate), {
+      parser: require("recastBabel"),
+      tabWidth: 2,
+    }).code;
+
     return _codemod;
+  }
 
-  },
+  @action
+  onUpdateSource(doc) {
+    this.source = doc;
+    this.transform = this.getCodeMod();
+    this.output = this.getOutput(doc);
+  }
 
-  didUpdateAttrs() {
-    this._super(...arguments);
-    if(this.get('gistTransform')) {
-    this.set('transform', this.get('gistTransform'));
+  @action
+  onUpdateDest(doc) {
+    this.target = doc;
+    this.transform = this.getCodeMod();
+    this.output = this.getOutput(this.code);
+  }
+  @action
+  onUpdateCodemod(doc) {}
+
+  getOutput() {
+    const transformModule = compileModule(this.transform);
+    const transform = transformModule.__esModule
+      ? transformModule.default
+      : transformModule;
+
+    let _source = this.source;
+
+    let _mode = this.mode;
+    let result = "";
+    if (_mode === "javascript") {
+      result = transform(
+        {
+          path: "Live.js",
+          source: _source,
+        },
+        {
+          jscodeshift: transformModule.parser
+            ? jscodeshift.withParser(transformModule.parser)
+            : jscodeshift,
+        },
+        {}
+      );
     } else {
-    this.set('transform', this._buildCodemod());
+      result = etrTransform(_source, transform).code;
     }
-  },
+    return result;
+  }
 
-  init() {
-    this._super(...arguments);
-  },
+  smartOp() {
+    return smartOp(this.source, this.target);
+  }
 
-  
-});
+  get languages() {
+    return Object.keys(this.modes);
+  }
+
+  @action
+  toggleSmartUpdate(val) {
+    this.allowSmartUpdate = val;
+    this.transform = this.getCodeMod();
+    this.output = this.getOutput(this.code);
+  }
+
+  @action
+  onChangeLang(lang) {
+    this.language = lang;
+    this.mode = this.modes[lang].mode;
+
+    this.source = this.modes[lang].source;
+    this.target = this.modes[lang].dest;
+
+    this.editorSource = this.modes[lang].source;
+    this.editorTarget = this.modes[lang].dest;
+
+    this.transform = this.getCodeMod();
+    this.output = this.getOutput();
+  }
+}

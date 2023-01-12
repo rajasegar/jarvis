@@ -1,5 +1,5 @@
-import recastBabel from "recastBabel";
-import etr from "ember-template-recast";
+import * as recast from "recast";
+import { parse as etrParse } from "ember-template-recast";
 import { es6, glimmer as hbsBuilder } from "ast-node-builder";
 const { buildAST } = es6;
 
@@ -13,21 +13,34 @@ function opQueryJS(nodeOp, dest) {
       break;
 
     case "replace":
-      newNode = buildAST(recastBabel.parse(dest), false);
+      newNode = buildAST(
+        recast.parse(dest, {
+          parser: require("recastBabel"),
+        }),
+        false
+      );
       str = `.replaceWith(path => {
           return ${newNode};
         })`;
       break;
 
     case "insert-before":
-      newNode = buildAST(recastBabel.parse(dest));
+      newNode = buildAST(
+        recast.parse(dest, {
+          parser: require("recastBabel"),
+        })
+      );
       str = `.forEach(path => {
         path.parent.insertBefore(${newNode});
         })`;
       break;
 
     case "insert-after":
-      newNode = buildAST(recastBabel.parse(dest));
+      newNode = buildAST(
+        recast.parse(dest, {
+          parser: require("recastBabel"),
+        })
+      );
       str = `.forEach(path => {
         path.parent.insertAfter(${newNode});
         })`;
@@ -45,7 +58,7 @@ function opQueryGlimmer(nodeOp, dest) {
       break;
 
     case "replace":
-      str = `return ${hbsBuilder.buildAST(etr.parse(dest))};`;
+      str = `return ${hbsBuilder.buildAST(etrParse(dest))};`;
       break;
   }
   return str;
