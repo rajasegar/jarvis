@@ -36,6 +36,8 @@ export default modifier(function codeMirror(
     parent: element,
   });
 
+  // editor.focus();
+
   return () => {
     editor.destroy();
   };

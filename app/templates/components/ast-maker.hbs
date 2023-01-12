@@ -11,23 +11,14 @@
         {{this.buttonText}}
       </button>
       <PowerSelect
-        @selected={{this.codemod.language}}
-        @options={{this.codemod.languages}}
+        @selected={{this.language}}
+        @options={{this.languages}}
         @onChange={{this.onChangeLang}}
         as |lang|
       >
         {{lang}}
       </PowerSelect>
 
-      <span class="label-text">Parser:</span>
-      <PowerSelect
-        @selected={{this.codemod.parser}}
-        @options={{this.codemod.parsers}}
-        @onChange={{action (mut this.codemod.parser)}}
-        as |parser|
-      >
-        {{parser}}
-      </PowerSelect>
       <span class="label-text">OPCODE:</span>
       <PowerSelect
         @selected={{this.opCode}}
@@ -51,12 +42,15 @@
         <div id="split-01">
           <div
             id="editor"
-            {{code-mirror content=this.code onUpdate=this.onUpdateSource}}
+            {{code-mirror
+              content=this.editorSource
+              onUpdate=this.onUpdateSource
+            }}
           ></div>
         </div>
         <div id="split-02">
           <div
-            {{code-mirror content=this.dest onUpdate=this.onUpdateDest}}
+            {{code-mirror content=this.editorTarget onUpdate=this.onUpdateDest}}
           ></div>
         </div>
       </div>
