@@ -16,6 +16,7 @@ export default class AstMaker extends Component {
   @tracked editorSource = "foo()";
   @tracked editorTarget = "bar()";
 
+  opCodes = ["replace", "remove", "insert-before", "insert-after"];
   @tracked mode = "javascript";
   allowSmartUpdate = false;
   @tracked transform = "";
