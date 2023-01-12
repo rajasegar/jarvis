@@ -2,14 +2,6 @@
   <header>
     <h1 title="Write me a Codemod">JARVIS</h1>
     <div class="parser_wrapper">
-      <span class="label-text"><LinkTo @route="index">New</LinkTo></span>
-      <button
-        type="button"
-        class="btn btn-outline-secondary btn-sm"
-        disabled={{this.buttonDisabled}}
-      >
-        {{this.buttonText}}
-      </button>
       <PowerSelect
         @selected={{this.language}}
         @options={{this.languages}}
@@ -19,7 +11,10 @@
         {{lang}}
       </PowerSelect>
 
-      <span class="label-text">OPCODE:</span>
+      <span
+        title="AST Node operations whether to replace, remove or insert nodes"
+        class="label-text"
+      >OPCODE: &#9432;</span>
       <PowerSelect
         @selected={{this.opCode}}
         @options={{this.codemod.nodeOps}}
@@ -33,8 +28,8 @@
       <SmartUpdateToggle @onUpdate={{this.toggleSmartUpdate}} />
       <DarkModeToggle />
     </div>
-    <span class="label-text">{{this.codemod.parser}}:
-      <strong>{{this.codemod.parserVersion}}</strong></span>
+    <span class="label-text">{{this.parser.name}}:
+      <strong>{{this.parser.version}}</strong></span>
   </header>
   <main>
     <div class="split" {{split-js direction="horizontal"}}>
@@ -55,7 +50,11 @@
         </div>
       </div>
       <div id="split-1" {{split-js direction="vertical"}}>
-        <div id="split-11">
+        <div id="split-11" class="pos-relative">
+          <div class="copy-codemod">
+            <button type="button" {{on "click" this.copyCodemod}}>Copy to
+              Clipboard</button>
+          </div>
           <div
             id="ast-editor"
             {{code-mirror content=this.transform onUpdate=this.onUpdateCodemod}}

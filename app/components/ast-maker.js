@@ -35,16 +35,26 @@ export default class AstMaker extends Component {
   @tracked source = "foo()";
   @tracked target = "bar()";
 
+  @tracked parser = this.modes["JavaScript"].parser;
+
   modes = {
     JavaScript: {
       mode: "javascript",
       source: "foo();",
       dest: "bar();",
+      parser: {
+        name: "recast/babel",
+        version: "7.20.5",
+      },
     },
     Handlebars: {
       mode: "handlebars",
       source: "{{foo}}",
       dest: "{{bar}}",
+      parser: {
+        name: "ember-template-recast",
+        version: ENV.pkg.dependencies["ember-template-recast"],
+      },
     },
   };
 
@@ -204,15 +214,25 @@ export default class AstMaker extends Component {
   @action
   onChangeLang(lang) {
     this.language = lang;
-    this.mode = this.modes[lang].mode;
 
-    this.source = this.modes[lang].source;
-    this.target = this.modes[lang].dest;
+    const { source, dest, parser, mode } = this.modes[lang];
+    this.mode = mode;
 
-    this.editorSource = this.modes[lang].source;
-    this.editorTarget = this.modes[lang].dest;
+    this.source = source;
+    this.target = dest;
+
+    this.editorSource = source;
+    this.editorTarget = dest;
+
+    this.parser = parser;
 
     this.transform = this.getCodeMod();
     this.output = this.getOutput();
+  }
+
+  @action
+  copyCodemod() {
+    console.log("Copied!!");
+    navigator.clipboard.writeText(this.transform);
   }
 }
