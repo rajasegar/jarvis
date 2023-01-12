@@ -1,12 +1,12 @@
-'use strict';
-const pkg = require('../package.json');
+"use strict";
+const pkg = require("../package.json");
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   let ENV = {
-    modulePrefix: 'jarvis',
+    modulePrefix: "jarvis",
     environment,
-    rootURL: '/',
-    locationType: 'history',
+    rootURL: "/",
+    locationType: "history",
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -14,8 +14,8 @@ module.exports = function(environment) {
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
 
     APP: {
@@ -23,10 +23,10 @@ module.exports = function(environment) {
       // when it is created
     },
     pkg,
-    GITHUB_API_TOKEN: process.env.GITHUB_API_TOKEN
+    GITHUB_API_TOKEN: process.env.GITHUB_API_TOKEN,
   };
 
-  if (environment === 'development') {
+  if (environment === "development") {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -34,22 +34,22 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
-  if (environment === 'test') {
+  if (environment === "test") {
     // Testem prefers this...
-    ENV.locationType = 'none';
+    ENV.locationType = "none";
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
-    ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.rootElement = "#ember-testing";
     ENV.APP.autoboot = false;
   }
 
-  if (environment === 'production') {
+  if (environment === "production") {
     // here you can enable a production-specific feature
-    ENV.rootURL = '/jarvis/';
-    ENV.locationType = 'hash';
+    ENV.rootURL = "/jarvis/";
+    ENV.locationType = "hash";
   }
 
   return ENV;

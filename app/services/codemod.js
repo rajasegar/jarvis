@@ -62,7 +62,7 @@ export default class CodemodService extends Service {
   }
 
   readGist(gist_id) {
-    let _mode = this.get("mode");
+    let _mode = this.mode;
     let sourceFileName = _mode === "javascript" ? "source.js" : "source.hbs";
     let destFileName =
       _mode === "javascript" ? "destination.js" : "destination.hbs";
@@ -76,11 +76,11 @@ export default class CodemodService extends Service {
         // TODO: handle error if transform.js is not present
         //console.log(data.files);
         let config = JSON.parse(data.files["jarvis.json"].content);
-        this.set("parser", config.parser);
-        this.set("language", config.lang);
-        this.set("sourceCode", data.files[sourceFileName].content || "");
-        this.set("destCode", data.files[destFileName].content || "");
-        this.set("transform", data.files["transform.js"].content || "");
+        this.parser = config.parser;
+        this.language = config.lang;
+        this.sourceCode = data.files[sourceFileName].content || "";
+        this.destCode = data.files[destFileName].content || "";
+        this.transform = data.files["transform.js"].content || "";
       })
       .catch((err) => {
         console.log("Error: ", err); //eslint-disable-line
@@ -89,30 +89,30 @@ export default class CodemodService extends Service {
 
   saveGist() {
     const octokit = new Octokit({ auth: ENV.GITHUB_API_TOKEN });
-    let _mode = this.get("mode");
+    let _mode = this.mode;
     let sourceFileName = _mode === "javascript" ? "source.js" : "source.hbs";
     let destFileName =
       _mode === "javascript" ? "destination.js" : "destination.hbs";
     let files = {
       "jarvis.json": {
         content: `{
-       "lang": "${this.get("language")}",
-       "parser": "${this.get("parser")}",
+       "lang": "${this.language}",
+       "parser": "${this.parser}",
        "version": "1.0",
-       "nodeOp": "${this.get("opCode")}"
+       "nodeOp": "${this.opCode}"
       }`,
       },
       "transform.js": {
-        content: this.get("codemod"),
+        content: this.codemod,
       },
     };
 
     files[sourceFileName] = {
-      content: this.get("sourceCode"),
+      content: this.sourceCode,
     };
 
     files[destFileName] = {
-      content: this.get("destCode"),
+      content: this.destCode,
     };
 
     return octokit.gists

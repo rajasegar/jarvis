@@ -6,8 +6,8 @@ import { javascript } from "@codemirror/lang-javascript";
 
 export default modifier(function codeMirror(
   element,
-  [],
-  { readOnly, content, onUpdate }
+  [], // eslint-disable-line
+  { content, onUpdate }
 ) {
   if (!element) {
     throw new Error("CodeMirror modifier has no element");

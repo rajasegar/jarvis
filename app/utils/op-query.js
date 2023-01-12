@@ -1,3 +1,4 @@
+/* globals require */
 import * as recast from "recast";
 import { parse as etrParse } from "ember-template-recast";
 import { es6, glimmer as hbsBuilder } from "ast-node-builder";

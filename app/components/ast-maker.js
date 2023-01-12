@@ -1,8 +1,10 @@
+/* globals require */
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
 
+import ENV from "jarvis/config/environment";
 import { babel, glimmer } from "ast-node-finder";
 import * as recast from "recast";
 import {
@@ -63,17 +65,6 @@ export default class AstMaker extends Component {
   }
 
   buttonDisabled = false;
-
-  @action
-  saveGist() {
-    this.set("buttonText", "Saving...");
-    this.set("buttonDisabled", true);
-    this.codemod.saveGist().then((data) => {
-      this.set("buttonText", "Save");
-      this.set("buttonDisabled", false);
-      this.router.transitionTo("gists", data.id);
-    });
-  }
 
   @action
   onChangeNodeOp(val) {
@@ -164,7 +155,7 @@ export default class AstMaker extends Component {
     this.output = this.getOutput(this.code);
   }
   @action
-  onUpdateCodemod(doc) {}
+  onUpdateCodemod() {}
 
   getOutput() {
     const transformModule = compileModule(this.transform);
