@@ -143,7 +143,7 @@ export default class AstMaker extends Component {
       tabWidth: 2,
     }).code;
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       resolve(_codemod);
     });
   }
@@ -192,7 +192,7 @@ export default class AstMaker extends Component {
       const { transform: etrTransform } = await import("ember-template-recast");
       result = etrTransform(_source, transform).code;
     }
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       resolve(result);
     });
   }

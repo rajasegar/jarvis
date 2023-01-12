@@ -1,7 +1,7 @@
 import Service from "@ember/service";
 import PARSERS from "jarvis/constants/parsers";
 // import Octokit from "@octokit/rest";
-import ENV from "jarvis/config/environment";
+// import ENV from "jarvis/config/environment";
 import { tracked } from "@glimmer/tracking";
 
 // Sample code to test

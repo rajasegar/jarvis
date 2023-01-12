@@ -61,7 +61,7 @@ async function opQueryGlimmer(nodeOp, dest) {
       str = `return ${hbsBuilder.buildAST(parse(dest))};`;
       break;
   }
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     resolve(str);
   });
 }

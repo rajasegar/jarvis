@@ -1,8 +1,8 @@
 "use strict";
 
 const webpack = require("webpack");
-const BundleAnalyzerPlugin =
-  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin =
+//   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const EmberApp = require("ember-cli/lib/broccoli/ember-app");
 
