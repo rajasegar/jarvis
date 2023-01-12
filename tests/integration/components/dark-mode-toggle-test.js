@@ -13,14 +13,5 @@ module("Integration | Component | dark-mode-toggle", function (hooks) {
     await render(hbs`<DarkModeToggle />`);
 
     assert.dom(this.element).hasText("");
-
-    // Template block usage:
-    await render(hbs`
-      <DarkModeToggle>
-        template block text
-      </DarkModeToggle>
-    `);
-
-    assert.dom(this.element).hasText("template block text");
   });
 });

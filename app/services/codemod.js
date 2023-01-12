@@ -1,6 +1,6 @@
 import Service from "@ember/service";
 import PARSERS from "jarvis/constants/parsers";
-import Octokit from "@octokit/rest";
+// import Octokit from "@octokit/rest";
 import ENV from "jarvis/config/environment";
 import { tracked } from "@glimmer/tracking";
 
@@ -60,6 +60,8 @@ export default class CodemodService extends Service {
     let _parsers = PARSERS[_lang];
     return _parsers[this.parser].version;
   }
+
+  /*
 
   readGist(gist_id) {
     let _mode = this.mode;
@@ -128,6 +130,8 @@ export default class CodemodService extends Service {
         console.log("Error: ", err); //eslint-disable-line
       });
   }
+
+	*/
 
   constructor() {
     super(...arguments);

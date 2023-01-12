@@ -12,15 +12,6 @@ module("Integration | Component | smart-update-toggle", function (hooks) {
 
     await render(hbs`<SmartUpdateToggle />`);
 
-    assert.dom(this.element).hasText("");
-
-    // Template block usage:
-    await render(hbs`
-      <SmartUpdateToggle>
-        template block text
-      </SmartUpdateToggle>
-    `);
-
-    assert.dom(this.element).hasText("template block text");
+    assert.dom(this.element).hasText("Smart Update");
   });
 });

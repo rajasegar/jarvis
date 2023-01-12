@@ -1,25 +1,17 @@
 /* globals require */
 import Component from "@glimmer/component";
-import { service } from "@ember/service";
 import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
 
 import ENV from "jarvis/config/environment";
-import { babel, glimmer } from "ast-node-finder";
+import { babel } from "ast-node-finder";
 import * as recast from "recast";
-import {
-  parse as etrParse,
-  transform as etrTransform,
-} from "ember-template-recast";
 import jscodeshift from "jscodeshift";
 import compileModule from "jarvis/utils/compile-module";
 import opQuery from "jarvis/utils/op-query";
 import smartOp from "jarvis/utils/smart-op";
 
 export default class AstMaker extends Component {
-  @service customize;
-  @service codemod;
-
   // source and target for codemirror editors
   @tracked editorSource = "foo()";
   @tracked editorTarget = "bar()";
@@ -77,30 +69,30 @@ export default class AstMaker extends Component {
   buttonDisabled = false;
 
   @action
-  onChangeNodeOp(val) {
+  async onChangeNodeOp(val) {
     this.opCode = val;
-    this.transform = this.getCodeMod();
-    this.output = this.getOutput();
+    this.transform = await this.getCodeMod();
+    this.output = await this.getOutput();
   }
 
   constructor() {
     super(...arguments);
-    this.transform = this.getCodeMod();
-    this.output = this.getOutput(this.code);
+    (async () => {
+      this.transform = await this.getCodeMod();
+      this.output = await this.getOutput(this.code);
+    })();
   }
 
-  opQuery(mode, opCode, dest) {
-    return opQuery(mode, opCode, dest);
-  }
-
-  getCodeMod() {
-    let ast = recast.parse(this.source, {
-      parser: require("recastBabel"),
-    });
+  async getCodeMod() {
+    let ast;
     let _transformTemplate = "";
     let transformLogic = "";
     let _mode = this.mode;
     if (_mode === "javascript") {
+      ast = recast.parse(this.source, {
+        parser: require("recastBabel"),
+      });
+
       let _inputNodeType = ast.program.body[0].type;
 
       let outAst = recast.parse(this.target, {
@@ -116,7 +108,7 @@ export default class AstMaker extends Component {
       let _opQuery =
         isSmartUpdate && this.allowSmartUpdate
           ? this.smartOp()
-          : this.opQuery(this.mode, this.opCode, this.target);
+          : await opQuery(this.mode, this.opCode, this.target);
 
       // TODO: Need to change to es6 export default
       _transformTemplate = `
@@ -130,8 +122,11 @@ export default class AstMaker extends Component {
       };
       module.exports.parser = 'babel'`;
     } else {
-      ast = etrParse(this.source);
-      let _opQuery = this.opQuery(this.mode, this.opCode, this.target);
+      const { parse } = await import("ember-template-recast");
+      const { glimmer } = await import("ast-node-finder");
+
+      ast = parse(this.source);
+      let _opQuery = await opQuery(this.mode, this.opCode, this.target);
       transformLogic = glimmer.dispatchNodes(ast, _opQuery).join();
 
       _transformTemplate = `
@@ -148,26 +143,29 @@ export default class AstMaker extends Component {
       tabWidth: 2,
     }).code;
 
-    return _codemod;
+    return new Promise((resolve, reject) => {
+      resolve(_codemod);
+    });
   }
 
   @action
-  onUpdateSource(doc) {
+  async onUpdateSource(doc) {
     this.source = doc;
-    this.transform = this.getCodeMod();
-    this.output = this.getOutput(doc);
+    this.transform = await this.getCodeMod();
+    this.output = await this.getOutput(doc);
   }
 
   @action
-  onUpdateDest(doc) {
+  async onUpdateDest(doc) {
     this.target = doc;
-    this.transform = this.getCodeMod();
-    this.output = this.getOutput(this.code);
+    this.transform = await this.getCodeMod();
+    this.output = await this.getOutput(this.code);
   }
+
   @action
   onUpdateCodemod() {}
 
-  getOutput() {
+  async getOutput() {
     const transformModule = compileModule(this.transform);
     const transform = transformModule.__esModule
       ? transformModule.default
@@ -191,9 +189,12 @@ export default class AstMaker extends Component {
         {}
       );
     } else {
+      const { transform: etrTransform } = await import("ember-template-recast");
       result = etrTransform(_source, transform).code;
     }
-    return result;
+    return new Promise((resolve, reject) => {
+      resolve(result);
+    });
   }
 
   smartOp() {
@@ -205,14 +206,14 @@ export default class AstMaker extends Component {
   }
 
   @action
-  toggleSmartUpdate(val) {
+  async toggleSmartUpdate(val) {
     this.allowSmartUpdate = val;
-    this.transform = this.getCodeMod();
-    this.output = this.getOutput(this.code);
+    this.transform = await this.getCodeMod();
+    this.output = await this.getOutput(this.code);
   }
 
   @action
-  onChangeLang(lang) {
+  async onChangeLang(lang) {
     this.language = lang;
 
     const { source, dest, parser, mode } = this.modes[lang];
@@ -226,8 +227,8 @@ export default class AstMaker extends Component {
 
     this.parser = parser;
 
-    this.transform = this.getCodeMod();
-    this.output = this.getOutput();
+    this.transform = await this.getCodeMod();
+    this.output = await this.getOutput();
   }
 
   @action
