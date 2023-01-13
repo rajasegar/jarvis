@@ -10,6 +10,15 @@ import jscodeshift from "jscodeshift";
 import compileModule from "jarvis/utils/compile-module";
 import opQuery from "jarvis/utils/op-query";
 import smartOp from "jarvis/utils/smart-op";
+import { fileSave } from "browser-nativefs";
+
+import {
+  projectReadme,
+  binCli,
+  transformTest,
+  packageJson,
+  transformReadme,
+} from "jarvis/constants/project-template";
 
 export default class AstMaker extends Component {
   // source and target for codemirror editors
@@ -236,5 +245,45 @@ export default class AstMaker extends Component {
   copyCodemod() {
     console.log("Copied!!");
     navigator.clipboard.writeText(this.transform);
+  }
+
+  @action
+  downloadProject() {
+    console.log("download");
+    import("jszip").then(({ default: JSZip }) => {
+      const zip = new JSZip();
+
+      zip.file("README.md", projectReadme);
+      zip.file("transforms/my-codemod/index.js", this.transform);
+      zip.file(
+        "transforms/my-codemod/__testfixtures__/basic.input.js",
+        this.source
+      );
+      zip.file(
+        "transforms/my-codemod/__testfixtures__/basic.output.js",
+        this.target
+      );
+      zip.file("transforms/my-codemod/test.js", transformTest);
+      zip.file("transforms/my-codemod/README.md", transformReadme);
+      zip.file("bin/cli.js", binCli);
+      zip.file("package.json", packageJson);
+
+      zip.generateAsync({ type: "blob" }).then(
+        async function (blob) {
+          await fileSave(
+            new Blob([blob], { type: "application/zip" }),
+            {
+              fileName: "jarvis-codemods.zip",
+              suggestedName: "jarvis-codemods.zip",
+              description: "Codemod-cli Project zip file",
+            },
+            window.handle
+          );
+        },
+        function (err) {
+          console.error(err);
+        }
+      );
+    });
   }
 }
