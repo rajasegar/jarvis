@@ -11,6 +11,14 @@ Read the introductory blog post [here](http://hangaroundtheweb.com/posts/jarvis-
 
 ![screenshot](https://github.com/rajasegar/jarvis/blob/master/public/jarvis-annotated.jpg)
 
+## Features
+- Support various AST node operations like replace, remove, insert before and after.
+- Write concise codemods using Smart Update
+- Support for JavasScript and Handlebars
+- Copy the generated codemod to clipboard
+- Download the generated codemods as a [codemod-cli]() project and run in local
+
+
 ## Related Tools
 - [ast-builder](https://rajasegar.github.io/ast-builder/)
 - [ast-finder](https://rajasegar.github.io/ast-finder/)
