@@ -6,3 +6,5 @@
  */
 
 /*! https://mths.be/fromcodepoint v0.2.1 by @mathias */
+
+// @license © 2020 Google LLC. Licensed under the Apache License, Version 2.0.
