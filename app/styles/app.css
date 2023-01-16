@@ -1,3 +1,5 @@
+@import "./tabs.css";
+
 :root {
   --dark-mode-bg: #333;
   --dark-mode-fg: #eee;

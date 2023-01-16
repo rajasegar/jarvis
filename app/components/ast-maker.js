@@ -11,6 +11,7 @@ import compileModule from "jarvis/utils/compile-module";
 import opQuery from "jarvis/utils/op-query";
 import smartOp from "jarvis/utils/smart-op";
 import { fileSave } from "browser-nativefs";
+import { es6, glimmer as hbsBuilder } from "ast-node-builder";
 
 import {
   projectReadme,
@@ -36,6 +37,7 @@ export default class AstMaker extends Component {
   // source and target for codemod computation
   @tracked source = "foo()";
   @tracked target = "bar()";
+  @tracked builderApi = "";
 
   @tracked parser = this.modes["JavaScript"].parser;
 
@@ -90,6 +92,7 @@ export default class AstMaker extends Component {
     (async () => {
       this.transform = await this.getCodeMod();
       this.output = await this.getOutput(this.code);
+      this.builderApi = this.getBuilderApi();
     })();
   }
 
@@ -285,5 +288,23 @@ export default class AstMaker extends Component {
         }
       );
     });
+  }
+
+  @action
+  showSrcBuilderAPI(val) {
+    console.log(val);
+  }
+
+  getBuilderApi() {
+    let ast;
+    const { buildAST } = es6;
+    if (this.mode === "javascript") {
+      ast = recast.parse(this.source, {
+        parser: require("recastBabel"),
+      });
+    }
+    const builderApi =
+      this.mode === "javascript" ? buildAST(ast) : hbsBuilder.buildAST(ast);
+    return builderApi.join("\n");
   }
 }
