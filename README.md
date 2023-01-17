@@ -16,7 +16,7 @@ Read the introductory blog post [here](http://hangaroundtheweb.com/posts/jarvis-
 - Write concise codemods using Smart Update
 - Support for JavasScript and Handlebars
 - Copy the generated codemod to clipboard
-- Download the generated codemods as a [codemod-cli]() project and run in local
+- Download the generated codemods as a [codemod-cli](https://github.com/rwjblue/codemod-cli) project and run in local
 
 
 ## Related Tools
