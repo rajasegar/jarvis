@@ -1,0 +1,10 @@
+<button
+  id={{@id}}
+  type="button"
+  role="tab"
+  aria-selected="{{this.selected}}"
+  aria-controls={{this.ariaControls}}
+  {{on "click" this.handleClick}}
+>
+  <span class="focus">{{yield}}</span>
+</button>

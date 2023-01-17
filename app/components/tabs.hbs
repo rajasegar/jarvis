@@ -1,0 +1,21 @@
+<div class="tabs">
+  {{#let
+    (hash
+      selectAction=this.select
+      registerAction=this.register
+      activeName=this.activeName
+      name=this.name
+      activeData=this.activeData
+    )
+    as |api|
+  }}
+    {{yield
+      (hash
+        list=(component "tab-list" api=api ownerName=this.name)
+        header=(component "tab-button" api=api)
+        panel=(component "tab-panel" api=api)
+        api=api
+      )
+    }}
+  {{/let}}
+</div>

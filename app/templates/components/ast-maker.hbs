@@ -58,13 +58,51 @@
     <div class="split" {{split-js direction="horizontal"}}>
       <div id="split-0" {{split-js direction="vertical"}}>
         <div id="split-01">
-          <div
-            id="editor"
-            {{code-mirror
-              content=this.editorSource
-              onUpdate=this.onUpdateSource
-            }}
-          ></div>
+          <Tabs @activeName="tab-0" as |tab|>
+            <tab.list>
+              <tab.header @id="tab-0">
+                Source
+              </tab.header>
+              <tab.header @id="tab-1">
+                Builder API
+              </tab.header>
+              <tab.header @id="tab-2">
+                Finder API
+              </tab.header>
+            </tab.list>
+
+            <tab.panel @id="tab-0">
+              <div
+                id="editor"
+                {{code-mirror
+                  content=this.editorSource
+                  onUpdate=this.onUpdateSource
+                }}
+              ></div>
+
+            </tab.panel>
+            <tab.panel @id="tab-1">
+              <div
+                id="srcBuilderApi"
+                {{code-mirror
+                  content=this.builderApi
+                  onUpdate=this.onUpdateSource
+                }}
+              ></div>
+
+            </tab.panel>
+            <tab.panel @id="tab-2">
+              <h1>Finder api</h1>
+            </tab.panel>
+          </Tabs>
+
+          <div id="src-options-wrapper">
+            <label>
+              <Input @type="checkbox" {{on "input" this.showSrcBuilderAPI}} />
+              Builder API
+            </label>
+          </div>
+
         </div>
         <div id="split-02">
           <div
