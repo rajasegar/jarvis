@@ -1,0 +1,58 @@
+<div id="split-11" class="pos-relative">
+  <Tabs @activeName="tab-0" as |tab|>
+    <tab.list>
+      <tab.header @name="tab-0">
+        Codemod
+      </tab.header>
+      <tab.header @name="tab-src-ast">
+        Source AST
+      </tab.header>
+      <tab.header @name="tab-1">
+        Source Builder API
+      </tab.header>
+      <tab.header @name="tab-2">
+        Source Finder API
+      </tab.header>
+    </tab.list>
+
+    <tab.panel @name="tab-0">
+      <CopyToClipboard @content={{@transform}} />
+      <div
+        id="transform-editor"
+        {{code-mirror content=@transform onUpdate=@onUpdateCodemod mode="js"}}
+      ></div>
+
+    </tab.panel>
+
+    <tab.panel @name="tab-src-ast">
+      <div
+        id="srcAst"
+        {{code-mirror content=this.ast onUpdate=@onUpdateSource mode="json"}}
+      ></div>
+    </tab.panel>
+    <tab.panel @name="tab-1">
+      <CopyToClipboard @content={{this.builderApi}} />
+      <div
+        id="srcBuilderApi"
+        {{code-mirror
+          content=this.builderApi
+          onUpdate=@onUpdateSource
+          mode="js"
+        }}
+      ></div>
+    </tab.panel>
+    <tab.panel @name="tab-2">
+      <CopyToClipboard @content={{this.finderApi}} />
+      <div
+        id="srcFinderApi"
+        {{code-mirror
+          content=this.finderApi
+          onUpdate=@onUpdateSource
+          mode="js"
+        }}
+      ></div>
+
+    </tab.panel>
+  </Tabs>
+
+</div>

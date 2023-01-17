@@ -228,14 +228,14 @@ header {
 
 .copy-codemod {
 		position: absolute;
-		top:10px;
+		top:50px;
 		right: 10px;
 		z-index: 9999;
 }
 
 .copy-codemod button {
 		cursor: pointer;
-		padding: 0.5em;
+		padding: 0.25em;
 }
 
 .pos-relative {

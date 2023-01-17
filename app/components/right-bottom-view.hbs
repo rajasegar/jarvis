@@ -1,0 +1,53 @@
+<div id="split-12" class="pos-relative">
+  <Tabs @activeName="tab-0" as |tab|>
+    <tab.list>
+      <tab.header @name="tab-0">
+        Output
+      </tab.header>
+      <tab.header @name="tab-target-ast">
+        Target AST
+      </tab.header>
+      <tab.header @name="tab-1">
+        Target Builder API
+      </tab.header>
+      <tab.header @name="tab-2">
+        Target Finder API
+      </tab.header>
+    </tab.list>
+
+    <tab.panel @name="tab-0">
+      <div {{code-mirror content=@output mode="js"}}></div>
+    </tab.panel>
+
+    <tab.panel @name="tab-target-ast">
+      <div
+        id="targetAst"
+        {{code-mirror content=this.ast onUpdate=@onUpdateSource mode="json"}}
+      ></div>
+    </tab.panel>
+    <tab.panel @name="tab-1">
+      <CopyToClipboard @content={{this.builderApi}} />
+      <div
+        id="targetBuilderApi"
+        {{code-mirror
+          content=this.builderApi
+          onUpdate=@onUpdateSource
+          mode="js"
+        }}
+      ></div>
+    </tab.panel>
+    <tab.panel @name="tab-2">
+      <CopyToClipboard @content={{this.finderApi}} />
+      <div
+        id="targetFinderApi"
+        {{code-mirror
+          content=this.finderApi
+          onUpdate=@onUpdateSource
+          mode="js"
+        }}
+      ></div>
+
+    </tab.panel>
+  </Tabs>
+
+</div>

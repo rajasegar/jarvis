@@ -23,6 +23,7 @@
     "test:ember": "ember test"
   },
   "dependencies": {
+    "@codemirror/lang-json": "^6.0.1",
     "@codemirror/state": "^6.2.0",
     "ast-node-builder": "^4.2.0",
     "ast-node-finder": "^4.1.0",

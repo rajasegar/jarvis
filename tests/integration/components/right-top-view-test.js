@@ -3,22 +3,22 @@ import { setupRenderingTest } from "ember-qunit";
 import { render } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 
-module("Integration | Component | tab-panel", function (hooks) {
+module("Integration | Component | right-top-view", function (hooks) {
   setupRenderingTest(hooks);
 
   skip("it renders", async function (assert) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<TabPanel />`);
+    await render(hbs`<RightTopView />`);
 
     assert.dom(this.element).hasText("");
 
     // Template block usage:
     await render(hbs`
-      <TabPanel>
+      <RightTopView>
         template block text
-      </TabPanel>
+      </RightTopView>
     `);
 
     assert.dom(this.element).hasText("template block text");
