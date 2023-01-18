@@ -45,6 +45,23 @@ function opQueryJS(nodeOp, dest) {
         path.parent.insertAfter(${newNode});
         })`;
       break;
+
+    case "insert-at-top":
+      newNode = buildAST(
+        recast.parse(dest, {
+          parser: require("recastBabel"),
+        })
+      );
+      str = `body.unshift(${newNode});`;
+      break;
+    case "insert-at-bottom":
+      newNode = buildAST(
+        recast.parse(dest, {
+          parser: require("recastBabel"),
+        })
+      );
+      str = `body.push(${newNode});`;
+      break;
   }
   return str;
 }

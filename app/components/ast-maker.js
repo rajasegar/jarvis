@@ -20,22 +20,37 @@ import {
   transformReadme,
 } from "jarvis/constants/project-template";
 
+const jsSource = `
+<Navigate exact />
+`;
+const jsTarget = `
+<Navigate end />
+`;
+
 export default class AstMaker extends Component {
   // source and target for codemirror editors
-  @tracked editorSource = "foo()";
-  @tracked editorTarget = "bar()";
+  @tracked editorSource = jsSource;
+  @tracked editorTarget = jsTarget;
 
-  opCodes = ["replace", "remove", "insert-before", "insert-after"];
+  opCodes = [
+    "replace",
+    "remove",
+    "insert-before",
+    "insert-after",
+    "insert-at-top",
+    "insert-at-bottom",
+    "wrap-around",
+  ];
   @tracked mode = "javascript";
   allowSmartUpdate = false;
   @tracked transform = "";
   @tracked opCode = "replace";
   @tracked language = "JavaScript";
-  @tracked output = "bar()";
+  @tracked output = jsTarget;
 
   // source and target for codemod computation
-  @tracked source = "foo()";
-  @tracked target = "bar()";
+  @tracked source = jsSource;
+  @tracked target = jsTarget;
   @tracked builderApi = "";
   @tracked finderApi = "";
 
@@ -116,7 +131,11 @@ export default class AstMaker extends Component {
         _inputNodeType === _outputNodeType && this.opCode === "replace";
 
       const { dispatchNodes } = babel;
-      transformLogic = dispatchNodes(ast).join();
+      transformLogic = ["insert-at-top", "insert-at-bottom"].includes(
+        this.opCode
+      )
+        ? ""
+        : dispatchNodes(ast).join();
       let _opQuery =
         isSmartUpdate && this.allowSmartUpdate
           ? this.smartOp()
@@ -171,7 +190,7 @@ export default class AstMaker extends Component {
   async onUpdateDest(doc) {
     this.target = doc;
     this.transform = await this.getCodeMod();
-    this.output = await this.getOutput(this.code);
+    this.output = await this.getOutput();
   }
 
   @action
@@ -220,8 +239,12 @@ export default class AstMaker extends Component {
   @action
   async toggleSmartUpdate(val) {
     this.allowSmartUpdate = val;
-    this.transform = await this.getCodeMod();
-    this.output = await this.getOutput(this.code);
+    try {
+      this.transform = await this.getCodeMod();
+      this.output = await this.getOutput();
+    } catch (ex) {
+      console.log(ex);
+    }
   }
 
   @action
