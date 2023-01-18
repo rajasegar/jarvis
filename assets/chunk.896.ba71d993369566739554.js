@@ -1,4 +1,4 @@
-/*! For license information please see chunk.896.d43de95d45b9dcfa232d.js.LICENSE.txt */
+/*! For license information please see chunk.896.ba71d993369566739554.js.LICENSE.txt */
 (globalThis.webpackChunk_ember_auto_import_=globalThis.webpackChunk_ember_auto_import_||[]).push([[896],{4475:(e,t,r)=>{"use strict"
 var n=r(9142)
 function i(e){return i="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},i(e)}var s,a,o=r(4583).codes,c=o.ERR_AMBIGUOUS_ARGUMENT,l=o.ERR_INVALID_ARG_TYPE,u=o.ERR_INVALID_ARG_VALUE,h=o.ERR_INVALID_RETURN_VALUE,p=o.ERR_MISSING_ARGS,f=r(4541),d=r(5058).inspect,m=r(5058).types,y=m.isPromise,g=m.isRegExp,v=Object.assign?Object.assign:r(4093).assign,b=Object.is?Object.is:r(731)
@@ -364,6 +364,8 @@ return i=O(r),"Identifier"===n.type?s=`property: { name: '${n.name}' }`:console.
 break
 case"NewExpression":t=function(e){let t=""
 return t=`root.find(j.NewExpression, {\n  callee: { name: '${e.callee.name}' }\n})`,t}(e)
+break
+case"JSXElement":t=function(e){return`root.find(j.JSXElement, {\n  openingElement: { name: { name: '${e.openingElement.name.name}' } }\n})`}(e)
 break
 default:console.log("expressionQuery => ",e.type)}return t}var C=Object.freeze({__proto__:null,dispatchNodes:function(e){let t=arguments.length>1&&void 0!==arguments[1]&&arguments[1],r=""
 return r=e.program&&e.program.body.map((e=>{switch(e.type){case"ExpressionStatement":return t?k(e.expression):A(e.expression)
@@ -20235,7 +20237,7 @@ case"RestElement":s=Ue(e)
 break
 default:console.log("ES6::property => ",e.type)}return s}function Ze(e){let t=!(arguments.length>1&&void 0!==arguments[1])||arguments[1],r=e&&e.program?e.program.body:[],n=r.map((e=>{switch(e.type){case"VariableDeclaration":return t?we(e):Se(e.declarations[0])
 case"ImportDeclaration":return Ve(e)
-case"ExpressionStatement":return t?Te(e):Re(e.expression)
+case"ExpressionStatement":return t?Te(e):"JSXElement"===e.expression.type?Y(e.expression):Re(e.expression)
 case"IfStatement":return ye(e)
 case"ExportDefaultDeclaration":return Fe(e)
 case"ExportNamedDeclaration":return $e(e)
