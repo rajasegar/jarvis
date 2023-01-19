@@ -191,11 +191,16 @@ function jsxElementUpdate(source, dest) {
             break;
 
           default:
+            console.error(
+              "Smart OP::JSX::unknown diff item kind => ",
+              diff.item.kind
+            );
             break;
         }
         break;
 
       default:
+        console.error("Smart OP::JSX::unknown diff kind => ", diff.kind);
         break;
     }
   });

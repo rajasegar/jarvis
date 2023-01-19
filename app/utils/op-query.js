@@ -3,9 +3,15 @@ import * as recast from "recast";
 import { es6, glimmer as hbsBuilder } from "ast-node-builder";
 const { buildAST } = es6;
 
-function opQueryJS(nodeOp, dest) {
+function opQueryJS(nodeOp, src, dest) {
   let str = "";
 
+  const ast = recast.parse(src, {
+    parser: require("recastBabel"),
+  });
+  const nodeType = ast.program.body[0].type;
+  const parent =
+    nodeType === "ExpressionStatement" ? "path.parentPath" : "path";
   let newNode;
   switch (nodeOp) {
     case "remove":
@@ -31,7 +37,7 @@ function opQueryJS(nodeOp, dest) {
         })
       );
       str = `.forEach(path => {
-        path.parent.insertBefore(${newNode});
+        ${parent}.insertBefore(${newNode});
         })`;
       break;
 
@@ -42,7 +48,7 @@ function opQueryJS(nodeOp, dest) {
         })
       );
       str = `.forEach(path => {
-        path.parent.insertAfter(${newNode});
+        ${parent}.insertAfter(${newNode});
         })`;
       break;
 
@@ -83,11 +89,11 @@ async function opQueryGlimmer(nodeOp, dest) {
   });
 }
 
-export default async function opQuery(mode, nodeOp, dest) {
+export default async function opQuery(mode, nodeOp, src, dest) {
   let _query = "";
   switch (mode) {
     case "javascript":
-      _query = opQueryJS(nodeOp, dest);
+      _query = opQueryJS(nodeOp, src, dest);
       break;
 
     case "handlebars":

@@ -223,7 +223,8 @@ header {
 #split-11,
 #split-12 {
 		width:100%;
-		overflow-y:auto
+		overflow-y:auto;
+		max-height: 49vh;
 }
 
 .copy-codemod {

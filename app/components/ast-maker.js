@@ -21,16 +21,17 @@ import {
 } from "jarvis/constants/project-template";
 
 const jsSource = `
-<Navigate exact />
+foo()
 `;
 const jsTarget = `
-<Navigate end />
+bar()
 `;
 
 export default class AstMaker extends Component {
   // source and target for codemirror editors
   @tracked editorSource = jsSource;
   @tracked editorTarget = jsTarget;
+  @tracked editorTransform = "";
 
   opCodes = [
     "replace",
@@ -81,24 +82,11 @@ export default class AstMaker extends Component {
     return ENV.pkg.devDependencies["ember-source"];
   }
 
-  get nodeBuilderVersion() {
-    return ENV.pkg.dependencies["ast-node-builder"];
-  }
-
-  get nodeFinderVersion() {
-    return ENV.pkg.dependencies["ast-node-finder"];
-  }
-
-  get buttonText() {
-    return "Save";
-  }
-
-  buttonDisabled = false;
-
   @action
   async onChangeNodeOp(val) {
     this.opCode = val;
     this.transform = await this.getCodeMod();
+    this.editorTransform = this.transform;
     this.output = await this.getOutput();
   }
 
@@ -106,7 +94,8 @@ export default class AstMaker extends Component {
     super(...arguments);
     (async () => {
       this.transform = await this.getCodeMod();
-      this.output = await this.getOutput(this.code);
+      this.editorTransform = this.transform;
+      this.output = await this.getOutput();
     })();
   }
 
@@ -139,7 +128,7 @@ export default class AstMaker extends Component {
       let _opQuery =
         isSmartUpdate && this.allowSmartUpdate
           ? this.smartOp()
-          : await opQuery(this.mode, this.opCode, this.target);
+          : await opQuery(this.mode, this.opCode, this.source, this.target);
 
       // TODO: Need to change to es6 export default
       _transformTemplate = `
@@ -183,6 +172,7 @@ export default class AstMaker extends Component {
   async onUpdateSource(doc) {
     this.source = doc;
     this.transform = await this.getCodeMod();
+    this.editorTransform = this.transform;
     this.output = await this.getOutput(doc);
   }
 
@@ -190,11 +180,19 @@ export default class AstMaker extends Component {
   async onUpdateDest(doc) {
     this.target = doc;
     this.transform = await this.getCodeMod();
+    this.editorTransform = this.transform;
     this.output = await this.getOutput();
   }
 
   @action
-  onUpdateCodemod() {}
+  async onUpdateCodemod(doc) {
+    this.transform = doc;
+    try {
+      this.output = await this.getOutput();
+    } catch (err) {
+      this.output = err.stack;
+    }
+  }
 
   async getOutput() {
     const transformModule = compileModule(this.transform);
@@ -241,6 +239,7 @@ export default class AstMaker extends Component {
     this.allowSmartUpdate = val;
     try {
       this.transform = await this.getCodeMod();
+      this.editorTransform = this.transform;
       this.output = await this.getOutput();
     } catch (ex) {
       console.log(ex);
