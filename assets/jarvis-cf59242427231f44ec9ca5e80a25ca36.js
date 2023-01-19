@@ -214,4 +214,4 @@ default:console.log("smartOp => ",u)}var f,m
 return p}
 const o=["loc","tokens","raw","start","end","rawValue"]
 function i(e,t){return(0,r.diff)(e,t,{prefilter:function(e,t){return~o.indexOf(t)}})}function a(e){return e.map((e=>"number"==typeof e?`[${e}]`:e)).join(".").replace(".[","[")}})),define("jarvis/config/environment",[],(function(){try{var e="jarvis/config/environment",t=document.querySelector('meta[name="'+e+'"]').getAttribute("content"),r={default:JSON.parse(decodeURIComponent(t))}
-return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("jarvis/app").default.create({name:"jarvis",version:"0.0.0+044d7df5"})
+return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("jarvis/app").default.create({name:"jarvis",version:"0.0.0+d8e52caa"})
