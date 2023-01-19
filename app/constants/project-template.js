@@ -51,8 +51,7 @@ export const packageJson = `
     "lint": "eslint --cache .",
     "test": "codemod-cli test",
     "test:coverage": "codemod-cli test --coverage",
-    "update-docs": "codemod-cli update-docs",
-    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
+    "update-docs": "codemod-cli update-docs"
   },
   "bin": "./bin/cli.js",
   "keywords": [
@@ -62,12 +61,12 @@ export const packageJson = `
     "codemod-cli": "^3.2.0"
   },
   "devDependencies": {
-    "coveralls": "^3.1.0",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "jest": "^26.6.3",
+    "jscodeshift-collections": "^2.1.2",
     "prettier": "^2.8.1"
   },
   "engines": {

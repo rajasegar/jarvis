@@ -12,6 +12,8 @@ import opQuery from "jarvis/utils/op-query";
 import smartOp from "jarvis/utils/smart-op";
 import { fileSave } from "browser-nativefs";
 
+import jsc from "jscodeshift-collections";
+
 import {
   projectReadme,
   binCli,
@@ -132,8 +134,10 @@ export default class AstMaker extends Component {
 
       // TODO: Need to change to es6 export default
       _transformTemplate = `
+        // const jsc = require('jscodeshift-collections');
           module.exports = function transformer(file, api) {
          const j = api.jscodeshift;
+				// j.registerCollections(jsc);
         const root = j(file.source);
         const body = root.get().value.program.body;
         ${transformLogic}
@@ -199,6 +203,8 @@ export default class AstMaker extends Component {
     const transform = transformModule.__esModule
       ? transformModule.default
       : transformModule;
+
+    jsc.registerCollections(jscodeshift);
 
     let _source = this.source;
 
