@@ -17,6 +17,7 @@ jobs:
     - name: ESLint
       run: |
         yarn lint
+        yarn test
     - name: Build
       run: yarn build
     - name: Deploy

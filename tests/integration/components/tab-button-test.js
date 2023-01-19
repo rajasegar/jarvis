@@ -1,26 +1,32 @@
-import { module, skip } from "qunit";
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render } from "@ember/test-helpers";
+import { render, findAll } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 
 module("Integration | Component | tab-button", function (hooks) {
   setupRenderingTest(hooks);
 
-  skip("it renders", async function (assert) {
+  test("it renders", async function (assert) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<TabButton />`);
+    this.set("selectAction", () => {});
+    this.set("registerAction", () => {});
 
-    assert.dom(this.element).hasText("");
-
-    // Template block usage:
     await render(hbs`
-      <TabButton>
-        template block text
-      </TabButton>
-    `);
+{{#let
+    (hash
+      selectAction=this.selectAction
+      registerAction=this.registerAction
+      activeName='tab-2'
+      name='tab-1'
+      activeData=""
+    )
+    as |api|
+  }}
+<TabButton @api=api/>
+{{/let}}`);
 
-    assert.dom(this.element).hasText("template block text");
+    assert.strictEqual(findAll("button").length, 1);
   });
 });

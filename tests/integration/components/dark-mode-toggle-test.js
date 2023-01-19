@@ -1,4 +1,4 @@
-import { module, skip } from "qunit";
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { render } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
@@ -6,12 +6,9 @@ import { hbs } from "ember-cli-htmlbars";
 module("Integration | Component | dark-mode-toggle", function (hooks) {
   setupRenderingTest(hooks);
 
-  skip("it renders", async function (assert) {
+  test("it renders", async function (assert) {
     await render(hbs`<DarkModeToggle />`);
 
-    assert.strictEqual(
-      this.element.querySelector("p").textContent.trim(),
-      "&#9728;"
-    );
+    assert.strictEqual(this.element.querySelector("p").textContent.trim(), "☀");
   });
 });
