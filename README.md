@@ -1,7 +1,6 @@
 # jarvis
 
 ![Build and Deploy](https://github.com/rajasegar/jarvis/workflows/Build%20and%20Deploy/badge.svg)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 [JARVIS](https://rajasegar.github.io/jarvis) is a tool which will profoundly transform the way how you write codemods.
 

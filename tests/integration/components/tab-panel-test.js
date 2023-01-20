@@ -23,7 +23,7 @@ module("Integration | Component | tab-panel", function (hooks) {
     )
     as |api|
   }}
-<TabPanel @api=api/>
+<TabPanel @api={{api}}/>
 {{/let}}`);
 
     assert.strictEqual(findAll('[role="tabpanel"]').length, 1);

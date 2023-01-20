@@ -24,7 +24,7 @@ module("Integration | Component | tab-button", function (hooks) {
     )
     as |api|
   }}
-<TabButton @api=api/>
+<TabButton @api={{api}}/>
 {{/let}}`);
 
     assert.strictEqual(findAll("button").length, 1);
