@@ -4633,16 +4633,16 @@ const a=n.default.extend({resolveOther:function(e){let t=this.findModuleName(e)
 if(t){let r=this._extractDefaultExport(t,e)
 if(void 0===r)throw new Error(` Expected to find: '${e.fullName}' within '${t}' but got 'undefined'. Did you forget to 'export default' within '${t}'?`)
 return this.shouldWrapInClassFactory(r,e)&&(r=(0,o.default)(r)),r}},parseName:function(e){if(!0===e.parsedName)return e
-let t,r,o,s=e.split("@")
-if(3===s.length){if(0===s[0].length){t=`@${s[1]}`
-let e=s[2].split(":")
-r=e[0],o=e[1]}else t=`@${s[1]}`,r=s[0].slice(0,-1),o=s[2]
-"template:components"===r&&(o=`components/${o}`,r="template")}else if(2===s.length){let e=s[0].split(":")
-if(2===e.length)0===e[1].length?(r=e[0],o=`@${s[1]}`):(t=e[1],r=e[0],o=s[1])
-else{let e=s[1].split(":")
-t=s[0],r=e[0],o=e[1]}"template"===r&&0===t.lastIndexOf("components/",0)&&(o=`components/${o}`,t=t.slice(11))}else s=e.split(":"),r=s[0],o=s[1]
-let a=o,l=(0,n.get)(this,"namespace")
-return{parsedName:!0,fullName:e,prefix:t||this.prefix({type:r}),type:r,fullNameWithoutType:a,name:o,root:l,resolveMethodName:"resolve"+(0,i.classify)(r)}},pluralizedTypes:null,moduleRegistry:null,makeToString(e,t){return this.namespace.modulePrefix+"@"+t+":"},shouldWrapInClassFactory:()=>!1,init(){this._super(),this.moduleBasedResolver=!0,this._moduleRegistry||(this._moduleRegistry=new s),this._normalizeCache=Object.create(null),this.pluralizedTypes=this.pluralizedTypes||Object.create(null),this.pluralizedTypes.config||(this.pluralizedTypes.config="config"),this._deprecatedPodModulePrefix=!1},normalize(e){return this._normalizeCache[e]||(this._normalizeCache[e]=this._normalize(e))},resolve(e){let t,r=this.parseName(e),n=r.resolveMethodName
+let t,r,n,o=e.split("@")
+if(3===o.length){if(0===o[0].length){t=`@${o[1]}`
+let e=o[2].split(":")
+r=e[0],n=e[1]}else t=`@${o[1]}`,r=o[0].slice(0,-1),n=o[2]
+"template:components"===r&&(n=`components/${n}`,r="template")}else if(2===o.length){let e=o[0].split(":")
+if(2===e.length)0===e[1].length?(r=e[0],n=`@${o[1]}`):(t=e[1],r=e[0],n=o[1])
+else{let e=o[1].split(":")
+t=o[0],r=e[0],n=e[1]}"template"===r&&0===t.lastIndexOf("components/",0)&&(n=`components/${n}`,t=t.slice(11))}else o=e.split(":"),r=o[0],n=o[1]
+let s=n,a=this.namespace
+return{parsedName:!0,fullName:e,prefix:t||this.prefix({type:r}),type:r,fullNameWithoutType:s,name:n,root:a,resolveMethodName:"resolve"+(0,i.classify)(r)}},pluralizedTypes:null,moduleRegistry:null,makeToString(e,t){return this.namespace.modulePrefix+"@"+t+":"},shouldWrapInClassFactory:()=>!1,init(){this._super(),this.moduleBasedResolver=!0,this._moduleRegistry||(this._moduleRegistry=new s),this._normalizeCache=Object.create(null),this.pluralizedTypes=this.pluralizedTypes||Object.create(null),this.pluralizedTypes.config||(this.pluralizedTypes.config="config"),this._deprecatedPodModulePrefix=!1,this.moduleNameLookupPatterns=[this.podBasedModuleName,this.podBasedComponentsInSubdir,this.mainModuleName,this.defaultModuleName,this.nestedColocationComponentModuleName]},normalize(e){return this._normalizeCache[e]||(this._normalizeCache[e]=this._normalize(e))},resolve(e){let t,r=this.parseName(e),n=r.resolveMethodName
 return"function"==typeof this[n]&&(t=this[n](r)),null==t&&(t=this.resolveOther(r)),t},_normalize(e){let t=e.split(":")
 if(t.length>1){let e=t[0]
 return"component"===e||"helper"===e||"modifier"===e||"template"===e&&0===t[1].indexOf("components/")?e+":"+t[1].replace(/_/g,"-"):e+":"+(0,i.dasherize)(t[1].replace(/\./g,"/"))}return e},pluralize(e){return this.pluralizedTypes[e]||(this.pluralizedTypes[e]=e+"s")},podBasedLookupWithPrefix(e,t){let r=t.fullNameWithoutType
@@ -4653,7 +4653,7 @@ if(this._moduleRegistry.has(t))return this._extractDefaultExport(t)},resolveRout
 if(this._moduleRegistry.has(r)){let e=this._extractDefaultExport(r)
 return e}},resolveTemplate(e){let r=this.resolveOther(e)
 return null==r&&(r=t.default.TEMPLATES[e.fullNameWithoutType]),r},mainModuleName(e){if("main"===e.fullNameWithoutType)return e.prefix+"/"+e.type},defaultModuleName(e){return e.prefix+"/"+this.pluralize(e.type)+"/"+e.fullNameWithoutType},nestedColocationComponentModuleName(e){if("component"===e.type)return e.prefix+"/"+this.pluralize(e.type)+"/"+e.fullNameWithoutType+"/index"},prefix(e){let t=this.namespace.modulePrefix
-return this.namespace[e.type+"Prefix"]&&(t=this.namespace[e.type+"Prefix"]),t},moduleNameLookupPatterns:(0,n.computed)((function(){return[this.podBasedModuleName,this.podBasedComponentsInSubdir,this.mainModuleName,this.defaultModuleName,this.nestedColocationComponentModuleName]})).readOnly(),findModuleName(e,t){let r,n=this.get("moduleNameLookupPatterns")
+return this.namespace[e.type+"Prefix"]&&(t=this.namespace[e.type+"Prefix"]),t},findModuleName(e,t){let r,n=this.moduleNameLookupPatterns
 for(let i=0,o=n.length;i<o;i++){let o=n[i].call(this,e)
 if(o&&(o=this.chooseModuleName(o,e)),o&&this._moduleRegistry.has(o)&&(r=o),t||this._logLookup(r,e,o),r)return r}},chooseModuleName(e,t){let r=(0,i.underscore)(e)
 if(e!==r&&this._moduleRegistry.has(e)&&this._moduleRegistry.has(r))throw new TypeError(`Ambiguous module names: '${e}' and '${r}'`)
