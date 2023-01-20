@@ -1,0 +1,56 @@
+<header>
+  <h1 title="Write me a Codemod">JARVIS</h1>
+  <div class="parser_wrapper">
+    <select
+      aria-label="Language dropdown"
+      {{on "change" @onChangeLang}}
+      class="dropdown"
+    >
+      {{#each this.languages as |lang|}}
+        <option value={{lang}}>{{lang}}</option>
+      {{/each}}
+    </select>
+    <span
+      title="AST Node operations whether to replace, remove or insert nodes"
+      class="label-text"
+    >OPCODE: &#9432;</span>
+    <select
+      aria-label="AST Node operation dropdown"
+      {{on "change" @onChangeNodeOp}}
+      class="dropdown"
+    >
+      {{#each this.opCodes as |op|}}
+        <option value={{op}}>{{op}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div id="options">
+    <SmartUpdateToggle @onUpdate={{@toggleSmartUpdate}} />
+    {{!  <DarkModeToggle />}}
+    <span class="label-text">
+      <button
+        title="Download this transform as a codemod-cli project"
+        class="download-btn"
+        type="button"
+        {{on "click" @downloadProject}}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-down-circle-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"
+          ></path>
+        </svg>
+        <span>Download</span>
+
+      </button>
+    </span>
+  </div>
+  <span class="label-text">{{this.parser.name}}:
+    <strong>{{this.parser.version}}</strong></span>
+</header>

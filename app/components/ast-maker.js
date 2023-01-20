@@ -11,6 +11,7 @@ import compileModule from "jarvis/utils/compile-module";
 import opQuery from "jarvis/utils/op-query";
 import smartOp from "jarvis/utils/smart-op";
 import { fileSave } from "browser-nativefs";
+import modes from "jarvis/constants/modes";
 
 import jsc from "jscodeshift-collections";
 
@@ -35,15 +36,6 @@ export default class AstMaker extends Component {
   @tracked editorTarget = jsTarget;
   @tracked editorTransform = "";
 
-  opCodes = [
-    "replace",
-    "remove",
-    "insert-before",
-    "insert-after",
-    "insert-at-top",
-    "insert-at-bottom",
-    "wrap-around",
-  ];
   @tracked mode = "javascript";
   allowSmartUpdate = false;
   @tracked transform = "";
@@ -57,35 +49,15 @@ export default class AstMaker extends Component {
   @tracked builderApi = "";
   @tracked finderApi = "";
 
-  @tracked parser = this.modes["JavaScript"].parser;
-
-  modes = {
-    JavaScript: {
-      mode: "javascript",
-      source: "foo();",
-      dest: "bar();",
-      parser: {
-        name: "recast/babel",
-        version: "7.20.5",
-      },
-    },
-    Handlebars: {
-      mode: "handlebars",
-      source: "{{foo}}",
-      dest: "{{bar}}",
-      parser: {
-        name: "ember-template-recast",
-        version: ENV.pkg.dependencies["ember-template-recast"],
-      },
-    },
-  };
+  modes = modes;
 
   get emberVersion() {
     return ENV.pkg.devDependencies["ember-source"];
   }
 
   @action
-  async onChangeNodeOp(val) {
+  async onChangeNodeOp(ev) {
+    const val = ev.target.value;
     this.opCode = val;
     this.transform = await this.getCodeMod();
     this.editorTransform = this.transform;
@@ -150,7 +122,12 @@ export default class AstMaker extends Component {
       const { glimmer } = await import("ast-node-finder");
 
       ast = parse(this.source);
-      let _opQuery = await opQuery(this.mode, this.opCode, this.target);
+      let _opQuery = await opQuery(
+        this.mode,
+        this.opCode,
+        this.source,
+        this.target
+      );
       transformLogic = glimmer.dispatchNodes(ast, _opQuery).join();
 
       _transformTemplate = `
@@ -253,7 +230,8 @@ export default class AstMaker extends Component {
   }
 
   @action
-  async onChangeLang(lang) {
+  async onChangeLang(ev) {
+    const lang = ev.target.value;
     this.language = lang;
 
     const { source, dest, parser, mode } = this.modes[lang];
@@ -268,6 +246,7 @@ export default class AstMaker extends Component {
     this.parser = parser;
 
     this.transform = await this.getCodeMod();
+    this.editorTransform = this.transform;
     this.output = await this.getOutput();
   }
 

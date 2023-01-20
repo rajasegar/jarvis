@@ -261,3 +261,14 @@ header {
 .download-btn:hover {
 		background: #111;
 }
+
+.dropdown {
+	padding: 0 0.25em;
+    margin: 0 1em;
+    height: 30px;
+    line-height: 1;
+    vertical-align: middle;
+    align-self: center;
+		font-size: 1em;
+		font-weight: 400;
+}
