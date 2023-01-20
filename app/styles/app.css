@@ -125,11 +125,6 @@ footer p {
   display: flex;
 }
 
-.ember-power-select-trigger {
-  max-height: 30px;
-  margin: 10px;
-  width: auto;
-}
 
 .label-text {
   line-height: 50px;
@@ -163,18 +158,11 @@ footer p {
   color: wheat;
 }
 
-.dark-mode .ember-power-select-option[aria-current="false"] {
-  background: var(--dark-mode-bg);
-  color: var(--dark-mode-fg);
-}
 
 .dark-mode .gutter {
   background-color: var(--dark-mode-border);
 }
 
-.dark-mode .ember-power-select-trigger {
-  background: var(--dark-mode-border);
-}
 
 .dark-mode footer {
   background: var(--dark-mode-header-bg);
@@ -189,9 +177,6 @@ header {
   grid-template-columns: 150px 1fr 350px 300px;
 }
 
-.ember-power-select-trigger {
-  width: 100px;
-}
 
 .split {
 		display:flex;
@@ -263,7 +248,7 @@ header {
 }
 
 .dropdown {
-	padding: 0 0.25em;
+		padding: 0 0.25em;
     margin: 0 1em;
     height: 30px;
     line-height: 1;
@@ -271,4 +256,7 @@ header {
     align-self: center;
 		font-size: 1em;
 		font-weight: 400;
+		background: white;
+		border: 1px solid #ccc;
+		border-radius: 4px;
 }
