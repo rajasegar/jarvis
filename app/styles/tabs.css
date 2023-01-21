@@ -23,15 +23,14 @@
   overflow: visible;
   background: hsl(220deg 20% 94%);
   outline: none;
-  font-weight: bold;
 }
 
 [role="tab"][aria-selected="true"] {
   padding: 2px 2px 4px;
   margin-top: 0;
   border-width: 2px;
-  border-top-width: 6px;
-  border-top-color: rgb(36 116 214);
+  border-top-width: 4px;
+  border-top-color: #777;
   border-bottom-color: hsl(220deg 43% 99%);
   background: hsl(220deg 43% 99%);
 }
@@ -50,12 +49,11 @@
 [role="tab"]:focus span.focus,
 [role="tab"]:active span.focus {
   padding: 2px 4px;
-  border: 2px solid rgb(36 116 214);
+  border: 2px solid #777;
   border-radius: 3px;
 }
 
 [role="tabpanel"] {
-  padding: 5px;
   border: 2px solid hsl(219deg 1% 72%);
   border-radius: 0 5px 5px;
   background: hsl(220deg 43% 99%);

@@ -23,12 +23,8 @@ import {
   transformReadme,
 } from "jarvis/constants/project-template";
 
-const jsSource = `
-foo()
-`;
-const jsTarget = `
-bar()
-`;
+const jsSource = `foo()`;
+const jsTarget = `bar()`;
 
 export default class AstMaker extends Component {
   // source and target for codemirror editors
