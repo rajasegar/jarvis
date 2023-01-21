@@ -16,7 +16,13 @@
     </tab.list>
 
     <tab.panel @name="tab-0">
-      <div {{code-mirror content=@output mode="js"}}></div>
+      <div
+        {{code-mirror
+          content=@output
+          mode="js"
+          helperText="This is the result of codemod after running the transform function on the source code"
+        }}
+      ></div>
     </tab.panel>
 
     <tab.panel @name="tab-target-ast">
@@ -33,6 +39,7 @@
           content=this.builderApi
           onUpdate=@onUpdateSource
           mode="js"
+          helperText="This is JSCodeshift AST Node builder api for the target code"
         }}
       ></div>
     </tab.panel>
@@ -44,6 +51,7 @@
           content=this.finderApi
           onUpdate=@onUpdateSource
           mode="js"
+          helperText="This is JSCodeshift AST Node finder api for the target code"
         }}
       ></div>
 

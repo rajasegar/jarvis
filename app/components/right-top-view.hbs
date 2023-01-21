@@ -19,7 +19,12 @@
       <CopyToClipboard @content={{@transform}} />
       <div
         id="transform-editor"
-        {{code-mirror content=@transform onUpdate=@onUpdate mode="js"}}
+        {{code-mirror
+          content=@transform
+          onUpdate=@onUpdate
+          mode="js"
+          helperText="This is the auto-generated codemod by JARVIS"
+        }}
       ></div>
 
     </tab.panel>
@@ -38,6 +43,7 @@
           content=this.builderApi
           onUpdate=@onUpdateSource
           mode="js"
+          helperText="This is the JSCodeshift AST Node builder api for the source code"
         }}
       ></div>
     </tab.panel>
@@ -49,6 +55,7 @@
           content=this.finderApi
           onUpdate=@onUpdateSource
           mode="js"
+          helperText="This is the JSCodeshift AST Node finder api for the source code"
         }}
       ></div>
 
