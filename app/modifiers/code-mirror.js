@@ -48,21 +48,10 @@ export default modifier(function codeMirror(
     return { top: true, dom };
   }
 
-  const helpTheme = EditorView.baseTheme({
-    ".cm-help-panel": {
-      padding: "5px 10px",
-      backgroundColor: "#fffa8f",
-      fontFamily: "monospace",
-    },
-  });
-
-  const helpPanelState = StateField.define({
-    create: () => true,
-    provide: (f) => showPanel.from(f, (on) => (on ? createHelpPanel : null)),
-  });
   function helpPanel() {
-    return [helpPanelState, helpTheme];
+    return showPanel.of(createHelpPanel);
   }
+
   const listenChangesExtension = StateField.define({
     create: () => null,
     update: async (value, transaction) => {
@@ -83,6 +72,7 @@ export default modifier(function codeMirror(
   if (helperText) {
     extensions.push(helpPanel());
   }
+
   if (mode === "js") {
     extensions.push(javascript());
   }

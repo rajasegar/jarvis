@@ -271,3 +271,9 @@ header {
 		border: 1px solid #ccc;
 		border-radius: 4px;
 }
+
+.cm-help-panel {
+		padding: 5px 10px;
+		background-color: #fffa8f;
+		font-family: monospace;
+}
