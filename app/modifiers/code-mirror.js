@@ -5,7 +5,6 @@ import { StateField, EditorState } from "@codemirror/state";
 import { javascript } from "@codemirror/lang-javascript";
 import { json } from "@codemirror/lang-json";
 import { autocompletion } from "@codemirror/autocomplete";
-import { showPanel } from "@codemirror/view";
 
 function myCompletions(context) {
   let word = context.matchBefore(/\w*/);
@@ -35,21 +34,10 @@ function myCompletions(context) {
 export default modifier(function codeMirror(
   element,
   [], // eslint-disable-line
-  { content, onUpdate, mode, helperText }
+  { content, onUpdate, mode }
 ) {
   if (!element) {
     throw new Error("CodeMirror modifier has no element");
-  }
-
-  function createHelpPanel() {
-    let dom = document.createElement("div");
-    dom.textContent = helperText;
-    dom.className = "cm-help-panel";
-    return { top: true, dom };
-  }
-
-  function helpPanel() {
-    return showPanel.of(createHelpPanel);
   }
 
   const listenChangesExtension = StateField.define({
@@ -68,10 +56,6 @@ export default modifier(function codeMirror(
     listenChangesExtension,
     autocompletion({ override: [myCompletions] }),
   ];
-
-  if (helperText) {
-    extensions.push(helpPanel());
-  }
 
   if (mode === "js") {
     extensions.push(javascript());

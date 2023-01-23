@@ -17,14 +17,10 @@
 
     <tab.panel @name="tab-0">
       <CopyToClipboard @content={{@transform}} />
+      <HelpPanel>This is the auto-generated codemod by JARVIS</HelpPanel>
       <div
         id="transform-editor"
-        {{code-mirror
-          content=@transform
-          onUpdate=@onUpdate
-          mode="js"
-          helperText="This is the auto-generated codemod by JARVIS"
-        }}
+        {{code-mirror content=@transform onUpdate=@onUpdate mode="js"}}
       ></div>
 
     </tab.panel>

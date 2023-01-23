@@ -1,9 +1,7 @@
 import Component from "@glimmer/component";
 import modes from "jarvis/constants/modes";
-import { tracked } from "@glimmer/tracking";
 
 export default class HeaderComponent extends Component {
-  @tracked parser = this.modes["JavaScript"].parser;
   opCodes = [
     "replace",
     "remove",
@@ -18,5 +16,9 @@ export default class HeaderComponent extends Component {
 
   get languages() {
     return Object.keys(this.modes);
+  }
+
+  get parser() {
+    return this.modes[this.args.lang].parser;
   }
 }

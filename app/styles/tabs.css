@@ -30,7 +30,7 @@
   margin-top: 0;
   border-width: 2px;
   border-top-width: 4px;
-  border-top-color: #777;
+  border-top-color: #333;
   border-bottom-color: hsl(220deg 43% 99%);
   background: hsl(220deg 43% 99%);
 }

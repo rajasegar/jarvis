@@ -275,5 +275,19 @@ header {
 .cm-help-panel {
 		padding: 5px 10px;
 		background-color: #fffa8f;
+		display: flex;
+		justify-content: space-between;
+}
+
+.monospace {
 		font-family: monospace;
+}
+
+.close-btn {
+		font-weight: bold;
+		cursor: pointer;
+		background: transparent;
+		border: none;
+		padding: 0;
+		margin: 0;
 }

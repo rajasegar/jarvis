@@ -1,0 +1,14 @@
+{{#if this.showHelp}}
+  <div class="cm-help-panel">
+    <div class="monospace">
+      {{yield}}
+    </div>
+    <div><button
+        type="button"
+        aria-label="Hide this panel"
+        {{on "click" this.closeHelp}}
+        class="close-btn"
+        title="Hide this panel"
+      >&times;</button></div>
+  </div>
+{{/if}}
