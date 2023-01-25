@@ -69,7 +69,7 @@
     "ember-source": "~4.10.0",
     "ember-template-lint": "^5.0.0",
     "ember-toggle": "^9.0.3",
-    "eslint": "^7.32.0",
+    "eslint": "^8.0.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-ember": "^11.0.0",
     "eslint-plugin-node": "^11.1.0",
