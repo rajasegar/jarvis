@@ -1,6 +1,7 @@
 # jarvis
 
 ![Build and Deploy](https://github.com/rajasegar/jarvis/workflows/Build%20and%20Deploy/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/rajasegar/jarvis/badge.svg?branch=master)](https://coveralls.io/github/rajasegar/jarvis?branch=master)
 
 [JARVIS](https://rajasegar.github.io/jarvis) is a tool which will profoundly transform the way how you write codemods.
 

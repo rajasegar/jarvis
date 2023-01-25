@@ -20,7 +20,7 @@
     "lint:js:fix": "eslint . --fix",
     "start": "ember serve",
     "test": "npm-run-all lint test:*",
-    "test:ember": "ember test"
+    "test:ember": "COVERAGE=true ember test && ember coverage-merge && rm -rf coverage_* coverage/coverage-summary.json"
   },
   "dependencies": {
     "@codemirror/autocomplete": "^6.4.0",
@@ -54,6 +54,7 @@
     "ember-cli": "~4.9.0",
     "ember-cli-app-version": "^5.0.0",
     "ember-cli-babel": "^7.26.11",
+    "ember-cli-code-coverage": "^2.0.0",
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-dotenv": "^3.1.0",
     "ember-cli-htmlbars": "^6.0.1",
