@@ -199,7 +199,6 @@ const{buildAST:n}=r.es6})),define("jarvis/utils/parse-touch-data",["exports","em
 switch(c){case"VariableDeclaration":f=u.declarations[0],m=d.declarations[0],p=`.forEach(path => {\n  ${(0,r.diff)(f,m,{prefilter:function(e,t){return~i.indexOf(t)}}).map((e=>`${a(["path","value",...e.path])} = '${e.rhs}';`)).join("\n")}\n  })`
 break
 case"ExpressionStatement":p="JSXElement"===u.expression.type?function(e,t){const r=o(e,t)
-console.log(r)
 let i=[]
 return r.forEach((e=>{let t=""
 switch(e.kind){case"E":t=`${a(["path","value",...e.path])} = '${e.rhs}';`,i.push(t)
@@ -227,4 +226,4 @@ default:console.log("smartOp => ",c)}var f,m
 return p}
 const i=["loc","tokens","raw","start","end","rawValue"]
 function o(e,t){return(0,r.diff)(e,t,{prefilter:function(e,t){return~i.indexOf(t)}})}function a(e){return e.map((e=>"number"==typeof e?`[${e}]`:e)).join(".").replace(".[","[")}})),define("jarvis/config/environment",[],(function(){try{var e="jarvis/config/environment",t=document.querySelector('meta[name="'+e+'"]').getAttribute("content"),r={default:JSON.parse(decodeURIComponent(t))}
-return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("jarvis/app").default.create({name:"jarvis",version:"0.0.0+a17ec196"})
+return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("jarvis/app").default.create({name:"jarvis",version:"0.0.0+f755a42e"})
