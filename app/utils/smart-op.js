@@ -153,7 +153,6 @@ export default function smartOp(input, output) {
 function jsxElementUpdate(source, dest) {
   const differences = getDiff(source, dest);
 
-  console.log(differences);
   let updates = [];
 
   differences.forEach((diff) => {

@@ -1,6 +1,6 @@
 import { module, test } from "qunit";
 import { setupRenderingTest } from "jarvis/tests/helpers";
-import { render } from "@ember/test-helpers";
+import { render, findAll, click } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 
 module("Integration | Component | help-panel", function (hooks) {
@@ -18,5 +18,9 @@ module("Integration | Component | help-panel", function (hooks) {
     `);
 
     assert.dom(this.element).hasText("template block text ×");
+
+    await click("button");
+
+    assert.strictEqual(findAll(".cm-help-panel").length, 0);
   });
 });

@@ -17,6 +17,7 @@ module.exports = {
         "--mute-audio",
         "--remote-debugging-port=0",
         "--window-size=1440,900",
+        "--clipboard-read",
       ].filter(Boolean),
     },
   },
