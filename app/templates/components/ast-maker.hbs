@@ -15,7 +15,7 @@
         </HelpPanel>
 
         <div
-          id="editor"
+          id="source-editor"
           {{code-mirror
             content=this.editorSource
             onUpdate=this.onUpdateSource
@@ -29,6 +29,7 @@
           This is the target code AFTER modification
         </HelpPanel>
         <div
+          id="target-editor"
           {{code-mirror
             content=this.editorTarget
             onUpdate=this.onUpdateDest

@@ -285,9 +285,4 @@ export default class AstMaker extends Component {
       );
     });
   }
-
-  @action
-  showSrcBuilderAPI(val) {
-    console.log(val);
-  }
 }

@@ -3,6 +3,7 @@
   <div class="parser_wrapper">
     <span class="label-text">Language:</span>
     <select
+      data-test="lst-lang"
       aria-label="Language dropdown"
       {{on "change" @onChangeLang}}
       class="dropdown"
@@ -16,6 +17,7 @@
       class="label-text"
     >OPCODE: &#9432;</span>
     <select
+      data-test="lst-nodeop"
       aria-label="AST Node operation dropdown"
       {{on "change" @onChangeNodeOp}}
       class="dropdown"
