@@ -51,7 +51,7 @@
     "codemirror": "^6.0.1",
     "deep-diff": "^1.0.2",
     "ember-auto-import": "^2.4.0",
-    "ember-cli": "~4.10.0",
+    "ember-cli": "~4.12.0",
     "ember-cli-app-version": "^5.0.0",
     "ember-cli-babel": "^7.26.11",
     "ember-cli-code-coverage": "^2.0.0",
