@@ -20,7 +20,7 @@ import {
   binCli,
   transformTest,
   packageJson,
-  transformReadme
+  transformReadme,
 } from 'jarvis/constants/project-template'
 
 const jsSource = `foo()`
@@ -76,13 +76,13 @@ export default class AstMaker extends Component {
     let _mode = this.mode
     if (_mode === 'javascript') {
       ast = recast.parse(this.source, {
-        parser: require('recastBabel')
+        parser: require('recastBabel'),
       })
 
       let _inputNodeType = ast.program.body[0].type
 
       let outAst = recast.parse(this.target, {
-        parser: require('recastBabel')
+        parser: require('recastBabel'),
       })
       let _outputNodeType = outAst.program.body[0].type
 
@@ -137,7 +137,7 @@ export default class AstMaker extends Component {
 
     let _codemod = recast.prettyPrint(recast.parse(_transformTemplate), {
       parser: require('recastBabel'),
-      tabWidth: 2
+      tabWidth: 2,
     }).code
 
     return new Promise((resolve) => {
@@ -187,12 +187,12 @@ export default class AstMaker extends Component {
       result = transform(
         {
           path: 'Live.js',
-          source: _source
+          source: _source,
         },
         {
           jscodeshift: transformModule.parser
             ? jscodeshift.withParser(transformModule.parser)
-            : jscodeshift
+            : jscodeshift,
         },
         {}
       )
@@ -281,7 +281,7 @@ export default class AstMaker extends Component {
               {
                 fileName: `${projectName}.zip`,
                 suggestedName: `${projectName}.zip`,
-                description: 'Codemod-cli Project zip file'
+                description: 'Codemod-cli Project zip file',
               },
               window.handle
             )
