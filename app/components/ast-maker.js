@@ -1,27 +1,27 @@
 /* globals require */
-import Component from "@glimmer/component";
-import { action } from "@ember/object";
-import { tracked } from "@glimmer/tracking";
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
-import ENV from "jarvis/config/environment";
-import { babel } from "ast-node-finder";
-import * as recast from "recast";
-import jscodeshift from "jscodeshift";
-import compileModule from "jarvis/utils/compile-module";
-import opQuery from "jarvis/utils/op-query";
-import smartOp from "jarvis/utils/smart-op";
-import { fileSave } from "browser-nativefs";
-import modes from "jarvis/constants/modes";
+import ENV from 'jarvis/config/environment';
+import { babel } from 'ast-node-finder';
+import * as recast from 'recast';
+import jscodeshift from 'jscodeshift';
+import compileModule from 'jarvis/utils/compile-module';
+import opQuery from 'jarvis/utils/op-query';
+import smartOp from 'jarvis/utils/smart-op';
+import { fileSave } from 'browser-nativefs';
+import modes from 'jarvis/constants/modes';
 
-import jsc from "jscodeshift-collections";
+import jsc from 'jscodeshift-collections';
 
 import {
   projectReadme,
   binCli,
   transformTest,
   packageJson,
-  transformReadme,
-} from "jarvis/constants/project-template";
+  transformReadme
+} from 'jarvis/constants/project-template';
 
 const jsSource = `foo()`;
 const jsTarget = `bar()`;
@@ -30,25 +30,25 @@ export default class AstMaker extends Component {
   // source and target for codemirror editors
   @tracked editorSource = jsSource;
   @tracked editorTarget = jsTarget;
-  @tracked editorTransform = "";
+  @tracked editorTransform = '';
 
-  @tracked mode = "javascript";
+  @tracked mode = 'javascript';
   allowSmartUpdate = false;
-  @tracked transform = "";
-  @tracked opCode = "replace";
-  @tracked language = "JavaScript";
+  @tracked transform = '';
+  @tracked opCode = 'replace';
+  @tracked language = 'JavaScript';
   @tracked output = jsTarget;
 
   // source and target for codemod computation
   @tracked source = jsSource;
   @tracked target = jsTarget;
-  @tracked builderApi = "";
-  @tracked finderApi = "";
+  @tracked builderApi = '';
+  @tracked finderApi = '';
 
   modes = modes;
 
   get emberVersion() {
-    return ENV.pkg.devDependencies["ember-source"];
+    return ENV.pkg.devDependencies['ember-source'];
   }
 
   @action
@@ -71,29 +71,29 @@ export default class AstMaker extends Component {
 
   async getCodeMod() {
     let ast;
-    let _transformTemplate = "";
-    let transformLogic = "";
+    let _transformTemplate = '';
+    let transformLogic = '';
     let _mode = this.mode;
-    if (_mode === "javascript") {
+    if (_mode === 'javascript') {
       ast = recast.parse(this.source, {
-        parser: require("recastBabel"),
+        parser: require('recastBabel')
       });
 
       let _inputNodeType = ast.program.body[0].type;
 
       let outAst = recast.parse(this.target, {
-        parser: require("recastBabel"),
+        parser: require('recastBabel')
       });
       let _outputNodeType = outAst.program.body[0].type;
 
       const isSmartUpdate =
-        _inputNodeType === _outputNodeType && this.opCode === "replace";
+        _inputNodeType === _outputNodeType && this.opCode === 'replace';
 
       const { dispatchNodes } = babel;
-      transformLogic = ["insert-at-top", "insert-at-bottom"].includes(
+      transformLogic = ['insert-at-top', 'insert-at-bottom'].includes(
         this.opCode
       )
-        ? ""
+        ? ''
         : dispatchNodes(ast).join();
       let _opQuery =
         isSmartUpdate && this.allowSmartUpdate
@@ -114,8 +114,8 @@ export default class AstMaker extends Component {
       };
       module.exports.parser = 'babel'`;
     } else {
-      const { parse } = await import("ember-template-recast");
-      const { glimmer } = await import("ast-node-finder");
+      const { parse } = await import('ember-template-recast');
+      const { glimmer } = await import('ast-node-finder');
 
       ast = parse(this.source);
       let _opQuery = await opQuery(
@@ -136,8 +136,8 @@ export default class AstMaker extends Component {
     }
 
     let _codemod = recast.prettyPrint(recast.parse(_transformTemplate), {
-      parser: require("recastBabel"),
-      tabWidth: 2,
+      parser: require('recastBabel'),
+      tabWidth: 2
     }).code;
 
     return new Promise((resolve) => {
@@ -182,22 +182,22 @@ export default class AstMaker extends Component {
     let _source = this.source;
 
     let _mode = this.mode;
-    let result = "";
-    if (_mode === "javascript") {
+    let result = '';
+    if (_mode === 'javascript') {
       result = transform(
         {
-          path: "Live.js",
-          source: _source,
+          path: 'Live.js',
+          source: _source
         },
         {
           jscodeshift: transformModule.parser
             ? jscodeshift.withParser(transformModule.parser)
-            : jscodeshift,
+            : jscodeshift
         },
         {}
       );
     } else {
-      const { transform: etrTransform } = await import("ember-template-recast");
+      const { transform: etrTransform } = await import('ember-template-recast');
       result = etrTransform(_source, transform).code;
     }
     return new Promise((resolve) => {
@@ -248,33 +248,40 @@ export default class AstMaker extends Component {
 
   @action
   downloadProject() {
-    console.log("download");
-    import("jszip").then(({ default: JSZip }) => {
+    console.log('download');
+    import('jszip').then(({ default: JSZip }) => {
       const zip = new JSZip();
 
-      zip.file("README.md", projectReadme);
-      zip.file("transforms/my-codemod/index.js", this.transform);
+      const projectName = prompt('Enter name for your codemod project: ');
+
+      zip.file('README.md', projectReadme(projectName));
+      zip.file('transforms/my-codemod/index.js', this.transform);
       zip.file(
-        "transforms/my-codemod/__testfixtures__/basic.input.js",
+        'transforms/my-codemod/__testfixtures__/basic.input.js',
         this.source
       );
       zip.file(
-        "transforms/my-codemod/__testfixtures__/basic.output.js",
+        'transforms/my-codemod/__testfixtures__/basic.output.js',
         this.target
       );
-      zip.file("transforms/my-codemod/test.js", transformTest);
-      zip.file("transforms/my-codemod/README.md", transformReadme);
-      zip.file("bin/cli.js", binCli);
-      zip.file("package.json", packageJson);
+      zip.file('transforms/my-codemod/test.js', transformTest);
+      zip.file('transforms/my-codemod/README.md', transformReadme);
+      zip.file('bin/cli.js', binCli);
+      zip.file('package.json', packageJson(projectName));
+      zip.file('.gitignore', 'node_modules');
+      zip.file(
+        'LICENSE',
+        'The MIT License\n Copyright 2023 Rajasegar Chandran'
+      );
 
-      zip.generateAsync({ type: "blob" }).then(
+      zip.generateAsync({ type: 'blob' }).then(
         async function (blob) {
           await fileSave(
-            new Blob([blob], { type: "application/zip" }),
+            new Blob([blob], { type: 'application/zip' }),
             {
-              fileName: "jarvis-codemods.zip",
-              suggestedName: "jarvis-codemods.zip",
-              description: "Codemod-cli Project zip file",
+              fileName: `${projectName}.zip`,
+              suggestedName: `${projectName}.zip`,
+              description: 'Codemod-cli Project zip file'
             },
             window.handle
           );

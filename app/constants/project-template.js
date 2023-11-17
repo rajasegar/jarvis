@@ -1,5 +1,5 @@
-export const projectReadme = `
-# jarvis-codemods
+export const projectReadme = (name) => `
+# ${name}
 
 A collection of codemods for generated using JARVIS
 
@@ -8,12 +8,12 @@ A collection of codemods for generated using JARVIS
 To run a specific codemod from this project, you would run the following:
 
 \`\`\`
-npx jarvis-codemods <TRANSFORM NAME> path/of/files/ or/some**/*glob.js
+npx ${name} <TRANSFORM NAME> path/of/files/ or/some**/*glob.js
 
 # or
 
-yarn global add jarvis-codemods
-jarvis-codemods <TRANSFORM NAME> path/of/files/ or/some**/*glob.js
+yarn global add ${name}
+${name} <TRANSFORM NAME> path/of/files/ or/some**/*glob.js
 \`\`\`
 
 ## Local Usage
@@ -43,9 +43,9 @@ node ./bin/cli.js <TRANSFORM NAME> path/of/files/ or/some**/*glob.js
 * \`yarn update-docs\`
 `;
 
-export const packageJson = `
+export const packageJson = (name) => `
 {
-  "name": "jarvis-codemods",
+  "name": "${name}",
   "version": "0.1.0",
   "scripts": {
     "lint": "eslint --cache .",
@@ -55,10 +55,18 @@ export const packageJson = `
   },
   "bin": "./bin/cli.js",
   "keywords": [
+    "codemod",
+    "codemods",
+    "${name}",
     "codemod-cli"
   ],
   "dependencies": {
     "codemod-cli": "^3.2.0"
+  },
+  "author": "<Author Name>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<github-user>/${name}"
   },
   "devDependencies": {
     "eslint": "^8.31.0",
