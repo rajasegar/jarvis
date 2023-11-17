@@ -11,20 +11,43 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     steps:
     - uses: actions/checkout@v3
-    - uses: rwjblue/setup-volta@v4
-    - name: Install
-      run: yarn install
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+        with:
+        node-version: 16
+
+    - uses: pnpm/action-setup@v2
+      name: Install pnpm
+        with:
+            version: 8
+            run_install: false
+
+    - name: Get pnpm store directory
+      shell: bash
+        run: |
+        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - uses: actions/cache@v3
+      name: Setup pnpm cache
+      with:
+        path: ${{ env.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+        ${{ runner.os }}-pnpm-store-
+
+    - name: Install dependencies
+      run: pnpm install
     - name: ESLint
       run: |
-        yarn lint
-        yarn test
+        pnpm run lint
+        pnpm run test
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build
-      run: yarn build
+      run: pnpm run build
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:

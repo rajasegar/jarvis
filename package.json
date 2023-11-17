@@ -88,5 +88,10 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "pnpm": {
+    "overrides": {
+      "aria-query": "5.1.3"
+    }
   }
 }

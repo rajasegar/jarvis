@@ -41,7 +41,7 @@ node ./bin/cli.js <TRANSFORM NAME> path/of/files/ or/some**/*glob.js
 ### Update Documentation
 
 * \`yarn update-docs\`
-`;
+`
 
 export const packageJson = (name) => `
 {
@@ -85,7 +85,7 @@ export const packageJson = (name) => `
   }
 }
 
-`;
+`
 
 export const binCli = `
 #!/usr/bin/env node
@@ -97,7 +97,7 @@ require('codemod-cli').runTransform(
   process.argv.slice(3) /* paths or globs */
 );
 
-`;
+`
 
 export const transformTest = `
 'use strict';
@@ -109,7 +109,7 @@ runTransformTest({
   path: require.resolve('./index.js'),
   fixtureDir: \`$\{__dirname}/__testfixtures__/\`,
 });
-`;
+`
 
 export const transformReadme = `
 # my-codemod
@@ -151,4 +151,4 @@ node ./bin/cli.js my-codemod path/of/files/ or/some**/*glob.js
 
 \`\`\`
 <!--FIXTURES_CONTENT_END-->
-`;
+`

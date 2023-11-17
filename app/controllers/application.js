@@ -1,4 +1,4 @@
-import Controller from "@ember/controller";
+import Controller from '@ember/controller'
 // import ENV from "jarvis/config/environment";
 // import { service } from "@ember/service";
 // import { action } from "@ember/object";

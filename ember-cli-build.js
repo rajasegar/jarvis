@@ -1,22 +1,22 @@
-"use strict";
+'use strict'
 
-const webpack = require("webpack");
+const webpack = require('webpack')
 // const BundleAnalyzerPlugin =
 //   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-const EmberApp = require("ember-cli/lib/broccoli/ember-app");
+const EmberApp = require('ember-cli/lib/broccoli/ember-app')
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     babel: {
       plugins: [
-        require.resolve("ember-auto-import/babel-plugin"),
-        ...require("ember-cli-code-coverage").buildBabelPlugin({}),
+        require.resolve('ember-auto-import/babel-plugin'),
+        ...require('ember-cli-code-coverage').buildBabelPlugin({}),
       ],
     },
     autoImport: {
       alias: {
-        recastBabel: "recast/parsers/babel",
+        recastBabel: 'recast/parsers/babel',
       },
       webpack: {
         node: {
@@ -24,23 +24,23 @@ module.exports = function (defaults) {
         },
         resolve: {
           fallback: {
-            path: require.resolve("path-browserify"),
-            os: require.resolve("os-browserify/browser"),
-            constants: require.resolve("constants-browserify"),
+            path: require.resolve('path-browserify'),
+            os: require.resolve('os-browserify/browser'),
+            constants: require.resolve('constants-browserify'),
             fs: false,
           },
         },
         plugins: [
           new webpack.ProvidePlugin({
-            process: "process/browser",
+            process: 'process/browser',
           }),
           // new BundleAnalyzerPlugin(),
         ],
       },
     },
-  });
+  })
 
-  app.import("node_modules/codemirror/lib/codemirror.css");
+  app.import('node_modules/codemirror/lib/codemirror.css')
 
-  return app.toTree();
-};
+  return app.toTree()
+}

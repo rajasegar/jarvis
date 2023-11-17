@@ -1,20 +1,20 @@
-import { module, test } from "qunit";
-import { setupRenderingTest } from "ember-qunit";
-import { render } from "@ember/test-helpers";
-import { hbs } from "ember-cli-htmlbars";
+import { module, test } from 'qunit'
+import { setupRenderingTest } from 'ember-qunit'
+import { render } from '@ember/test-helpers'
+import { hbs } from 'ember-cli-htmlbars'
 
-module("Integration | Modifier | split-js", function (hooks) {
-  setupRenderingTest(hooks);
+module('Integration | Modifier | split-js', function (hooks) {
+  setupRenderingTest(hooks)
 
   // Replace this with your real tests.
-  test("it renders", async function (assert) {
+  test('it renders', async function (assert) {
     await render(
       hbs`<div {{split-js direction='horizontal'}}>
 <div></div>
 <div></div>
 </div>`
-    );
+    )
 
-    assert.ok(true);
-  });
-});
+    assert.ok(true)
+  })
+})

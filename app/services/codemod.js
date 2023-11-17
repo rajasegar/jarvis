@@ -1,64 +1,64 @@
-import Service from "@ember/service";
-import PARSERS from "jarvis/constants/parsers";
+import Service from '@ember/service'
+import PARSERS from 'jarvis/constants/parsers'
 // import Octokit from "@octokit/rest";
 // import ENV from "jarvis/config/environment";
-import { tracked } from "@glimmer/tracking";
+import { tracked } from '@glimmer/tracking'
 
 // Sample code to test
-const jsInput = `foo();`;
-const jsOutput = `foo.bar();`;
+const jsInput = `foo();`
+const jsOutput = `foo.bar();`
 
 const hbscode = `<div class="entry">
   <h1>{{title}}</h1>
   <div class="body">
     {{body}}
   </div>
-</div>`;
+</div>`
 
 const modes = {
-  Javascript: "javascript",
-  Handlebars: "handlebars",
-};
+  Javascript: 'javascript',
+  Handlebars: 'handlebars',
+}
 
-const OPCODES = ["replace", "remove", "insert-before", "insert-after"];
+const OPCODES = ['replace', 'remove', 'insert-before', 'insert-after']
 
 export default class CodemodService extends Service {
-  language = "Javascript";
-  nodeOps = OPCODES;
-  @tracked opCode = "replace";
+  language = 'Javascript'
+  nodeOps = OPCODES
+  @tracked opCode = 'replace'
 
   get mode() {
-    return modes[this.language];
+    return modes[this.language]
   }
 
   get sourceCode() {
-    if (this.language === "Javascript") {
-      return jsInput;
+    if (this.language === 'Javascript') {
+      return jsInput
     } else {
-      return hbscode;
+      return hbscode
     }
   }
 
   get destCode() {
-    if (this.language === "Javascript") {
-      return jsOutput;
+    if (this.language === 'Javascript') {
+      return jsOutput
     } else {
-      return "{{foo}}";
+      return '{{foo}}'
     }
   }
 
   get parser() {
-    return Object.keys(PARSERS[this.language])[0];
+    return Object.keys(PARSERS[this.language])[0]
   }
 
   get parsers() {
-    return Object.keys(PARSERS[this.language]);
+    return Object.keys(PARSERS[this.language])
   }
 
   get parserVersion() {
-    let _lang = this.language;
-    let _parsers = PARSERS[_lang];
-    return _parsers[this.parser].version;
+    let _lang = this.language
+    let _parsers = PARSERS[_lang]
+    return _parsers[this.parser].version
   }
 
   /*
@@ -134,11 +134,11 @@ export default class CodemodService extends Service {
 	*/
 
   constructor() {
-    super(...arguments);
-    this.languages = Object.keys(PARSERS);
+    super(...arguments)
+    this.languages = Object.keys(PARSERS)
   }
 
   updateOpCode(value) {
-    this.opCode = value;
+    this.opCode = value
   }
 }
