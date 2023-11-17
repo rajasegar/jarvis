@@ -20,7 +20,7 @@ import {
   binCli,
   transformTest,
   packageJson,
-  transformReadme,
+  transformReadme
 } from 'jarvis/constants/project-template'
 
 const jsSource = `foo()`
@@ -76,13 +76,13 @@ export default class AstMaker extends Component {
     let _mode = this.mode
     if (_mode === 'javascript') {
       ast = recast.parse(this.source, {
-        parser: require('recastBabel'),
+        parser: require('recastBabel')
       })
 
       let _inputNodeType = ast.program.body[0].type
 
       let outAst = recast.parse(this.target, {
-        parser: require('recastBabel'),
+        parser: require('recastBabel')
       })
       let _outputNodeType = outAst.program.body[0].type
 
@@ -137,7 +137,7 @@ export default class AstMaker extends Component {
 
     let _codemod = recast.prettyPrint(recast.parse(_transformTemplate), {
       parser: require('recastBabel'),
-      tabWidth: 2,
+      tabWidth: 2
     }).code
 
     return new Promise((resolve) => {
@@ -187,12 +187,12 @@ export default class AstMaker extends Component {
       result = transform(
         {
           path: 'Live.js',
-          source: _source,
+          source: _source
         },
         {
           jscodeshift: transformModule.parser
             ? jscodeshift.withParser(transformModule.parser)
-            : jscodeshift,
+            : jscodeshift
         },
         {}
       )
@@ -253,40 +253,44 @@ export default class AstMaker extends Component {
       const zip = new JSZip()
 
       const projectName = prompt('Enter name for your codemod project: ')
+      if (projectName) {
+        zip.file('README.md', projectReadme(projectName))
+        zip.file('transforms/my-codemod/index.js', this.transform)
+        zip.file(
+          'transforms/my-codemod/__testfixtures__/basic.input.js',
+          this.source
+        )
+        zip.file(
+          'transforms/my-codemod/__testfixtures__/basic.output.js',
+          this.target
+        )
+        zip.file('transforms/my-codemod/test.js', transformTest)
+        zip.file('transforms/my-codemod/README.md', transformReadme)
+        zip.file('bin/cli.js', binCli)
+        zip.file('package.json', packageJson(projectName))
+        zip.file('.gitignore', 'node_modules')
+        zip.file(
+          'LICENSE',
+          'The MIT License\n Copyright 2023 Rajasegar Chandran'
+        )
 
-      zip.file('README.md', projectReadme(projectName))
-      zip.file('transforms/my-codemod/index.js', this.transform)
-      zip.file(
-        'transforms/my-codemod/__testfixtures__/basic.input.js',
-        this.source
-      )
-      zip.file(
-        'transforms/my-codemod/__testfixtures__/basic.output.js',
-        this.target
-      )
-      zip.file('transforms/my-codemod/test.js', transformTest)
-      zip.file('transforms/my-codemod/README.md', transformReadme)
-      zip.file('bin/cli.js', binCli)
-      zip.file('package.json', packageJson(projectName))
-      zip.file('.gitignore', 'node_modules')
-      zip.file('LICENSE', 'The MIT License\n Copyright 2023 Rajasegar Chandran')
-
-      zip.generateAsync({ type: 'blob' }).then(
-        async function (blob) {
-          await fileSave(
-            new Blob([blob], { type: 'application/zip' }),
-            {
-              fileName: `${projectName}.zip`,
-              suggestedName: `${projectName}.zip`,
-              description: 'Codemod-cli Project zip file',
-            },
-            window.handle
-          )
-        },
-        function (err) {
-          console.error(err)
-        }
-      )
+        zip.generateAsync({ type: 'blob' }).then(
+          async function (blob) {
+            await fileSave(
+              new Blob([blob], { type: 'application/zip' }),
+              {
+                fileName: `${projectName}.zip`,
+                suggestedName: `${projectName}.zip`,
+                description: 'Codemod-cli Project zip file'
+              },
+              window.handle
+            )
+          },
+          function (err) {
+            console.error(err)
+          }
+        )
+      }
     })
   }
 }
